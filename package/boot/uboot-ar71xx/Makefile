@@ -15,8 +15,9 @@ PKG_RELEASE:=1
 PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:= \
-	https://librecmc.org/librecmc/downloads/sources/archive/v1.2.1/
+	https://librecmc.org/librecmc/downloads/sources/archive/v1.2.1/ \
 	ftp://ftp.denx.de/pub/u-boot
+
 PKG_MD5SUM:=526e01c8564ab8d1fd2c0e787a014b17
 PKG_TARGETS:=bin
 
