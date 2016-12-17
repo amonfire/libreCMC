@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
-PKG_NAME:=u-boot
+PKG_NAME:=u-boot-libre
 PKG_VERSION:=2010.03
 PKG_RELEASE:=1
 
