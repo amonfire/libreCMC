@@ -14,6 +14,7 @@ DEVICE_VARS += NETGEAR_KERNEL_MAGIC NETGEAR_BOARD_ID NETGEAR_HW_ID CMDLINE CONSO
 
 ifeq ($(SUBTARGET),generic)
 include ./tp-link.mk
+include ./ubnt.mk
 include ./generic.mk
 include ./legacy-devices.mk
 endif

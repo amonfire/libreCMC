@@ -14,7 +14,7 @@ PKG_VERSION:=2016-10-08
 PKG_RELEASE:=1
 PKG_SOURCE_URL:=http://mirror2.openwrt.org/sources
 PKG_BACKPORT_VERSION:=
-PKG_MD5SUM:=4f6350e3b75815060bfdf47ef266ad613c7bfea5b7b1dc4552dee69e1bebe4fb
+PKG_HASH:=4f6350e3b75815060bfdf47ef266ad613c7bfea5b7b1dc4552dee69e1bebe4fb
 
 PKG_SOURCE:=compat-wireless-$(PKG_VERSION)$(PKG_BACKPORT_VERSION).tar.bz2
 PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/compat-wireless-$(PKG_VERSION)
@@ -24,9 +24,10 @@ PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 
 PKG_DRIVERS = \
 	ath ath5k ath9k ath9k-common ath9k-htc \
+	carl9170 \
 	lib80211 \
 	mac80211-hwsim \
-
+	rt2800-lib rt2800-mmio rt2800-soc \
 
 PKG_CONFIG_DEPENDS:= \
 	CONFIG_PACKAGE_kmod-mac80211 \
@@ -36,8 +37,6 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_PACKAGE_MAC80211_TRACING \
 	CONFIG_PACKAGE_ATH_DEBUG \
 	CONFIG_PACKAGE_ATH_DFS \
-	CONFIG_ATH9K_SUPPORT_PCOEM \
-	CONFIG_ATH9K_TX99 \
 	CONFIG_ATH_USER_REGD \
 
 include $(INCLUDE_DIR)/package.mk
@@ -104,6 +103,26 @@ define KernelPackage/mac80211/description
 Generic IEEE 802.11 Networking Stack (mac80211)
 endef
 
+define KernelPackage/adm8211
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=ADMTek 8211 support
+  DEPENDS+=@PCI_SUPPORT +kmod-mac80211 +kmod-eeprom-93cx6
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/admtek/adm8211.ko
+  AUTOLOAD:=$(call AutoProbe,adm8211)
+endef
+
+define KernelPackage/airo
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Cisco Aironet driver
+  DEPENDS+=@PCI_SUPPORT +@DRIVER_WEXT_SUPPORT +kmod-cfg80211 @TARGET_x86
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/cisco/airo.ko
+  AUTOLOAD:=$(call AutoProbe,airo)
+endef
+
+define KernelPackage/airo/description
+ Kernel support for Cisco Aironet cards
+endef
+
 define KernelPackage/ath/config
   if PACKAGE_kmod-ath
 	config ATH_USER_REGD
@@ -122,7 +141,7 @@ define KernelPackage/ath/config
 		bool "Atheros wireless debugging"
 		help
 		  Say Y, if you want to debug atheros wireless drivers.
-		  Only ath9k & ath10k make use of this.
+		  Only ath9k makes use of this.
 
 	config PACKAGE_ATH_DFS
 		bool "Enable DFS support"
@@ -152,7 +171,7 @@ define KernelPackage/ath5k
   $(call KernelPackage/mac80211/Default)
   TITLE:=Atheros 5xxx wireless cards support
   URL:=https://wireless.wiki.kernel.org/en/users/drivers/ath5k
-  DEPENDS+= @PCI_SUPPORT||@TARGET_ath25 +kmod-ath
+  DEPENDS+= @PCI_SUPPORT||@TARGET_ath25 +kmod-ath +@DRIVER_11W_SUPPORT
   FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ath/ath5k/ath5k.ko
   AUTOLOAD:=$(call AutoProbe,ath5k)
 endef
@@ -198,6 +217,11 @@ define KernelPackage/ath9k/config
                bool "Enable TX99 support"
                depends on PACKAGE_kmod-ath9k
 
+	config ATH9K_UBNTHSR
+		bool "Support for Ubiquiti UniFi Outdoor+ access point"
+		depends on PACKAGE_kmod-ath9k && TARGET_ar71xx_generic
+		default y
+
 endef
 
 define KernelPackage/ath9k-htc
@@ -214,6 +238,15 @@ define KernelPackage/ath9k-htc/description
 This module adds support for wireless adapters based on
 Atheros USB AR9271 and AR7010 family of chipsets.
 endef
+
+define KernelPackage/carl9170
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Driver for Atheros AR9170 USB sticks
+  DEPENDS:=@USB_SUPPORT +kmod-mac80211 +kmod-ath +kmod-usb-core +kmod-input-core +@DRIVER_11N_SUPPORT +carl9170-firmware
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ath/carl9170/carl9170.ko
+  AUTOLOAD:=$(call AutoProbe,carl9170)
+endef
+
 
 define KernelPackage/lib80211
   $(call KernelPackage/mac80211/Default)
@@ -241,7 +274,6 @@ define KernelPackage/lib80211/description
  - lib80211_crytp_ccmp
 endef
 
-
 define KernelPackage/mac80211-hwsim
   $(call KernelPackage/mac80211/Default)
   TITLE:=mac80211 HW simulation device
@@ -250,6 +282,31 @@ define KernelPackage/mac80211-hwsim
   AUTOLOAD:=$(call AutoProbe,mac80211_hwsim)
 endef
 
+define KernelPackage/rt2800-lib
+$(call KernelPackage/rt2x00/Default)
+  DEPENDS+= @(PCI_SUPPORT||USB_SUPPORT||TARGET_ramips) +kmod-rt2x00-lib +kmod-lib-crc-ccitt +@DRIVER_11N_SUPPORT
+  HIDDEN:=1
+  TITLE+= (rt2800 LIB)
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ralink/rt2x00/rt2800lib.ko
+endef
+
+define KernelPackage/rt2800-mmio
+$(call KernelPackage/rt2x00/Default)
+  TITLE += (RT28xx/RT3xxx MMIO)
+  DEPENDS += +kmod-rt2800-lib +kmod-rt2x00-mmio
+  HIDDEN:=1
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ralink/rt2x00/rt2800mmio.ko
+endef
+
+define KernelPackage/rt2800-soc
+$(call KernelPackage/rt2x00/Default)
+  DEPENDS += @(TARGET_ramips_rt288x||TARGET_ramips_rt305x||TARGET_ramips_rt3883||TARGET_ramips_mt7620) +kmod-rt2800-mmio +kmod-rt2800-lib
+  TITLE += (RT28xx/RT3xxx SoC)
+  FILES := \
+	$(PKG_BUILD_DIR)/drivers/net/wireless/ralink/rt2x00/rt2x00soc.ko \
+	$(PKG_BUILD_DIR)/drivers/net/wireless/ralink/rt2x00/rt2800soc.ko
+  AUTOLOAD:=$(call AutoProbe,rt2800soc)
+endef
 
 config_package=$(if $(CONFIG_PACKAGE_kmod-$(1)),m)
 
@@ -263,7 +320,19 @@ config-y:= \
 	MAC80211_RC_MINSTREL_HT \
 	MAC80211_RC_MINSTREL_VHT \
 	MAC80211_RC_DEFAULT_MINSTREL \
+	WLAN_VENDOR_ADMTEK \
 	WLAN_VENDOR_ATH \
+	WLAN_VENDOR_ATMEL \
+	WLAN_VENDOR_INTEL \
+	WLAN_VENDOR_INTERSIL \
+	WLAN_VENDOR_MARVELL \
+	WLAN_VENDOR_MEDIATEK \
+	WLAN_VENDOR_RALINK \
+	WLAN_VENDOR_REALTEK \
+	WLAN_VENDOR_RSI \
+	WLAN_VENDOR_ST \
+	WLAN_VENDOR_TI \
+	WLAN_VENDOR_ZYDAS \
 
 config-$(call config_package,cfg80211) += CFG80211
 
@@ -281,7 +350,6 @@ endif
 
 ifdef CONFIG_PACKAGE_MAC80211_TRACING
   config-y += \
-	ATH10K_TRACING \
 	ATH6KL_TRACING \
 	ATH_TRACEPOINTS \
 	WIL6210_TRACING \
@@ -291,9 +359,11 @@ endif
 
 config-$(call config_package,lib80211) += LIB80211 LIB80211_CRYPT_WEP LIB80211_CRYPT_CCMP LIB80211_CRYPT_TKIP
 
+config-$(call config_package,airo) += AIRO
+
 config-$(call config_package,ath) += ATH_CARDS ATH_COMMON
-config-$(CONFIG_PACKAGE_ATH_DEBUG) += ATH_DEBUG ATH10K_DEBUG ATH9K_STATION_STATISTICS
-config-$(CONFIG_PACKAGE_ATH_DFS) += ATH9K_DFS_CERTIFIED ATH10K_DFS_CERTIFIED
+config-$(CONFIG_PACKAGE_ATH_DEBUG) += ATH_DEBUG ATH9K_STATION_STATISTICS
+config-$(CONFIG_PACKAGE_ATH_DFS) += ATH9K_DFS_CERTIFIED
 
 config-$(call config_package,ath9k) += ATH9K
 config-$(call config_package,ath9k-common) += ATH9K_COMMON
@@ -302,9 +372,9 @@ config-$(CONFIG_PCI) += ATH9K_PCI
 config-$(CONFIG_ATH_USER_REGD) += ATH_USER_REGD
 config-$(CONFIG_ATH9K_SUPPORT_PCOEM) += ATH9K_PCOEM
 config-$(CONFIG_ATH9K_TX99) += ATH9K_TX99
+config-$(CONFIG_ATH9K_UBNTHSR) += ATH9K_UBNTHSR
 
 config-$(call config_package,ath9k-htc) += ATH9K_HTC
-config-$(call config_package,ath10k) += ATH10K ATH10K_PCI
 
 config-$(call config_package,ath5k) += ATH5K
 ifdef CONFIG_TARGET_ath25
@@ -316,6 +386,10 @@ endif
 config-$(call config_package,carl9170) += CARL9170
 
 config-$(call config_package,mac80211-hwsim) += MAC80211_HWSIM
+
+config-$(call config_package,rt2800-lib) += RT2800_LIB
+
+config-$(call config_package,rt2800-soc) += RT2800SOC
 
 config-$(CONFIG_LEDS_TRIGGERS) += MAC80211_LEDS
 
@@ -397,17 +471,26 @@ define Build/InstallDev
 	rm -f $(1)/usr/include/mac80211-backport/linux/module.h
 endef
 
+
 define KernelPackage/cfg80211/install
 	$(INSTALL_DIR) $(1)/lib/wifi $(1)/lib/netifd/wireless
 	$(INSTALL_DATA) ./files/lib/wifi/mac80211.sh $(1)/lib/wifi
 	$(INSTALL_BIN) ./files/lib/netifd/wireless/mac80211.sh $(1)/lib/netifd/wireless
+	$(INSTALL_DIR) $(1)/etc/hotplug.d/ieee80211
+	$(INSTALL_DATA) ./files/mac80211.hotplug $(1)/etc/hotplug.d/ieee80211/00-wifi-detect
 endef
+
 
 $(eval $(call KernelPackage,ath))
 $(eval $(call KernelPackage,ath5k))
 $(eval $(call KernelPackage,ath9k))
 $(eval $(call KernelPackage,ath9k-common))
+$(eval $(call KernelPackage,ath9k-htc))
+$(eval $(call KernelPackage,carl9170))
 $(eval $(call KernelPackage,cfg80211))
 $(eval $(call KernelPackage,lib80211))
 $(eval $(call KernelPackage,mac80211))
 $(eval $(call KernelPackage,mac80211-hwsim))
+$(eval $(call KernelPackage,rt2800-lib))
+$(eval $(call KernelPackage,rt2800-mmio))
+$(eval $(call KernelPackage,rt2800-soc))

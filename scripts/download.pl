@@ -11,6 +11,7 @@ use strict;
 use warnings;
 use File::Basename;
 use File::Copy;
+use Text::ParseWords;
 
 @ARGV > 2 or die "Syntax: $0 <target dir> <filename> <hash> <url filename> [<mirror> ...]\n";
 
@@ -64,13 +65,26 @@ sub hash_cmd() {
 	my $len = length($file_hash);
 	my $cmd;
 
-	$len == 64 and return "openssl dgst -sha256 | sed -e 's,.*= ,,'";
-	$len == 32 and do {
-		my $cmd = which("md5sum") || which("md5") || die 'no md5 checksum program found, please install md5 or md5sum';
-		chomp $cmd;
-		return $cmd;
-	};
+	$len == 64 and return "mkhash sha256";
+	$len == 32 and return "mkhash md5";
 	return undef;
+}
+
+sub download_cmd($) {
+	my $url = shift;
+	my $have_curl = 0;
+
+	if (open CURL, '-|', 'curl', '--version') {
+		if (defined(my $line = readline CURL)) {
+			$have_curl = 1 if $line =~ /^curl /;
+		}
+		close CURL;
+	}
+
+	return $have_curl
+		? (qw(curl --connect-timeout 20 --retry 5 --location --insecure), shellwords($ENV{CURL_OPTIONS} || ''), $url)
+		: (qw(wget --tries=5 --timeout=20 --no-check-certificate --output-document=-), shellwords($ENV{WGET_OPTIONS} || ''), $url)
+	;
 }
 
 my $hash_cmd = hash_cmd();
@@ -78,7 +92,6 @@ my $hash_cmd = hash_cmd();
 sub download
 {
 	my $mirror = shift;
-	my $options = $ENV{WGET_OPTIONS} || "";
 
 	$mirror =~ s!/$!!;
 
@@ -125,18 +138,19 @@ sub download
 			}
 		};
 	} else {
-		open WGET, "wget -t5 --timeout=20 --no-check-certificate $options -O- '$mirror/$url_filename' |" or die "Cannot launch wget.\n";
+		my @cmd = download_cmd("$mirror/$url_filename");
+		open(FETCH_FD, '-|', @cmd) or die "Cannot launch curl or wget.\n";
 		$hash_cmd and do {
 			open MD5SUM, "| $hash_cmd > '$target/$filename.hash'" or die "Cannot launch $hash_cmd.\n";
 		};
 		open OUTPUT, "> $target/$filename.dl" or die "Cannot create file $target/$filename.dl: $!\n";
 		my $buffer;
-		while (read WGET, $buffer, 1048576) {
+		while (read FETCH_FD, $buffer, 1048576) {
 			$hash_cmd and print MD5SUM $buffer;
 			print OUTPUT $buffer;
 		}
 		$hash_cmd and close MD5SUM;
-		close WGET;
+		close FETCH_FD;
 		close OUTPUT;
 
 		if ($? >> 8) {
@@ -226,7 +240,7 @@ foreach my $mirror (@ARGV) {
 			push @mirrors, "ftp://ftp.riken.jp/Linux/kernel.org/$dir";
 			push @mirrors, "ftp://www.mirrorservice.org/sites/ftp.kernel.org/pub/$dir";
 		}
-	} elsif ($mirror =~ /^\@KERNEL_LIBRE\/(.+)$/) {
+    } elsif ($mirror =~ /^\@KERNEL_LIBRE\/(.+)$/) {
                 my @extra = ( $1 );
                 if ($filename =~ /linux-libre-\d+\.\d+(?:\.\d+)?-rc-gnu/) {
                         push @extra, "$extra[0]/testing";
@@ -236,7 +250,7 @@ foreach my $mirror (@ARGV) {
                 foreach my $dir (@extra) {
                         push @mirrors, "http://linux-libre.fsfla.org/pub/linux-libre/releases/$dir";
                 }
-	} elsif ($mirror =~ /^\@GNOME\/(.+)$/) {
+    } elsif ($mirror =~ /^\@GNOME\/(.+)$/) {
 		push @mirrors, "http://mirror.csclub.uwaterloo.ca/gnome/sources/$1";
 		push @mirrors, "http://ftp.acc.umu.se/pub/GNOME/sources/$1";
 		push @mirrors, "http://ftp.kaist.ac.kr/gnome/sources/$1";
@@ -256,12 +270,11 @@ push @mirrors, 'http://sources.lede-project.org';
 push @mirrors, 'http://mirror2.openwrt.org/sources';
 push @mirrors, 'http://downloads.openwrt.org/sources';
 
-while (!$ok) {
+while (!-f "$target/$filename") {
 	my $mirror = shift @mirrors;
 	$mirror or die "No more mirrors to try - giving up.\n";
 
 	download($mirror);
-	-f "$target/$filename" and $ok = 1;
 }
 
 $SIG{INT} = \&cleanup;

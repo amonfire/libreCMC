@@ -292,9 +292,6 @@ msgstr ""
 msgid "Always announce default router"
 msgstr ""
 
-msgid "An additional network will be created if you leave this checked."
-msgstr ""
-
 msgid "Annex"
 msgstr ""
 
@@ -401,6 +398,9 @@ msgstr ""
 
 msgid "Authentication"
 msgstr "Autentizace"
+
+msgid "Authentication Type"
+msgstr ""
 
 msgid "Authoritative"
 msgstr "Autoritativní"
@@ -573,6 +573,9 @@ msgid "Check"
 msgstr "Kontrola"
 
 msgid "Check fileystems before mount"
+msgstr ""
+
+msgid "Check this option to delete the existing networks from this radio."
 msgstr ""
 
 msgid "Checksum"
@@ -987,6 +990,9 @@ msgstr "Povolit <abbr title=\"Spanning Tree Protocol\">STP</abbr>"
 
 msgid "Enable HE.net dynamic endpoint update"
 msgstr "Povolit dynamickou aktualizaci koncového bodu HE.net"
+
+msgid "Enable IPv6 negotiation"
+msgstr ""
 
 msgid "Enable IPv6 negotiation on the PPP link"
 msgstr "Na PPP spoji povolit vyjednání IPv6"
@@ -2427,6 +2433,9 @@ msgstr ""
 msgid "Public prefix routed to this device for distribution to clients."
 msgstr ""
 
+msgid "QMI Cellular"
+msgstr ""
+
 msgid "Quality"
 msgstr "Kvalita"
 
@@ -2654,6 +2663,9 @@ msgid "Root preparation"
 msgstr ""
 
 msgid "Route Allowed IPs"
+msgstr ""
+
+msgid "Route type"
 msgstr ""
 
 msgid "Routed IPv6 prefix for downstream interfaces"
@@ -2924,7 +2936,7 @@ msgid ""
 "configurations where only hosts with a corresponding lease are served."
 msgstr ""
 "Statické zápůjčky se používají pro přiřazení fixních IP adres a symbolických "
-"jmen DHCP klientům. Jsou také vyžadvány pro nedynamické konfigurace "
+"jmen DHCP klientům. Jsou také vyžadovány pro nedynamické konfigurace "
 "rozhraní, kde jsou povoleni pouze hosté s odpovídajícím nastavením."
 
 msgid "Status"
@@ -2940,7 +2952,7 @@ msgid "Submit"
 msgstr "Odeslat"
 
 msgid "Suppress logging"
-msgstr ""
+msgstr "Potlačit logování"
 
 msgid "Suppress logging of the routine operation of these protocols"
 msgstr ""
@@ -3227,8 +3239,8 @@ msgid ""
 "This is the only <abbr title=\"Dynamic Host Configuration Protocol\">DHCP</"
 "abbr> in the local network"
 msgstr ""
-"Toto je jedný <abbr title=\"Dynamic Host Configuration Protocol\">DHCP</"
-"abbr>v mistní síti"
+"Toto je jediný <abbr title=\"Dynamic Host Configuration Protocol\">DHCP</"
+"abbr> v mistní síti"
 
 msgid "This is the plain username for logging into the account"
 msgstr ""

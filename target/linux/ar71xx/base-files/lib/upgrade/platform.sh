@@ -176,8 +176,6 @@ platform_check_image() {
 	airgateway|\
 	airrouter|\
 	ap132|\
-	ap81|\
-	ap83|\
 	ap90q|\
 	bullet-m|\
 	c-55|\
@@ -228,6 +226,7 @@ platform_check_image() {
 	rocket-m-xw|\
 	rocket-m|\
 	rw2458n|\
+	sr3200|\
 	tew-632brp|\
 	tew-712br|\
 	tew-732br|\
@@ -251,7 +250,8 @@ platform_check_image() {
 	wzr-hp-ag300h|\
 	wzr-hp-g300nh2|\
 	wzr-hp-g300nh|\
-	wzr-hp-g450h)
+	wzr-hp-g450h|\
+	xd3200)
 		[ "$magic" != "2705" ] && {
 			echo "Invalid image type."
 			return 1
@@ -261,7 +261,6 @@ platform_check_image() {
 		;;
 	alfa-ap96|\
 	alfa-nx|\
-	ap113|\
 	ap121-mini|\
 	ap121|\
 	ap135-020|\
@@ -344,6 +343,7 @@ platform_check_image() {
 	omy-x1|\
 	onion-omega|\
 	oolite|\
+	re450|\
 	smart-300|\
 	som9331|\
 	tellstick-znet-lite|\
@@ -379,6 +379,7 @@ platform_check_image() {
 	tl-wpa8630|\
 	tl-wr1041n-v2|\
 	tl-wr1043nd-v2|\
+	tl-wr1043nd-v4|\
 	tl-wr1043nd|\
 	tl-wr2543n|\
 	tl-wr703n|\
@@ -397,6 +398,7 @@ platform_check_image() {
 	tl-wr842n-v3|\
 	tl-wr941nd-v5|\
 	tl-wr941nd-v6|\
+	tl-wr940n-v4|\
 	tl-wr941nd)
 		local magic_ver="0100"
 
@@ -451,7 +453,9 @@ platform_check_image() {
 		;;
 	cpe210|\
 	cpe510|\
-	eap120)
+	eap120|\
+	wbs210|\
+	wbs510)
 		tplink_pharos_check_image "$1" && return 0
 		return 1
 		;;
@@ -496,6 +500,7 @@ platform_check_image() {
 
 		return 0
 		;;
+	e2100l|\
 	mynet-rext|\
 	wrt160nl)
 		cybertan_check_image "$1" && return 0
