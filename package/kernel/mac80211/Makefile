@@ -27,6 +27,7 @@ PKG_DRIVERS = \
 	carl9170 \
 	lib80211 \
 	mac80211-hwsim \
+	rt2x00-lib \
 	rt2800-lib rt2800-mmio rt2800-soc \
 
 PKG_CONFIG_DEPENDS:= \
@@ -281,6 +282,32 @@ define KernelPackage/mac80211-hwsim
   FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/mac80211_hwsim.ko
   AUTOLOAD:=$(call AutoProbe,mac80211_hwsim)
 endef
+define KernelPackage/rt2x00-lib
+$(call KernelPackage/rt2x00/Default)
+  DEPENDS+= @(PCI_SUPPORT||USB_SUPPORT||TARGET_ramips) +kmod-mac80211 +kmod-lib-crc-itu-t
+  TITLE+= (LIB)
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ralink/rt2x00/rt2x00lib.ko
+  MENU:=1
+endef
+
+define KernelPackage/rt2x00-lib/config
+  if PACKAGE_kmod-rt2x00-lib
+
+        config PACKAGE_RT2X00_LIB_DEBUGFS
+                bool "Enable rt2x00 debugfs support"
+                depends on PACKAGE_MAC80211_DEBUGFS
+                help
+                  Enable creation of debugfs files for the rt2x00 drivers.
+                  These debugfs files support both reading and writing of the
+                  most important register types of the rt2x00 hardware.
+
+        config PACKAGE_RT2X00_DEBUG
+                bool "Enable rt2x00 debug output"
+                help
+                  Enable debugging output for all rt2x00 modules
+
+  endif
+endef
 
 define KernelPackage/rt2800-lib
 $(call KernelPackage/rt2x00/Default)
@@ -288,6 +315,14 @@ $(call KernelPackage/rt2x00/Default)
   HIDDEN:=1
   TITLE+= (rt2800 LIB)
   FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ralink/rt2x00/rt2800lib.ko
+endef
+
+define KernelPackage/rt2x00-mmio
+$(call KernelPackage/rt2x00/Default)
+  DEPENDS+= @(PCI_SUPPORT||TARGET_ramips) +kmod-rt2x00-lib +kmod-eeprom-93cx6
+  HIDDEN:=1
+  TITLE+= (MMIO)
+  FILES:= $(PKG_BUILD_DIR)/drivers/net/wireless/ralink/rt2x00/rt2x00mmio.ko
 endef
 
 define KernelPackage/rt2800-mmio
@@ -386,6 +421,10 @@ endif
 config-$(call config_package,carl9170) += CARL9170
 
 config-$(call config_package,mac80211-hwsim) += MAC80211_HWSIM
+
+config-$(call config_package,rt2x00-lib) += RT2X00 RT2X00_LIB
+
+config-$(call config_package,rt2x00-mmio) += RT2X00_LIB_MMIO
 
 config-$(call config_package,rt2800-lib) += RT2800_LIB
 
@@ -491,6 +530,8 @@ $(eval $(call KernelPackage,cfg80211))
 $(eval $(call KernelPackage,lib80211))
 $(eval $(call KernelPackage,mac80211))
 $(eval $(call KernelPackage,mac80211-hwsim))
+$(eval $(call KernelPackage,rt2x00-lib))
+$(eval $(call KernelPackage,rt2x00-mmio))
 $(eval $(call KernelPackage,rt2800-lib))
 $(eval $(call KernelPackage,rt2800-mmio))
 $(eval $(call KernelPackage,rt2800-soc))
