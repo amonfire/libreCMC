@@ -1,0 +1,135 @@
+/dts-v1/;
+
+#include "mt7621.dtsi"
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+
+/ {
+	compatible = "mediatek,mt7621-eval-board", "mediatek,mt7621-soc";
+	model = "GB-PC1";
+
+	memory@0 {
+		device_type = "memory";
+		reg = <0x0 0x1c000000>, <0x20000000 0x4000000>;
+	};
+
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
+	sdhci@10130000 {
+		status = "okay";
+	};
+
+	palmbus@1E000000 {
+		spi@b00 {
+			status = "okay";
+
+			m25p80@0 {
+				#address-cells = <1>;
+				#size-cells = <1>;
+				compatible = "jedec,spi-nor";
+				reg = <0 0>;
+				linux,modalias = "m25p80";
+				spi-max-frequency = <10000000>;
+				m25p,chunked-io = <32>;
+
+				partition@0 {
+					label = "u-boot";
+					reg = <0x0 0x30000>;
+					read-only;
+				};
+
+				partition@30000 {
+					label = "u-boot-env";
+					reg = <0x30000 0x10000>;
+				};
+
+				partition@40000 {
+					label = "firmware";
+					reg = <0x50000 0x1fb0000>;
+				};
+
+			};
+		};
+
+		i2c@900 {
+			compatible = "ralink,i2c-mt7621";
+			reg = <0x900 0x100>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&i2c_pins>;
+			status = "okay";
+		};
+	};
+
+	pcie@1e140000 {
+		status = "okay";
+	};
+
+	ethernet@1e100000 {
+		status = "okay";
+	};
+
+	gpio-keys-polled {
+		compatible = "gpio-keys-polled";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		poll-interval = <20>;
+
+		reset {
+			label = "reset";
+			gpios = <&gpio0 18 GPIO_ACTIVE_HIGH>;
+			linux,code = <KEY_RESTART>;
+		};
+	};
+
+	gpio-leds {
+		compatible = "gpio-leds";
+
+		status {
+			label = "gnubee:green:status";
+			gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;
+		};
+
+		system {
+			label = "gnubee:green:system";
+			gpios = <&gpio0 8 GPIO_ACTIVE_HIGH>;
+		};
+	};
+
+	gpio-power {
+		compatible = "gpio-power";
+
+		26 {
+			label = "gnubee:power:gpio26";
+			gpios = <&gpio0 26 GPIO_ACTIVE_LOW>;
+		};
+
+		28 {
+			label = "gnubee:power:gpio28";
+			gpios = <&gpio0 28 GPIO_ACTIVE_HIGH>;
+		};
+
+		29 {
+			label = "gnubee:power:gpio29";
+			gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
+		};
+
+		30 {
+			label = "gnubee:power:gpio30";
+			gpios = <&gpio0 30 GPIO_ACTIVE_HIGH>;
+		};
+	};
+
+	pinctrl {
+		state_default: pinctrl0 {
+			gpio {
+				ralink,group = "wdt", "rgmii2", "mdio";
+				ralink,function = "gpio";
+			};
+		};
+	};
+};
