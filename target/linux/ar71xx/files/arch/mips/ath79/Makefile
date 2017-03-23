@@ -38,6 +38,7 @@ obj-$(CONFIG_ATH79_ROUTERBOOT)		+= routerboot.o
 #
 # Machines
 #
+obj-$(CONFIG_ATH79_MACH_A60)			+= mach-a60.o
 obj-$(CONFIG_ATH79_MACH_ALFA_AP120C)		+= mach-alfa-ap120c.o
 obj-$(CONFIG_ATH79_MACH_ALFA_AP96)		+= mach-alfa-ap96.o
 obj-$(CONFIG_ATH79_MACH_ALFA_NX)		+= mach-alfa-nx.o
@@ -147,6 +148,7 @@ obj-$(CONFIG_ATH79_MACH_RB4XX)			+= mach-rb4xx.o
 obj-$(CONFIG_ATH79_MACH_RB750)			+= mach-rb750.o
 obj-$(CONFIG_ATH79_MACH_RB91X)			+= mach-rb91x.o
 obj-$(CONFIG_ATH79_MACH_RB922)			+= mach-rb922.o
+obj-$(CONFIG_ATH79_MACH_RB941)			+= mach-rb941.o
 obj-$(CONFIG_ATH79_MACH_RB95X)			+= mach-rb95x.o
 obj-$(CONFIG_ATH79_MACH_RBSXTLITE)		+= mach-rbsxtlite.o
 obj-$(CONFIG_ATH79_MACH_RE450)			+= mach-re450.o

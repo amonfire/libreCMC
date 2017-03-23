@@ -12,7 +12,7 @@ try_version() {
 }
 
 try_git() {
-	REBOOT=375587f4b29039d86880030c6ab9a135e0342567
+	REBOOT=ee53a240ac902dc83209008a2671e7fdcf55957a
 	git rev-parse --git-dir >/dev/null 2>&1 || return 1
 
 	[ -n "$GET_REV" ] || GET_REV="HEAD"
@@ -40,7 +40,8 @@ try_git() {
 			REV="${UPSTREAM_REV}+$((REV - UPSTREAM_REV))"
 		fi
 
-		REV="${REV:+r$REV-$(git log --format="%h" -1)}"
+		REV="${REV:+r$REV-$(git log -n 1 --format="%h" $UPSTREAM_BASE)}"
+
 		;;
 	esac
 

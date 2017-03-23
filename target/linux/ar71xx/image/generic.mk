@@ -579,7 +579,7 @@ define Build/uImageHiWiFi
 	mkimage -A $(LINUX_KARCH) \
 		-O linux -T kernel \
 		-C $(1) -a $(KERNEL_LOADADDR) -e $(if $(KERNEL_ENTRY),$(KERNEL_ENTRY),$(KERNEL_LOADADDR)) \
-		-n 'tw150v1 $(call toupper,$(LINUX_KARCH)) LEDE Linux-$(LINUX_VERSION)' -d $@ $@.new
+		-n 'tw150v1 $(call toupper,$(LINUX_KARCH)) libreCMC Linux-$(LINUX_VERSION)' -d $@ $@.new
 	@mv $@.new $@
 endef
 
@@ -680,7 +680,7 @@ define Build/mkwrggimg
 	$(STAGING_DIR_HOST)/bin/mkwrggimg -b \
 		-i $@ -o $@.imghdr -d /dev/mtdblock/1 \
 		-m $(BOARDNAME) -s $(DAP_SIGNATURE) \
-		-v LEDE -B $(REVISION)
+		-v libreCMC -B $(REVISION)
 	mv $@.imghdr $@
 endef
 
@@ -722,6 +722,6 @@ define Device/bhr-4grv2
   MTDPARTS := spi0.0:256k(u-boot)ro,64k(u-boot-env)ro,14528k(rootfs),1472k(kernel),64k(art)ro,16000k@0x50000(firmware)
   IMAGES := sysupgrade.bin factory.bin
   IMAGE/sysupgrade.bin = append-rootfs | pad-rootfs | pad-to $$$$(ROOTFS_SIZE) | append-kernel | check-size $$$$(IMAGE_SIZE)
-  IMAGE/factory.bin = append-kernel | pad-to $$$$(KERNEL_SIZE) | append-rootfs | mkbuffaloimg
+  IMAGE/factory.bin = append-kernel | pad-to $$$$(KERNEL_SIZE) | append-rootfs | pad-rootfs | mkbuffaloimg
 endef
 TARGET_DEVICES += bhr-4grv2

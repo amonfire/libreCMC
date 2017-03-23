@@ -11,7 +11,7 @@ include $(INCLUDE_DIR)/kernel.mk
 include $(INCLUDE_DIR)/version.mk
 
 PKG_NAME:=base-files
-PKG_RELEASE:=171
+PKG_RELEASE:=172
 PKG_FLAGS:=nonshared
 
 PKG_FILE_DEPENDS:=$(PLATFORM_DIR)/ $(GENERIC_PLATFORM_DIR)/base-files/
@@ -31,7 +31,7 @@ define Package/base-files
   SECTION:=base
   CATEGORY:=Base system
   DEPENDS:=+netifd +libc +procd +jsonfilter +SIGNED_PACKAGES:usign +SIGNED_PACKAGES:lede-keyring +fstools +fwtool
-  TITLE:=Base filesystem for Lede
+  TITLE:=Base filesystem for libreCMC
   URL:=http://openwrt.org/
   VERSION:=$(PKG_RELEASE)-$(REVISION)
 endef
@@ -57,6 +57,7 @@ define Package/base-files/conffiles
 /etc/sysctl.d/local.conf
 /etc/sysctl.d/
 /etc/iproute2/rt_tables
+/etc/iproute2/rt_protos
 $(call $(TARGET)/conffiles)
 endef
 

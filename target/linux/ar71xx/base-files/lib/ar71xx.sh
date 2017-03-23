@@ -382,6 +382,12 @@ ar71xx_board_detect() {
 	*"Oolite V1.0")
 		name="oolite"
 		;;
+	*"A40")
+		name="a40"
+		;;
+	*"A60")
+		name="a60"
+		;;
 	*"AC1750DB")
 		name="f9k1115v2"
 		;;
@@ -736,6 +742,9 @@ ar71xx_board_detect() {
 	*OM2Pv2)
 		name="om2pv2"
 		;;
+	*OM2Pv4)
+		name="om2pv4"
+		;;
 	*"OM2P HS")
 		name="om2p-hs"
 		;;
@@ -744,6 +753,9 @@ ar71xx_board_detect() {
 		;;
 	*"OM2P HSv3")
 		name="om2p-hsv3"
+		;;
+	*"OM2P HSv4")
+		name="om2p-hsv4"
 		;;
 	*"OM2P LC")
 		name="om2p-lc"
@@ -834,6 +846,9 @@ ar71xx_board_detect() {
 		;;
 	*"RouterBOARD 912UAG-5HPnD")
 		name="rb-912uag-5hpnd"
+		;;
+	*"RouterBOARD 941-2nD")
+		name="rb-941-2nd"
 		;;
 	*"RouterBOARD 951G-2HnD")
 		name="rb-951g-2hnd"

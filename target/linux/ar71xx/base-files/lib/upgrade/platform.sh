@@ -7,9 +7,12 @@
 
 PART_NAME=firmware
 RAMFS_COPY_DATA=/lib/ar71xx.sh
+[ -x /usr/sbin/nandwrite ] && RAMFS_COPY_BIN=/usr/sbin/nandwrite
 
 CI_BLKSZ=65536
 CI_LDADR=0x80060000
+
+PLATFORM_DO_UPGRADE_COMBINED_SEPARATE_MTD=0
 
 platform_find_partitions() {
 	local first dev size erasesize name
@@ -40,6 +43,13 @@ platform_find_kernelpart() {
 	done
 }
 
+platform_find_rootfspart() {
+	local part
+	for part in "${1%:*}" "${1#*:}"; do
+		[ "$part" != "$2" ] && echo "$part" && break
+	done
+}
+
 platform_do_upgrade_combined() {
 	local partitions=$(platform_find_partitions)
 	local kernelpart=$(platform_find_kernelpart "${partitions#*:}")
@@ -53,13 +63,22 @@ platform_do_upgrade_combined() {
 	   [ ${root_blocks:-0} -gt 0 ] && \
 	   [ ${erase_size:-0} -gt 0 ];
 	then
+		local rootfspart=$(platform_find_rootfspart "$partitions" "$kernelpart")
 		local append=""
 		[ -f "$CONF_TAR" -a "$SAVE_CONFIG" -eq 1 ] && append="-j $CONF_TAR"
 
-		( dd if="$1" bs=$CI_BLKSZ skip=1 count=$kern_blocks 2>/dev/null; \
-		  dd if="$1" bs=$CI_BLKSZ skip=$((1+$kern_blocks)) count=$root_blocks 2>/dev/null ) | \
-			mtd -r $append -F$kernelpart:$kern_length:$CI_LDADR,rootfs write - $partitions
+		if [ "$PLATFORM_DO_UPGRADE_COMBINED_SEPARATE_MTD" -ne 1 ]; then
+		    ( dd if="$1" bs=$CI_BLKSZ skip=1 count=$kern_blocks 2>/dev/null; \
+		      dd if="$1" bs=$CI_BLKSZ skip=$((1+$kern_blocks)) count=$root_blocks 2>/dev/null ) | \
+			    mtd -r $append -F$kernelpart:$kern_length:$CI_LDADR,rootfs write - $partitions
+		elif [ -n "$rootfspart" ]; then
+		    dd if="$1" bs=$CI_BLKSZ skip=1 count=$kern_blocks 2>/dev/null | \
+			    mtd write - $kernelpart
+		    dd if="$1" bs=$CI_BLKSZ skip=$((1+$kern_blocks)) count=$root_blocks 2>/dev/null | \
+			    mtd -r $append write - $rootfspart
+		fi
 	fi
+	PLATFORM_DO_UPGRADE_COMBINED_SEPARATE_MTD=0
 }
 
 tplink_get_image_hwid() {
@@ -162,6 +181,15 @@ alfa_check_image() {
 	esac
 
 	return 0
+}
+
+platform_nand_board_name() {
+	local board=$(ar71xx_board_name)
+
+	case "$board" in
+	rb*) echo "routerboard";;
+	*) echo "$board";;
+	esac
 }
 
 platform_check_image() {
@@ -308,6 +336,7 @@ platform_check_image() {
 	ls-sr71|\
 	pb42|\
 	pb44|\
+	rb-941-2nd|\
 	routerstation-pro|\
 	routerstation|\
 	wp543|\
@@ -443,6 +472,10 @@ platform_check_image() {
 	tew-673gru)
 		dir825b_check_image "$1" && return 0
 		;;
+	rb*)
+		nand_do_platform_check routerboard $1
+		return $?
+		;;
 	c-60|\
 	nbg6716|\
 	r6100|\
@@ -459,6 +492,8 @@ platform_check_image() {
 		tplink_pharos_check_image "$1" && return 0
 		return 1
 		;;
+	a40|\
+	a60|\
 	mr1750v2|\
 	mr1750|\
 	mr600v2|\
@@ -467,9 +502,11 @@ platform_check_image() {
 	mr900|\
 	om2p-hsv2|\
 	om2p-hsv3|\
+	om2p-hsv4|\
 	om2p-hs|\
 	om2p-lc|\
 	om2pv2|\
+	om2pv4|\
 	om2p|\
 	om5p-acv2|\
 	om5p-ac|\
@@ -570,6 +607,9 @@ platform_pre_upgrade() {
 	local board=$(ar71xx_board_name)
 
 	case "$board" in
+	rb-941-2nd)
+		;;
+	rb*|\
 	c-60|\
 	nbg6716|\
 	r6100|\
@@ -584,10 +624,29 @@ platform_pre_upgrade() {
 	esac
 }
 
+platform_nand_pre_upgrade() {
+	local board=$(ar71xx_board_name)
+
+	case "$board" in
+	rb*)
+		CI_KERNPART=none
+		local fw_mtd=$(find_mtd_part kernel)
+		fw_mtd="${fw_mtd/block/}"
+		[ -n "$fw_mtd" ] || return
+		mtd erase kernel
+		tar xf "$1" sysupgrade-routerboard/kernel -O | nandwrite -o "$fw_mtd" -
+		;;
+	esac
+}
+
 platform_do_upgrade() {
 	local board=$(ar71xx_board_name)
 
 	case "$board" in
+	rb-941-2nd)
+		PLATFORM_DO_UPGRADE_COMBINED_SEPARATE_MTD=1
+		platform_do_upgrade_combined "$ARGV"
+		;;
 	all0258n)
 		platform_do_upgrade_allnet "0x9f050000" "$ARGV"
 		;;
@@ -614,6 +673,8 @@ platform_do_upgrade() {
 	tew-673gru)
 		platform_do_upgrade_dir825b "$ARGV"
 		;;
+	a40|\
+	a60|\
 	mr1750v2|\
 	mr1750|\
 	mr600v2|\
@@ -622,9 +683,11 @@ platform_do_upgrade() {
 	mr900|\
 	om2p-hsv2|\
 	om2p-hsv3|\
+	om2p-hsv4|\
 	om2p-hs|\
 	om2p-lc|\
 	om2pv2|\
+	om2pv4|\
 	om2p|\
 	om5p-acv2|\
 	om5p-ac|\

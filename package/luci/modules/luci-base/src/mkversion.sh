@@ -15,7 +15,7 @@ if pcall(dofile, "/etc/openwrt_release") and _G.DISTRIB_DESCRIPTION then
 		end
 	end
 else
-	distname    = "libreCMC"
+	distname    = "OpenWrt"
 	distversion = "Development Snapshot"
 end
 

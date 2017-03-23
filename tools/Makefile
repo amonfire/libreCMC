@@ -56,6 +56,7 @@ $(curdir)/missing-macros/compile := $(curdir)/autoconf/install
 $(curdir)/e2fsprogs/compile := $(curdir)/libtool/install
 $(curdir)/libelf/compile := $(curdir)/libtool/install
 $(curdir)/sdcc/compile := $(curdir)/bison/install
+$(curdir)/b43-tools/compile := $(curdir)/bison/install
 $(curdir)/padjffs2/compile := $(curdir)/findutils/install
 $(curdir)/isl/compile := $(curdir)/gmp/install
 $(curdir)/bc/compile := $(curdir)/bison/install
