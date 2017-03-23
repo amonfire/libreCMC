@@ -192,17 +192,7 @@ proto_map_setup() {
 
 proto_map_teardown() {
 	local cfg="$1"
-	local link="map-$cfg"
-
-	json_get_var type type
-
-	[ -z "$type" ] && type="map-e"
-
-	case "$type" in
-		"map-e"|"lw4o6") ifdown "${cfg}_" ;;
-		"map-t") [ -f "/proc/net/nat46/control" ] && echo del $link > /proc/net/nat46/control ;;
-	esac
-
+	ifdown "${cfg}_"
 	rm -f /tmp/map-$cfg.rules
 }
 

@@ -21,7 +21,7 @@ function s.cfgsections()
 	return { "_pass" }
 end
 
-function m.parse(map)
+function m.on_commit(map)
 	local v1 = pw1:formvalue("_pass")
 	local v2 = pw2:formvalue("_pass")
 
@@ -36,8 +36,6 @@ function m.parse(map)
 			m.message = translate("Given password confirmation did not match, password not changed!")
 		end
 	end
-
-	Map.parse(map)
 end
 
 

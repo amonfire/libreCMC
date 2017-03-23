@@ -10,8 +10,6 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=osafeloader
 PKG_RELEASE:=1
 
-PKG_FLAGS:=nonshared
-
 include $(INCLUDE_DIR)/package.mk
 
 define Package/osafeloader
