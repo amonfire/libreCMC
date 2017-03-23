@@ -213,11 +213,8 @@ _procd_set_param() {
 			json_add_string "" "$@"
 			json_close_array
 		;;
-		nice)
+		nice|reload_signal)
 			json_add_int "$type" "$1"
-		;;
-		reload_signal)
-			json_add_int "$type" $(kill -l "$1")
 		;;
 		pidfile|user|seccomp|capabilities)
 			json_add_string "$type" "$1"
@@ -251,8 +248,9 @@ _procd_add_interface_trigger() {
 	json_close_array
 
 	json_close_array
-	_procd_add_timeout
 	json_close_array
+
+	_procd_add_timeout
 }
 
 _procd_add_reload_interface_trigger() {
@@ -282,8 +280,10 @@ _procd_add_config_trigger() {
 	json_close_array
 
 	json_close_array
-	_procd_add_timeout
+
 	json_close_array
+
+	_procd_add_timeout
 }
 
 _procd_add_raw_trigger() {

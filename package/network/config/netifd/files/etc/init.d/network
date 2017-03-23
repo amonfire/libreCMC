@@ -31,10 +31,9 @@ reload_service() {
 	/sbin/wifi reload_legacy
 }
 
-stop_service() {
+stop() {
 	/sbin/wifi down
-	ifdown -a
-	sleep 1
+	procd_kill network ''
 }
 
 service_running() {
@@ -136,6 +135,14 @@ service_triggers()
 	validate_switch_section
 	validate_switch_vlan
 	procd_close_validate
+}
+
+restart() {
+	ifdown -a
+	sleep 1
+	trap '' TERM
+	stop "$@"
+	start "$@"
 }
 
 shutdown() {
