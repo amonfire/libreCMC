@@ -135,22 +135,6 @@ $(Device/cpe510-520)
 endef
 TARGET_DEVICES += cpe210-220 cpe510-520 wbs210 wbs510
 
-define Device/re450
-  DEVICE_TITLE := TP-LINK RE450
-  DEVICE_PACKAGES := kmod-ath10k ath10k-firmware-qca988x
-  MTDPARTS := spi0.0:128k(u-boot)ro,1344k(kernel),4672k(rootfs),64k(pation-table)ro,64k(product-info)ro,1856k(config)ro,64k(art)ro,6016k@0x20000(firmware)
-  IMAGE_SIZE := 7936k
-  BOARDNAME := RE450
-  TPLINK_BOARD_NAME := RE450
-  DEVICE_PROFILE := RE450
-  LOADER_TYPE := elf
-  KERNEL := kernel-bin | patch-cmdline | lzma | mktplinkfw-kernel
-  IMAGES := sysupgrade.bin factory.bin
-  IMAGE/sysupgrade.bin := append-rootfs | tplink-safeloader sysupgrade
-  IMAGE/factory.bin := append-rootfs | tplink-safeloader factory
-endef
-TARGET_DEVICES += re450
-
 define Device/eap120
   DEVICE_TITLE := TP-LINK EAP120
   MTDPARTS := spi0.0:128k(u-boot)ro,64k(pation-table)ro,64k(product-info)ro,1536k(kernel),14336k(rootfs),192k(config)ro,64k(ART)ro,15872k@0x40000(firmware)
@@ -220,19 +204,6 @@ $(Device/tl-wdr4300-v1)
 endef
 TARGET_DEVICES += tl-wdr3500-v1 tl-wdr3600-v1 tl-wdr4300-v1 tl-wdr4300-v1-il tl-wdr4310-v1 mw4530r-v1
 
-define Device/tl-wdr6500-v2
-$(Device/tplink-8mlzma)
-  DEVICE_TITLE := TP-LINK TL-WDR6500v2
-  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport kmod-ath10k ath10k-firmware-qca988x
-  KERNEL := kernel-bin | patch-cmdline | lzma | uImage lzma
-  KERNEL_INITRAMFS := kernel-bin | patch-cmdline | lzma | uImage lzma | mktplinkfw-combined
-  BOARDNAME = TL-WDR6500-v2
-  DEVICE_PROFILE = TLWDR6500V2
-  TPLINK_HWID := 0x65000002
-  TPLINK_HEADER_VERSION := 2
-endef
-TARGET_DEVICES += tl-wdr6500-v2
-
 define Device/tl-wdr3320-v2
 $(Device/tplink-4mlzma)
   DEVICE_TITLE := TP-LINK TL-WDR3320v2
@@ -247,7 +218,7 @@ TARGET_DEVICES += tl-wdr3320-v2
 define Device/archer-c5-v1
     $(Device/tplink-16mlzma)
     DEVICE_TITLE := TP-LINK Archer C5
-    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport kmod-ath10k ath10k-firmware-qca988x
+    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport
     BOARDNAME := ARCHER-C5
     DEVICE_PROFILE := ARCHERC7
     TPLINK_HWID := 0xc5000001
@@ -256,7 +227,7 @@ endef
 define Device/archer-c7-v1
     $(Device/tplink-8mlzma)
     DEVICE_TITLE := TP-LINK Archer C7 v1
-    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport kmod-ath10k ath10k-firmware-qca988x
+    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport
     BOARDNAME := ARCHER-C7
     DEVICE_PROFILE := ARCHERC7
     TPLINK_HWID := 0x75000001
@@ -265,7 +236,7 @@ endef
 define Device/archer-c7-v2
     $(Device/tplink-16mlzma)
     DEVICE_TITLE := TP-LINK Archer C7 v2
-    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport kmod-ath10k ath10k-firmware-qca988x
+    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport
     BOARDNAME := ARCHER-C7-V2
     DEVICE_PROFILE := ARCHERC7
     TPLINK_HWID := 0xc7000002
@@ -277,7 +248,7 @@ endef
 define Device/archer-c7-v2-il
     $(Device/tplink-16mlzma)
     DEVICE_TITLE := TP-LINK Archer C7 v2 IL
-    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport kmod-ath10k ath10k-firmware-qca988x
+    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport
     BOARDNAME := ARCHER-C7-V2
     DEVICE_PROFILE := ARCHERC7
     TPLINK_HWID := 0xc7000002
@@ -287,7 +258,7 @@ endef
 define Device/tl-wdr7500-v3
     $(Device/tplink-8mlzma)
     DEVICE_TITLE := TP-LINK Archer C7 v3
-    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport kmod-ath10k ath10k-firmware-qca988x
+    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport
     BOARDNAME := ARCHER-C7
     DEVICE_PROFILE := ARCHERC7
     TPLINK_HWID := 0x75000003
@@ -412,16 +383,6 @@ define Device/tl-mr3420-v2
     TPLINK_HWID := 0x34200002
 endef
 TARGET_DEVICES += tl-mr3020-v1 tl-mr3040-v1 tl-mr3040-v2 tl-mr3220-v1 tl-mr3220-v2 tl-mr3420-v1 tl-mr3420-v2
-
-define Device/tl-wpa8630
-    $(Device/tplink-8mlzma)
-    DEVICE_TITLE := TP-LINK TL-WPA8630
-    DEVICE_PACKAGES := kmod-ath10k ath10k-firmware-qca988x
-    BOARDNAME := TL-WPA8630
-    DEVICE_PROFILE := TL-WPA8630
-    TPLINK_HWID := 0x86300001
-endef
-TARGET_DEVICES += tl-wpa8630
 
 define Device/tl-wr703n-v1
     $(Device/tplink-4mlzma)

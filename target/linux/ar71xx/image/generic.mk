@@ -44,16 +44,6 @@ define Device/cf-e320n-v2
 endef
 TARGET_DEVICES += cf-e320n-v2
 
-define Device/cf-e380ac-v1
-  DEVICE_TITLE := COMFAST CF-E380AC v1
-  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-ath10k ath10k-firmware-qca988x
-  BOARDNAME = CF-E380AC-V1
-  IMAGE_SIZE = 16128k
-  CONSOLE = ttyS0,115200
-  MTDPARTS = spi0.0:128k(u-boot)ro,64k(art)ro,16128k(firmware),64k(art-backup)ro
-endef
-TARGET_DEVICES += cf-e380ac-v1
-
 define Device/cf-e380ac-v2
   $(Device/cf-e380ac-v1)
   DEVICE_TITLE := COMFAST CF-E380AC v2
@@ -414,16 +404,6 @@ define Device/rnx-n360rt
 endef
 TARGET_DEVICES += rnx-n360rt
 
-define Device/mc-mac1200r
-  $(Device/tplink-8mlzma)
-  DEVICE_TITLE := MERCURY MAC1200R
-  DEVICE_PACKAGES := kmod-ath10k ath10k-firmware-qca988x
-  BOARDNAME := MC-MAC1200R
-  DEVICE_PROFILE := MAC1200R
-  TPLINK_HWID := 0x12000001
-endef
-TARGET_DEVICES += mc-mac1200r
-
 define Device/minibox-v1
   $(Device/tplink-16mlzma)
   DEVICE_TITLE := Gainstrong MiniBox V1.0
@@ -484,24 +464,6 @@ define Device/som9331
 endef
 TARGET_DEVICES += som9331
 
-define Device/sr3200
-  DEVICE_TITLE := YunCore SR3200
-  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-ath10k ath10k-firmware-qca988x
-  BOARDNAME = SR3200
-  IMAGE_SIZE = 16000k
-  CONSOLE = ttyS0,115200
-  MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env),16000k(firmware),64k(art)ro
-endef
-TARGET_DEVICES += sr3200
-
-define Device/xd3200
-  $(Device/sr3200)
-  DEVICE_TITLE := YunCore XD3200
-  DEVICE_PACKAGES := kmod-ath10k ath10k-firmware-qca988x
-  BOARDNAME = XD3200
-endef
-TARGET_DEVICES += xd3200
-
 define Device/tellstick-znet-lite
   $(Device/tplink-16mlzma)
   DEVICE_TITLE := TellStick ZNet Lite
@@ -527,7 +489,7 @@ TARGET_DEVICES += oolite
 
 define Device/NBG6616
   DEVICE_TITLE := ZyXEL NBG6616
-  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport kmod-usb-storage kmod-rtc-pcf8563 kmod-ath10k ath10k-firmware-qca988x
+  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport kmod-usb-storage kmod-rtc-pcf8563
   BOARDNAME = NBG6616
   KERNEL_SIZE = 2048k
   IMAGE_SIZE = 15323k
@@ -630,20 +592,6 @@ define Device/seama
   DEVICE_VARS += SEAMA_SIGNATURE
 endef
 
-define Device/dir-869-a1
-$(Device/seama)
-  DEVICE_TITLE := D-Link DIR-869 rev. A1
-  DEVICE_PACKAGES := kmod-ath10k ath10k-firmware-qca988x
-  BOARDNAME = DIR-869-A1
-  IMAGE_SIZE = 15872k
-  MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env)ro,64k(devdata)ro,64k(devconf)ro,15872k(firmware),64k(radiocfg)ro
-  SEAMA_SIGNATURE := wrgac54_dlink.2015_dir869
-  IMAGE/factory.bin := \
-	$$(IMAGE/default) | pad-rootfs -x 64 | \
-	seama | seama-seal -m "signature=$$$$(SEAMA_SIGNATURE)" | \
-	check-size $$$$(IMAGE_SIZE)
-endef
-
 define Device/mynet-n600
 $(Device/seama)
   DEVICE_TITLE := Western Digital My Net N600
@@ -667,7 +615,7 @@ endef
 define Device/qihoo-c301
 $(Device/seama)
   DEVICE_TITLE := Qihoo C301
-  DEVICE_PACKAGES :=  kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport kmod-ath10k ath10k-firmware-qca988x
+  DEVICE_PACKAGES :=  kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport
   BOARDNAME = QIHOO-C301
   IMAGE_SIZE = 15744k
   MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env),64k(devdata),64k(devconf),15744k(firmware),64k(warm_start),64k(action_image_config),64k(radiocfg)ro;spi0.1:15360k(upgrade2),1024k(privatedata)
@@ -687,23 +635,6 @@ endef
 define Build/wrgg-pad-rootfs
 	$(STAGING_DIR_HOST)/bin/padjffs2 $(IMAGE_ROOTFS) -c 64 >>$@
 endef
-
-define Device/dap-2695-a1
-  DEVICE_TITLE := D-Link DAP-2695 rev. A1
-  DEVICE_PACKAGES := ath10k-firmware-qca988x kmod-ath10k uboot-envtools
-  BOARDNAME = DAP-2695-A1
-  IMAGES := factory.img sysupgrade.bin
-  IMAGE_SIZE = 15360k
-  IMAGE/factory.img = append-kernel | pad-offset 65536 160 | append-rootfs | wrgg-pad-rootfs | mkwrggimg | check-size $$$$(IMAGE_SIZE)
-  IMAGE/sysupgrade.bin = append-kernel | pad-offset 65536 160 | mkwrggimg | append-rootfs | wrgg-pad-rootfs | check-size $$$$(IMAGE_SIZE)
-  KERNEL := kernel-bin | patch-cmdline | relocate-kernel | lzma
-  KERNEL_INITRAMFS := $$(KERNEL) | mkwrggimg
-  MTDPARTS = spi0.0:256k(bootloader)ro,64k(bdcfg)ro,64k(rgdb)ro,64k(langpack)ro,15360k(firmware),448k(captival)ro,64k(certificate)ro,64k(radiocfg)ro
-  DAP_SIGNATURE := wapac02_dkbs_dap2695
-  DEVICE_VARS += DAP_SIGNATURE
-endef
-
-TARGET_DEVICES += dap-2695-a1
 
 define Build/mkbuffaloimg
 	$(STAGING_DIR_HOST)/bin/mkbuffaloimg -B $(BOARDNAME) \

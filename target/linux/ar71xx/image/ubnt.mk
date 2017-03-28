@@ -125,22 +125,6 @@ define Device/ubnt-unifi
   DEVICE_PROFILE := UBNT UBNTUNIFI
 endef
 
-define Device/ubnt-unifiac-lite
-  $(Device/ubnt-unifiac)
-  DEVICE_TITLE := Ubiquiti UniFi AC-Lite
-  DEVICE_PACKAGES := kmod-ath10k ath10k-firmware-qca988x
-  DEVICE_PROFILE := UBNT UBNTUNIFIACLITE
-  BOARDNAME := UBNT-UF-AC-LITE
-endef
-
-define Device/ubnt-unifiac-pro
-  $(Device/ubnt-unifiac)
-  DEVICE_TITLE := Ubiquiti UniFi AC-Pro
-  DEVICE_PACKAGES := kmod-ath10k ath10k-firmware-qca988x kmod-usb-core kmod-usb-ohci kmod-usb2
-  DEVICE_PROFILE := UBNT UBNTUNIFIACPRO
-  BOARDNAME := UBNT-UF-AC-PRO
-endef
-
 define Device/ubnt-unifi-outdoor
   $(Device/ubnt-bz)
   DEVICE_TITLE := Ubiquiti UniFi Outdoor

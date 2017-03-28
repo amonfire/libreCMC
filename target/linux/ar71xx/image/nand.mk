@@ -13,17 +13,6 @@ endef
 
 TARGET_DEVICES += c-60
 
-define Device/domywifi-dw33d
-  DEVICE_TITLE := DomyWifi DW33D
-  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-storage kmod-usb-ledtrig-usbport kmod-ath10k ath10k-firmware-qca988x
-  BOARDNAME = DW33D
-  IMAGE_SIZE = 16000k
-  CONSOLE = ttyS0,115200
-  MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env)ro,14528k(rootfs),1472k(kernel),64k(art)ro,16000k@0x50000(firmware);ar934x-nfc:96m(rootfs_data),32m(backup)ro
-  IMAGE/sysupgrade.bin = append-rootfs | pad-rootfs | pad-to 14528k | append-kernel | check-size $$$$(IMAGE_SIZE)
-endef
-TARGET_DEVICES += domywifi-dw33d
-
 define Build/MerakiNAND
 	-$(STAGING_DIR_HOST)/bin/mkmerakifw \
 		-B $(BOARDNAME) -s \
@@ -69,12 +58,6 @@ endef
 
 TARGET_DEVICES += z1
 
-define LegacyDevice/R6100
-  DEVICE_TITLE := NETGEAR R6100
-  DEVICE_PACKAGES := kmod-ath10k ath10k-firmware-qca988x kmod-usb-core kmod-usb-ohci kmod-usb2 kmod-usb-ledtrig-usbport
-endef
-LEGACY_DEVICES += R6100
-
 define LegacyDevice/WNDR3700V4
   DEVICE_TITLE := NETGEAR WNDR3700v4
   DEVICE_PACKAGES := kmod-usb-core kmod-usb-ohci kmod-usb2 kmod-usb-ledtrig-usbport
@@ -86,9 +69,3 @@ define LegacyDevice/WNDR4300V1
   DEVICE_PACKAGES := kmod-usb-core kmod-usb-ohci kmod-usb2 kmod-usb-ledtrig-usbport
 endef
 LEGACY_DEVICES += WNDR4300V1
-
-define LegacyDevice/NBG6716
-  DEVICE_TITLE := Zyxel NBG 6716
-  DEVICE_PACKAGES := kmod-rtc-pcf8563 kmod-ath10k ath10k-firmware-qca988x
-endef
-LEGACY_DEVICES += NBG6716
