@@ -10,7 +10,7 @@
 # REVISION:=x
 # SOURCE_DATE_EPOCH:=x
 
-RELEASE:=Frivolous Fred
+RELEASE:=Frivolous Fred RC1
 
 PKG_CONFIG_DEPENDS += \
 	CONFIG_VERSION_BUG_URL \
@@ -31,7 +31,7 @@ qstrip_escape=$(subst ','\'',$(call qstrip,$(1)))
 sanitize = $(call tolower,$(subst _,-,$(subst $(space),-,$(1))))
 
 VERSION_NUMBER:=$(call qstrip_escape,$(CONFIG_VERSION_NUMBER))
-VERSION_NUMBER:=$(if $(VERSION_NUMBER),$(VERSION_NUMBER),v1.4)
+VERSION_NUMBER:=$(if $(VERSION_NUMBER),$(VERSION_NUMBER),v1.4-core-RC1)
 
 VERSION_CODE:=$(call qstrip_escape,$(CONFIG_VERSION_CODE))
 VERSION_CODE:=$(if $(VERSION_CODE),$(VERSION_CODE),$(REVISION))
