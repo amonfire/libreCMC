@@ -553,6 +553,7 @@ platform_check_image() {
 
 		return 0
 		;;
+	tpe-r1100|\
 	tube2h)
 		alfa_check_image "$1" && return 0
 		return 1
