@@ -69,6 +69,7 @@ get_status_led() {
 	dir-620-a1|\
 	dir-620-d1|\
 	dwr-512-b|\
+	gb-pc1|\
 	hpm|\
 	hw550-3g|\
 	mac1200rv2|\
@@ -172,10 +173,6 @@ get_status_led() {
 	newifi-d1)
 		status_led="$board:blue:status"
 		;;
-	omega2| \
-	omega2p)
-		status_led="$board:amber:system"
-		;;
 	oy-0001|\
 	sl-r7205|\
 	zbt-we826)
@@ -209,9 +206,6 @@ get_status_led() {
 		;;
 	v22rw-2x2)
 		status_led="$board:green:security"
-		;;
-	vocore2)
-		status_led="$board:fuchsia:status"
 		;;
 	w306r-v20|\
 	witi|\
