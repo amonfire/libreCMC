@@ -40,7 +40,7 @@ VERSION_NICK:=$(call qstrip_escape,$(CONFIG_VERSION_NICK))
 VERSION_NICK:=$(if $(VERSION_NICK),$(VERSION_NICK),$(RELEASE))
 
 VERSION_REPO:=$(call qstrip_escape,$(CONFIG_VERSION_REPO))
-VERSION_REPO:=$(if $(VERSION_REPO),$(VERSION_REPO),https://librecmc.org/librecmc)
+VERSION_REPO:=$(if $(VERSION_REPO),$(VERSION_REPO),https://librecmc.org/librecmc/downloads/snapshots/%v)
 
 VERSION_DIST:=$(call qstrip_escape,$(CONFIG_VERSION_DIST))
 VERSION_DIST:=$(if $(VERSION_DIST),$(VERSION_DIST),libreCMC)
