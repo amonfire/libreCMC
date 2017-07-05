@@ -30,7 +30,7 @@ endif
 define Package/base-files
   SECTION:=base
   CATEGORY:=Base system
-  DEPENDS:=+netifd +libc +procd +jsonfilter +SIGNED_PACKAGES:usign +SIGNED_PACKAGES:lede-keyring +fstools +fwtool
+  DEPENDS:=+netifd +libc +procd +jsonfilter +SIGNED_PACKAGES:usign +SIGNED_PACKAGES:librecmc-keyring +fstools +fwtool
   TITLE:=Base filesystem for libreCMC
   URL:=http://openwrt.org/
   VERSION:=$(PKG_RELEASE)-$(REVISION)
