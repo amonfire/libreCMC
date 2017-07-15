@@ -18,7 +18,7 @@ PKG_BUILD_PARALLEL:=0
 
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=http://www.openssl.org/source/ \
+PKG_SOURCE_URL:=https://www.openssl.org/source/ \
 	http://www.openssl.org/source/old/$(PKG_BASE)/ \
 
 PKG_HASH:=ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c

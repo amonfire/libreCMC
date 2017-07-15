@@ -82,8 +82,8 @@ sub download_cmd($) {
 	}
 
 	return $have_curl
-		? (qw(curl -f --connect-timeout 20 --retry 5 --location --insecure), shellwords($ENV{CURL_OPTIONS} || ''), $url)
-		: (qw(wget --tries=5 --timeout=20 --no-check-certificate --output-document=-), shellwords($ENV{WGET_OPTIONS} || ''), $url)
+		? (qw(curl -f --connect-timeout 20 --retry 5 --location), shellwords($ENV{CURL_OPTIONS} || ''), $url)
+		: (qw(wget --tries=5 --timeout=20 --output-document=-), shellwords($ENV{WGET_OPTIONS} || ''), $url)
 	;
 }
 
@@ -188,16 +188,12 @@ sub cleanup
 foreach my $mirror (@ARGV) {
 	if ($mirror =~ /^\@SF\/(.+)$/) {
 		# give sourceforge a few more tries, because it redirects to different mirrors
-		for (1 .. 5) {
-			push @mirrors, "http://downloads.sourceforge.net/$1";
-		}
+		#for (1 .. 5) {
+		#	push @mirrors, "http://downloads.sourceforge.net/$1";
+		#}
 	} elsif ($mirror =~ /^\@APACHE\/(.+)$/) {
 		push @mirrors, "https://mirror.netcologne.de/apache.org/$1";
 		push @mirrors, "https://mirror.aarnet.edu.au/pub/apache/$1";
-		push @mirrors, "http://mirror.cogentco.com/pub/apache/$1";
-		push @mirrors, "http://mirror.csclub.uwaterloo.ca/apache/$1";
-		push @mirrors, "http://mirror.navercorp.com/apache/$1";
-		push @mirrors, "http://ftp.jaist.ac.jp/pub/apache/$1";
 	} elsif ($mirror =~ /^\@GITHUB\/(.+)$/) {
 		# give github a few more tries (different mirrors)
 		for (1 .. 5) {
@@ -206,17 +202,8 @@ foreach my $mirror (@ARGV) {
 	} elsif ($mirror =~ /^\@GNU\/(.+)$/) {
 		push @mirrors, "https://mirrors.rit.edu/gnu/$1";
 		push @mirrors, "https://mirror.netcologne.de/gnu/$1";
-		push @mirrors, "http://ftp.kddilabs.jp/GNU/gnu/$1";
-		push @mirrors, "http://www.nic.funet.fi/pub/gnu/gnu/$1";
-		push @mirrors, "http://mirror.internode.on.net/pub/gnu/$1";
-		push @mirrors, "http://mirror.navercorp.com/gnu/$1";
 	} elsif ($mirror =~ /^\@SAVANNAH\/(.+)$/) {
 		push @mirrors, "https://mirror.netcologne.de/savannah/$1";
-		push @mirrors, "http://mirror.csclub.uwaterloo.ca/nongnu/$1";
-		push @mirrors, "http://ftp.acc.umu.se/mirror/gnu.org/savannah/$1";
-		push @mirrors, "http://nongnu.uib.no/$1";
-		push @mirrors, "http://ftp.igh.cnrs.fr/pub/nongnu/$1";
-		push @mirrors, "http://public.p-knowledge.co.jp/Savannah-nongnu-mirror/$1";
 	} elsif ($mirror =~ /^\@KERNEL\/(.+)$/) {
 		my @extra = ( $1 );
 		if ($filename =~ /linux-\d+\.\d+(?:\.\d+)?-rc/) {
@@ -227,10 +214,6 @@ foreach my $mirror (@ARGV) {
 		foreach my $dir (@extra) {
 			push @mirrors, "https://cdn.kernel.org/pub/$dir";
 			push @mirrors, "https://mirror.rackspace.com/kernel.org/$dir";
-			push @mirrors, "http://download.xs4all.nl/ftp.kernel.org/pub/$dir";
-			push @mirrors, "http://mirrors.mit.edu/kernel/$dir";
-			push @mirrors, "http://ftp.nara.wide.ad.jp/pub/kernel.org/$dir";
-			push @mirrors, "http://www.ring.gr.jp/archives/linux/kernel.org/$dir";
 		}
     } elsif ($mirror =~ /^\@KERNEL_LIBRE\/(.+)$/) {
                 my @extra = ( $1 );
@@ -240,15 +223,10 @@ foreach my $mirror (@ARGV) {
                         push @extra, "$extra[0]/v$1";
                 }
                 foreach my $dir (@extra) {
-                        push @mirrors, "http://linux-libre.fsfla.org/pub/linux-libre/releases/$dir";
+                        push @mirrors, "https://linux-libre.fsfla.org/pub/linux-libre/releases/$dir";
                 }
     } elsif ($mirror =~ /^\@GNOME\/(.+)$/) {
-		push @mirrors, "http://mirror.csclub.uwaterloo.ca/gnome/sources/$1";
-		push @mirrors, "http://ftp.acc.umu.se/pub/GNOME/sources/$1";
-		push @mirrors, "http://ftp.kaist.ac.kr/gnome/sources/$1";
-		push @mirrors, "http://www.mirrorservice.org/sites/ftp.gnome.org/pub/GNOME/sources/$1";
-		push @mirrors, "http://mirror.internode.on.net/pub/gnome/sources/$1";
-		push @mirrors, "http://ftp.belnet.be/ftp.gnome.org/sources/$1";
+		push @mirrors, "https://mirror.csclub.uwaterloo.ca/gnome/sources/$1";
     }
     else {
 		push @mirrors, $mirror;
