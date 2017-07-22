@@ -5,7 +5,7 @@
 define Device/gb-pc1
   DTS := GB-PC1
   DEVICE_TITLE := GnuBee Personal Cloud One
-  DEVICE_PACKAGES := kmod-ata-core kmod-ata-ahci
+  DEVICE_PACKAGES := kmod-ata-core kmod-ata-ahci kmod-usb3 kmod-sdhci-mt7620 uboot-envtools
   IMAGE_SIZE := $(ralink_default_fw_size_32M)
 endef
 
