@@ -50,43 +50,14 @@
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 
-		lan {
-			label = "gb-pc1:green:lan";
+		lan1 {
+			label = "gb-pc1:green:lan1";
 			gpios = <&gpio0 24 GPIO_ACTIVE_LOW>;
 		};
 
-		wan {
-			label = "gb-pc1:green:wan";
+		lan2 {
+			label = "gb-pc1:green:lan2";
 			gpios = <&gpio0 25 GPIO_ACTIVE_LOW>;
-		};
-	};
-
-	gpio-export {
-		compatible = "gpio-export";
-		#size-cells = <0>;
-
-		gpio26 {
-			gpio-export,name = "gpio26";
-			gpio-export,direction_may_change = <1>;
-			gpios = <&gpio0 26 GPIO_ACTIVE_HIGH>;
-		};
-
-		gpio28 {
-			gpio-export,name = "gpio28";
-			gpio-export,direction_may_change = <1>;
-			gpios = <&gpio0 28 GPIO_ACTIVE_HIGH>;
-		};
-
-		gpio29 {
-			gpio-export,name = "gpio29";
-			gpio-export,direction_may_change = <1>;
-			gpios = <&gpio0 29 GPIO_ACTIVE_HIGH>;
-		};
-
-		gpio30 {
-			gpio-export,name = "gpio30";
-			gpio-export,direction_may_change = <1>;
-			gpios = <&gpio0 30 GPIO_ACTIVE_HIGH>;
 		};
 	};
 };
@@ -115,6 +86,7 @@
 		partition@30000 {
 			label = "u-boot-env";
 			reg = <0x30000 0x10000>;
+			read-only;
 		};
 
 		factory: partition@40000 {
@@ -128,16 +100,6 @@
 			reg = <0x50000 0x1fb0000>;
 		};
 	};
-};
-
-&cpuclock {
-		compatible = "fixed-clock";
-		clock-frequency = <2000000000>;
-};
-
-&sysclock {
-		compatible = "fixed-clock";
-		clock-frequency = <80000000>;
 };
 
 &pcie {
