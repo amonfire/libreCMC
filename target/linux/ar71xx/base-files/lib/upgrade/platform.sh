@@ -237,6 +237,7 @@ platform_check_image() {
 	ew-dorin-router|\
 	ew-dorin|\
 	gl-ar150|\
+	gl-usb150|\
 	gl-ar300m|\
 	gl-ar300|\
 	gl-domino|\
