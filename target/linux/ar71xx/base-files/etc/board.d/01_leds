@@ -276,6 +276,7 @@ dlan-pro-1200-ac)
 	ucidef_set_led_gpio "plcr" "dLAN" "devolo:error:dlan" "16" "0"
 	;;
 gl-ar150|\
+gl-usb150|\
 gl-ar300|\
 gl-ar300m|\
 gl-mifi)

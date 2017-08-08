@@ -620,6 +620,9 @@ ar71xx_board_detect() {
 	*"GL AR150")
 		name="gl-ar150"
 		;;
+	*"GL USB150")
+		name="gl-usb150"
+		;;
 	*"GL AR300")
 		name="gl-ar300"
 		;;
@@ -1088,7 +1091,7 @@ ar71xx_board_detect() {
 	*"TL-MR13U v1")
 		name="tl-mr13u"
 		;;
-	*"Think Penguin Mini Router")
+	*"TPE-R1100 Think Penguin Mini Router")
                 name="tpe-r1100"
                 ;;
 	*"Tube2H")
