@@ -623,6 +623,9 @@ ar71xx_board_detect() {
 	*"GL AR150")
 		name="gl-ar150"
 		;;
+	*"GL-USB150")
+		name="gl-usb150"
+	;;
 	*"GL AR300")
 		name="gl-ar300"
 		;;

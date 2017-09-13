@@ -121,15 +121,18 @@ define Device/weio
 endef
 TARGET_DEVICES += weio
 
-define Device/gl-ar150
-  DEVICE_TITLE := GL AR150
-  DEVICE_PACKAGES := kmod-usb-core kmod-usb2
-  BOARDNAME = GL-AR150
-  IMAGE_SIZE = 16000k
-  CONSOLE = ttyATH0,115200
-  MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env)ro,16000k(firmware),64k(art)ro
+define Device/gl-usb150
+  DEVICE_TITLE := GL.iNet GL-USB150
+  DEVICE_PACKAGES := -swconfig
+  BOARDNAME := GL-USB150
+  IMAGE_SIZE := 16000k
+  CONSOLE := ttyATH0,115200
+  MTDPARTS := spi0.0:256k(u-boot)ro,64k(u-boot-env)ro,16000k(firmware),64k(art)ro
+  SUPPORTED_DEVICES := gl-usb150
+  IMAGE/sysupgrade.bin = append-kernel | pad-to $$$$(BLOCKSIZE) | \
+        append-rootfs | pad-rootfs | append-metadata | check-size $$$$(IMAGE_SIZE)
 endef
-TARGET_DEVICES += gl-ar150
+TARGET_DEVICES += gl-usb150
 
 define Device/tpe-r1100
   $(Device/gl-ar150)
