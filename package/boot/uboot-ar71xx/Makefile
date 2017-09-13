@@ -9,16 +9,15 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=u-boot
-PKG_VERSION:=2010.03-libre
+PKG_VERSION:=2010.03
 PKG_RELEASE:=1
 
 PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+PKG_HASH:=902d1b2c15787df55186fae4033685fb0c5a5a12755a08383e97c4a3e255925b
 PKG_SOURCE_URL:= \
-	https://librecmc.org/librecmc/downloads/sources/archive/v1.2.1/ \
+	http://mirror2.openwrt.org/sources \
 	ftp://ftp.denx.de/pub/u-boot
-
-PKG_MD5SUM:=526e01c8564ab8d1fd2c0e787a014b17
 PKG_TARGETS:=bin
 
 PKG_LICENSE:=GPL-2.0 GPL-2.0+
