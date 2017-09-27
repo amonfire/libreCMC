@@ -14,9 +14,10 @@ PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=\
 	https://build.openvpn.net/downloads/releases/ \
-	https://swupdate.openvpn.net/community/releases/
+	https://swupdate.openvpn.net/community/releases/ \
+	http://www.eurephia.net/openvpn/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_HASH:=15e15fc97f189b52aee7c90ec8355aa77469c773125110b4c2f089abecde36fb
+PKG_HASH:=7aa86167a5b8923e54e8795b814ed77288c793671f59fd830d9ab76d4b480571
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
