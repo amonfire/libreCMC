@@ -18,6 +18,9 @@ msgstr "Tillåt systemanvändare att nå deras hem-mappar via nätverksdelningar
 msgid "Allowed users"
 msgstr "Tillåtna användare"
 
+msgid "Browseable"
+msgstr ""
+
 msgid "Create mask"
 msgstr "Skapa mask"
 
@@ -54,6 +57,11 @@ msgstr "Nätverksdelningar"
 
 msgid "Path"
 msgstr "Genväg"
+
+msgid ""
+"Please add directories to share. Each directory refers to a folder on a "
+"mounted device."
+msgstr ""
 
 msgid "Read-only"
 msgstr "Endast läsbar"

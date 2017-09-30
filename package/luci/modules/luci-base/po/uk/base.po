@@ -163,6 +163,11 @@ msgstr "<abbr title=\"Максимум\">Max.</abbr> одночасних зап
 msgid "<abbr title='Pairwise: %s / Group: %s'>%s - %s</abbr>"
 msgstr "<abbr title='Парний: %s / Груповий: %s'>%s - %s</abbr>"
 
+msgid ""
+"<br/>Note: you need to manually restart the cron service if the crontab file "
+"was empty before editing."
+msgstr ""
+
 msgid "A43C + J43 + A43"
 msgstr ""
 
@@ -181,9 +186,6 @@ msgstr ""
 msgid "APN"
 msgstr ""
 "<abbr title=\"Access Point Name — символічна назва точки доступу\">APN</abbr>"
-
-msgid "AR Support"
-msgstr "Підтримка AR"
 
 msgid "ARP retry threshold"
 msgstr "Поріг повтору ARP"
@@ -432,13 +434,7 @@ msgstr ""
 msgid "Associated Stations"
 msgstr "Приєднані станції"
 
-msgid "Atheros 802.11%s Wireless Controller"
-msgstr "Бездротовий 802.11%s контролер Atheros"
-
 msgid "Auth Group"
-msgstr ""
-
-msgid "AuthGroup"
 msgstr ""
 
 msgid "Authentication"
@@ -512,9 +508,6 @@ msgstr "Повернутися до переліку"
 
 msgid "Back to scan results"
 msgstr "Повернутися до результатів сканування"
-
-msgid "Background Scan"
-msgstr "Сканування у фоновому режимі"
 
 msgid "Backup / Flash Firmware"
 msgstr "Резервне копіювання / Оновлення прошивки"
@@ -683,9 +676,6 @@ msgstr "Команда"
 
 msgid "Common Configuration"
 msgstr "Загальна конфігурація"
-
-msgid "Compression"
-msgstr "Стиснення"
 
 msgid "Configuration"
 msgstr "Конфігурація"
@@ -907,9 +897,6 @@ msgstr "Вимкнути настроювання DNS"
 msgid "Disable Encryption"
 msgstr ""
 
-msgid "Disable HW-Beacon timer"
-msgstr "Вимкнути таймер HW-Beacon"
-
 msgid "Disabled"
 msgstr "Вимкнено"
 
@@ -956,9 +943,6 @@ msgstr ""
 
 msgid "Do not forward reverse lookups for local networks"
 msgstr "Не спрямовувати зворотний перегляд для локальних мереж"
-
-msgid "Do not send probe responses"
-msgstr "Не надсилати відповіді на зондування"
 
 msgid "Domain required"
 msgstr "Потрібен домен"
@@ -1162,9 +1146,6 @@ msgstr ""
 msgid "Extra SSH command options"
 msgstr ""
 
-msgid "Fast Frames"
-msgstr "Швидкі фрейми"
-
 msgid "File"
 msgstr "Файл"
 
@@ -1199,6 +1180,9 @@ msgstr "Готово"
 
 msgid "Firewall"
 msgstr "Брандмауер"
+
+msgid "Firewall Mark"
+msgstr ""
 
 msgid "Firewall Settings"
 msgstr "Настройки брандмауера"
@@ -1244,6 +1228,9 @@ msgstr "Примусово TKIP"
 
 msgid "Force TKIP and CCMP (AES)"
 msgstr "Примусово TKIP та CCMP (AES)"
+
+msgid "Force link"
+msgstr ""
 
 msgid "Force use of NAT-T"
 msgstr ""
@@ -1494,6 +1481,9 @@ msgstr "Довжина префікса IPv6"
 msgid "IPv6 routed prefix"
 msgstr ""
 
+msgid "IPv6 suffix"
+msgstr ""
+
 msgid "IPv6-Address"
 msgstr "IPv6-адреса"
 
@@ -1512,7 +1502,7 @@ msgstr "IPv6 через IPv4 (6to4)"
 msgid "Identity"
 msgstr "Ідентичність"
 
-msgid "If checked, 1DES is enaled"
+msgid "If checked, 1DES is enabled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1604,6 +1594,9 @@ msgstr "Інстальовані пакети"
 msgid "Interface"
 msgstr "Інтерфейс"
 
+msgid "Interface %q device auto-migrated from %q to %q."
+msgstr ""
+
 msgid "Interface Configuration"
 msgstr "Конфігурація інтерфейсу"
 
@@ -1650,6 +1643,9 @@ msgstr "Задано невірний VLAN ID! Доступні тільки у�
 msgid "Invalid username and/or password! Please try again."
 msgstr "Неприпустиме ім’я користувача та/або пароль! Спробуйте ще раз."
 
+msgid "Isolate Clients"
+msgstr ""
+
 #, fuzzy
 msgid ""
 "It appears that you are trying to flash an image that does not fit into the "
@@ -1658,8 +1654,8 @@ msgstr ""
 "Схоже, що ви намагаєтеся залити образ, який не вміщається у флеш-пам'ять! "
 "Перевірте файл образу!"
 
-msgid "Java Script required!"
-msgstr "Потрібен Java Script!"
+msgid "JavaScript required!"
+msgstr "Потрібен JavaScript!"
 
 msgid "Join Network"
 msgstr "Підключення до мережі"
@@ -1726,9 +1722,6 @@ msgstr "Час чинності оренди"
 
 msgid "Leasefile"
 msgstr "Файл оренд"
-
-msgid "Leasetime"
-msgstr "Час оренди"
 
 msgid "Leasetime remaining"
 msgstr "Час оренди, що лишився"
@@ -1930,9 +1923,6 @@ msgstr ""
 msgid "Max. Attainable Data Rate (ATTNDR)"
 msgstr ""
 
-msgid "Maximum Rate"
-msgstr "Максимальна швидкість"
-
 msgid "Maximum allowed number of active DHCP leases"
 msgstr "Максимально допустима кількість активних оренд DHCP"
 
@@ -1967,9 +1957,6 @@ msgstr "Використання пам'яті, %"
 
 msgid "Metric"
 msgstr "Метрика"
-
-msgid "Minimum Rate"
-msgstr "Мінімальна швидкість"
 
 msgid "Minimum hold time"
 msgstr "Мінімальний час утримування"
@@ -2044,9 +2031,6 @@ msgstr "Вниз"
 msgid "Move up"
 msgstr "Вгору"
 
-msgid "Multicast Rate"
-msgstr "Швидкість багатоадресного потоку"
-
 msgid "Multicast address"
 msgstr "Адреса багатоадресного потоку"
 
@@ -2057,6 +2041,9 @@ msgid "NAT-T Mode"
 msgstr ""
 
 msgid "NAT64 Prefix"
+msgstr ""
+
+msgid "NCM"
 msgstr ""
 
 msgid "NDP-Proxy"
@@ -2248,12 +2235,21 @@ msgstr ""
 msgid "Optional, use when the SIXXS account has more than one tunnel"
 msgstr ""
 
-msgid "Optional."
+msgid ""
+"Optional. 32-bit mark for outgoing encrypted packets. Enter value in hex, "
+"starting with <code>0x</code>."
 msgstr ""
 
 msgid ""
-"Optional. Adds in an additional layer of symmetric-key cryptography for post-"
-"quantum resistance."
+"Optional. Allowed values: 'eui64', 'random', fixed value like '::1' or "
+"'::1:2'. When IPv6 prefix (like 'a:b:c:d::') is received from a delegating "
+"server, use the suffix (like '::1') to form the IPv6 address ('a:b:c:d::1') "
+"for the interface."
+msgstr ""
+
+msgid ""
+"Optional. Base64-encoded preshared key. Adds in an additional layer of "
+"symmetric-key cryptography for post-quantum resistance."
 msgstr ""
 
 msgid "Optional. Create routes for Allowed IPs for this peer."
@@ -2289,9 +2285,6 @@ msgstr "Вих."
 
 msgid "Outbound:"
 msgstr "Вихідний:"
-
-msgid "Outdoor Channels"
-msgstr "Зовнішні канали"
 
 msgid "Output Interface"
 msgstr ""
@@ -2405,6 +2398,9 @@ msgstr ""
 msgid "Password successfully changed!"
 msgstr "Пароль успішно змінено!"
 
+msgid "Password2"
+msgstr ""
+
 msgid "Path to CA-Certificate"
 msgstr "Шлях до центру сертифікції"
 
@@ -2475,6 +2471,12 @@ msgid "Power Management Mode"
 msgstr ""
 
 msgid "Pre-emtive CRC errors (CRCP_P)"
+msgstr ""
+
+msgid "Prefer LTE"
+msgstr ""
+
+msgid "Prefer UMTS"
 msgstr ""
 
 msgid "Prefix Delegated"
@@ -2681,9 +2683,6 @@ msgstr "Перепідключення інтерфейсу"
 msgid "References"
 msgstr "Посилання"
 
-msgid "Regulatory Domain"
-msgstr "Регулятивний домен"
-
 msgid "Relay"
 msgstr "Ретранслятор"
 
@@ -2732,13 +2731,13 @@ msgstr "Потрібно для деяких провайдерів, напри�
 msgid "Required. Base64-encoded private key for this interface."
 msgstr ""
 
+msgid "Required. Base64-encoded public key of peer."
+msgstr ""
+
 msgid ""
 "Required. IP addresses and prefixes that this peer is allowed to use inside "
 "the tunnel. Usually the peer's tunnel IP addresses and the networks the peer "
 "routes through the tunnel."
-msgstr ""
-
-msgid "Required. Public key of peer."
 msgstr ""
 
 msgid ""
@@ -2887,9 +2886,6 @@ msgstr ""
 msgid "Separate Clients"
 msgstr "Розділяти клієнтів"
 
-msgid "Separate WDS"
-msgstr "Розділяти WDS"
-
 msgid "Server Settings"
 msgstr "Настройки сервера"
 
@@ -2912,6 +2908,11 @@ msgstr "Тип сервісу"
 
 msgid "Services"
 msgstr "Сервіси"
+
+msgid ""
+"Set interface properties regardless of the link carrier (If set, carrier "
+"sense events do not invoke hotplug handlers)."
+msgstr ""
 
 #, fuzzy
 msgid "Set up Time Synchronization"
@@ -3054,9 +3055,6 @@ msgstr "Статичні оренди"
 
 msgid "Static Routes"
 msgstr "Статичні маршрути"
-
-msgid "Static WDS"
-msgstr "Статичний WDS"
 
 msgid "Static address"
 msgstr "Статичні адреси"
@@ -3484,9 +3482,6 @@ msgstr ""
 msgid "Tunnel type"
 msgstr ""
 
-msgid "Turbo Mode"
-msgstr "Режим Turbo"
-
 msgid "Tx-Power"
 msgstr "Потужність передавача"
 
@@ -3773,9 +3768,6 @@ msgstr "Записувати отримані DNS-запити до систем
 msgid "Write system log to file"
 msgstr ""
 
-msgid "XR Support"
-msgstr "Підтримка XR"
-
 msgid ""
 "You can enable or disable installed init scripts here. Changes will applied "
 "after a device reboot.<br /><strong>Warning: If you disable essential init "
@@ -3787,9 +3779,9 @@ msgstr ""
 "пристрій може стати недоступним!</strong>"
 
 msgid ""
-"You must enable Java Script in your browser or LuCI will not work properly."
+"You must enable JavaScript in your browser or LuCI will not work properly."
 msgstr ""
-"Ви повинні увімкнути Java Script у вашому браузері, або LuCI не буде "
+"Ви повинні увімкнути JavaScript у вашому браузері, або LuCI не буде "
 "працювати належним чином."
 
 msgid ""
@@ -3803,9 +3795,6 @@ msgstr "будь-який"
 
 msgid "auto"
 msgstr "авто"
-
-msgid "automatic"
-msgstr ""
 
 msgid "baseT"
 msgstr "baseT"
@@ -3885,9 +3874,6 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-msgid "navigation Navigation"
-msgstr ""
-
 msgid "no"
 msgstr "ні"
 
@@ -3919,12 +3905,6 @@ msgid "routed"
 msgstr "спрямовано"
 
 msgid "server mode"
-msgstr ""
-
-msgid "skiplink1 Skip to navigation"
-msgstr ""
-
-msgid "skiplink2 Skip to content"
 msgstr ""
 
 msgid "stateful-only"
@@ -3962,6 +3942,57 @@ msgstr "так"
 
 msgid "« Back"
 msgstr "« Назад"
+
+#~ msgid "Leasetime"
+#~ msgstr "Час оренди"
+
+#~ msgid "AR Support"
+#~ msgstr "Підтримка AR"
+
+#~ msgid "Atheros 802.11%s Wireless Controller"
+#~ msgstr "Бездротовий 802.11%s контролер Atheros"
+
+#~ msgid "Background Scan"
+#~ msgstr "Сканування у фоновому режимі"
+
+#~ msgid "Compression"
+#~ msgstr "Стиснення"
+
+#~ msgid "Disable HW-Beacon timer"
+#~ msgstr "Вимкнути таймер HW-Beacon"
+
+#~ msgid "Do not send probe responses"
+#~ msgstr "Не надсилати відповіді на зондування"
+
+#~ msgid "Fast Frames"
+#~ msgstr "Швидкі фрейми"
+
+#~ msgid "Maximum Rate"
+#~ msgstr "Максимальна швидкість"
+
+#~ msgid "Minimum Rate"
+#~ msgstr "Мінімальна швидкість"
+
+#~ msgid "Multicast Rate"
+#~ msgstr "Швидкість багатоадресного потоку"
+
+#~ msgid "Outdoor Channels"
+#~ msgstr "Зовнішні канали"
+
+#~ msgid "Regulatory Domain"
+#~ msgstr "Регулятивний домен"
+
+#~ msgid "Separate WDS"
+#~ msgstr "Розділяти WDS"
+
+#~ msgid "Static WDS"
+#~ msgstr "Статичний WDS"
+
+#~ msgid "Turbo Mode"
+#~ msgstr "Режим Turbo"
+
+#~ msgid "XR Support"
+#~ msgstr "Підтримка XR"
 
 #~ msgid "An additional network will be created if you leave this unchecked."
 #~ msgstr "Якщо ви залишите це невибраним, буде створена додаткова мережа."

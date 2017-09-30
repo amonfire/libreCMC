@@ -149,6 +149,11 @@ msgstr "Nejvyšší počet souběžných dotazů"
 msgid "<abbr title='Pairwise: %s / Group: %s'>%s - %s</abbr>"
 msgstr "<abbr title='Pairwise: %s / Group: %s'>%s - %s</abbr>"
 
+msgid ""
+"<br/>Note: you need to manually restart the cron service if the crontab file "
+"was empty before editing."
+msgstr ""
+
 msgid "A43C + J43 + A43"
 msgstr ""
 
@@ -166,9 +171,6 @@ msgstr ""
 
 msgid "APN"
 msgstr "APN"
-
-msgid "AR Support"
-msgstr "Podpora AR"
 
 msgid "ARP retry threshold"
 msgstr "ARP limit opakování"
@@ -414,13 +416,7 @@ msgstr ""
 msgid "Associated Stations"
 msgstr "Připojení klienti"
 
-msgid "Atheros 802.11%s Wireless Controller"
-msgstr "Atheros 802.11%s bezdrátový ovladač"
-
 msgid "Auth Group"
-msgstr ""
-
-msgid "AuthGroup"
 msgstr ""
 
 msgid "Authentication"
@@ -494,9 +490,6 @@ msgstr "Zpět k přehledu"
 
 msgid "Back to scan results"
 msgstr "Zpět k výsledkům vyhledávání"
-
-msgid "Background Scan"
-msgstr "Vyhledávat na pozadí"
 
 msgid "Backup / Flash Firmware"
 msgstr "Zálohovat / nahrát firmware"
@@ -665,9 +658,6 @@ msgstr "Příkaz"
 
 msgid "Common Configuration"
 msgstr "Společná nastavení"
-
-msgid "Compression"
-msgstr "Komprese"
 
 msgid "Configuration"
 msgstr "Nastavení"
@@ -888,9 +878,6 @@ msgstr "Zakázat nastavení DNS"
 msgid "Disable Encryption"
 msgstr ""
 
-msgid "Disable HW-Beacon timer"
-msgstr "Zakázat HW-Beacon časovač"
-
 msgid "Disabled"
 msgstr "Zakázáno"
 
@@ -936,9 +923,6 @@ msgstr ""
 
 msgid "Do not forward reverse lookups for local networks"
 msgstr "Nepřeposílat reverzní dotazy na místní sítě"
-
-msgid "Do not send probe responses"
-msgstr "Neodpovídat na vyhledávání"
 
 msgid "Domain required"
 msgstr "Vyžadována doména"
@@ -1140,9 +1124,6 @@ msgstr ""
 msgid "Extra SSH command options"
 msgstr ""
 
-msgid "Fast Frames"
-msgstr "Rychlé rámce"
-
 msgid "File"
 msgstr "Soubor"
 
@@ -1177,6 +1158,9 @@ msgstr "Dokončit"
 
 msgid "Firewall"
 msgstr "Firewall"
+
+msgid "Firewall Mark"
+msgstr ""
 
 msgid "Firewall Settings"
 msgstr "Nastavení firewallu"
@@ -1222,6 +1206,9 @@ msgstr "Vynutit TKIP"
 
 msgid "Force TKIP and CCMP (AES)"
 msgstr "Vynutit TKIP a CCMP (AES)"
+
+msgid "Force link"
+msgstr ""
 
 msgid "Force use of NAT-T"
 msgstr ""
@@ -1470,6 +1457,9 @@ msgstr "Délka IPv6 prefixu"
 msgid "IPv6 routed prefix"
 msgstr ""
 
+msgid "IPv6 suffix"
+msgstr ""
+
 msgid "IPv6-Address"
 msgstr "IPv6 adresa"
 
@@ -1488,7 +1478,7 @@ msgstr "IPv6-over-IPv4 (6to4)"
 msgid "Identity"
 msgstr "Identita"
 
-msgid "If checked, 1DES is enaled"
+msgid "If checked, 1DES is enabled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1576,6 +1566,9 @@ msgstr "Nainstalované balíčky"
 msgid "Interface"
 msgstr "Rozhraní"
 
+msgid "Interface %q device auto-migrated from %q to %q."
+msgstr ""
+
 msgid "Interface Configuration"
 msgstr "Konfigurace rozhraní"
 
@@ -1623,6 +1616,9 @@ msgstr "Uvedené VLAN ID je neplatné! Každé ID musí být jedinečné"
 msgid "Invalid username and/or password! Please try again."
 msgstr "Špatné uživatelské jméno a/nebo heslo! Prosím zkuste to znovu."
 
+msgid "Isolate Clients"
+msgstr ""
+
 #, fuzzy
 msgid ""
 "It appears that you are trying to flash an image that does not fit into the "
@@ -1631,7 +1627,7 @@ msgstr ""
 "Zdá se, že se pokoušíte zapsat obraz, který se nevejde do flash paměti. "
 "Prosím ověřte soubor s obrazem!"
 
-msgid "Java Script required!"
+msgid "JavaScript required!"
 msgstr "Vyžadován JavaScript!"
 
 msgid "Join Network"
@@ -1699,9 +1695,6 @@ msgstr "Doba platnosti zápůjčky"
 
 msgid "Leasefile"
 msgstr "Soubor zájpůjček"
-
-msgid "Leasetime"
-msgstr "Doba trvání zápůjčky"
 
 msgid "Leasetime remaining"
 msgstr "Zbývající doba trvání zápůjčky"
@@ -1901,9 +1894,6 @@ msgstr ""
 msgid "Max. Attainable Data Rate (ATTNDR)"
 msgstr ""
 
-msgid "Maximum Rate"
-msgstr "Nejvyšší míra"
-
 msgid "Maximum allowed number of active DHCP leases"
 msgstr "Nejvyšší povolené množství aktivních DHCP zápůjček"
 
@@ -1938,9 +1928,6 @@ msgstr "Využití paměti (%)"
 
 msgid "Metric"
 msgstr "Metrika"
-
-msgid "Minimum Rate"
-msgstr "Nejnižší hodnota"
 
 msgid "Minimum hold time"
 msgstr "Minimální čas zápůjčky"
@@ -2015,9 +2002,6 @@ msgstr "Přesunout dolů"
 msgid "Move up"
 msgstr "Přesunout nahoru"
 
-msgid "Multicast Rate"
-msgstr "Hodnota vícesměrového vysílání"
-
 msgid "Multicast address"
 msgstr "Adresa vícesměrového vysílání"
 
@@ -2028,6 +2012,9 @@ msgid "NAT-T Mode"
 msgstr ""
 
 msgid "NAT64 Prefix"
+msgstr ""
+
+msgid "NCM"
 msgstr ""
 
 msgid "NDP-Proxy"
@@ -2218,12 +2205,21 @@ msgstr ""
 msgid "Optional, use when the SIXXS account has more than one tunnel"
 msgstr ""
 
-msgid "Optional."
+msgid ""
+"Optional. 32-bit mark for outgoing encrypted packets. Enter value in hex, "
+"starting with <code>0x</code>."
 msgstr ""
 
 msgid ""
-"Optional. Adds in an additional layer of symmetric-key cryptography for post-"
-"quantum resistance."
+"Optional. Allowed values: 'eui64', 'random', fixed value like '::1' or "
+"'::1:2'. When IPv6 prefix (like 'a:b:c:d::') is received from a delegating "
+"server, use the suffix (like '::1') to form the IPv6 address ('a:b:c:d::1') "
+"for the interface."
+msgstr ""
+
+msgid ""
+"Optional. Base64-encoded preshared key. Adds in an additional layer of "
+"symmetric-key cryptography for post-quantum resistance."
 msgstr ""
 
 msgid "Optional. Create routes for Allowed IPs for this peer."
@@ -2259,9 +2255,6 @@ msgstr "Ven"
 
 msgid "Outbound:"
 msgstr "Odchozí:"
-
-msgid "Outdoor Channels"
-msgstr "Venkovní kanály"
 
 msgid "Output Interface"
 msgstr ""
@@ -2372,6 +2365,9 @@ msgstr ""
 msgid "Password successfully changed!"
 msgstr "Heslo bylo úspěšně změněno!"
 
+msgid "Password2"
+msgstr ""
+
 msgid "Path to CA-Certificate"
 msgstr "Cesta k certifikátu CA"
 
@@ -2442,6 +2438,12 @@ msgid "Power Management Mode"
 msgstr ""
 
 msgid "Pre-emtive CRC errors (CRCP_P)"
+msgstr ""
+
+msgid "Prefer LTE"
+msgstr ""
+
+msgid "Prefer UMTS"
 msgstr ""
 
 msgid "Prefix Delegated"
@@ -2647,9 +2649,6 @@ msgstr "Přepojuji rozhraní"
 msgid "References"
 msgstr "Reference"
 
-msgid "Regulatory Domain"
-msgstr "Doména regulátora"
-
 msgid "Relay"
 msgstr "Přenos"
 
@@ -2699,13 +2698,13 @@ msgstr "Vyžadováno u některých ISP, např. Charter s DocSIS 3"
 msgid "Required. Base64-encoded private key for this interface."
 msgstr ""
 
+msgid "Required. Base64-encoded public key of peer."
+msgstr ""
+
 msgid ""
 "Required. IP addresses and prefixes that this peer is allowed to use inside "
 "the tunnel. Usually the peer's tunnel IP addresses and the networks the peer "
 "routes through the tunnel."
-msgstr ""
-
-msgid "Required. Public key of peer."
 msgstr ""
 
 msgid ""
@@ -2853,9 +2852,6 @@ msgstr ""
 msgid "Separate Clients"
 msgstr "Oddělovat klienty"
 
-msgid "Separate WDS"
-msgstr "Oddělovat WDS"
-
 msgid "Server Settings"
 msgstr "Nastavení serveru"
 
@@ -2878,6 +2874,11 @@ msgstr "Typ služby"
 
 msgid "Services"
 msgstr "Služby"
+
+msgid ""
+"Set interface properties regardless of the link carrier (If set, carrier "
+"sense events do not invoke hotplug handlers)."
+msgstr ""
 
 #, fuzzy
 msgid "Set up Time Synchronization"
@@ -3018,9 +3019,6 @@ msgstr "Statické zápůjčky"
 
 msgid "Static Routes"
 msgstr "Statické trasy"
-
-msgid "Static WDS"
-msgstr "Statický WDS"
 
 msgid "Static address"
 msgstr "Statická adresa"
@@ -3436,9 +3434,6 @@ msgstr ""
 msgid "Tunnel type"
 msgstr ""
 
-msgid "Turbo Mode"
-msgstr "Turbo mód"
-
 msgid "Tx-Power"
 msgstr "Tx-Power"
 
@@ -3724,9 +3719,6 @@ msgstr "Zapisovat přijaté požadavky DNS do systemového logu"
 msgid "Write system log to file"
 msgstr ""
 
-msgid "XR Support"
-msgstr "Podpora XR"
-
 msgid ""
 "You can enable or disable installed init scripts here. Changes will applied "
 "after a device reboot.<br /><strong>Warning: If you disable essential init "
@@ -3737,9 +3729,9 @@ msgstr ""
 "\"network\", vaše zařízení se může stát nepřístupným!</strong>"
 
 msgid ""
-"You must enable Java Script in your browser or LuCI will not work properly."
+"You must enable JavaScript in your browser or LuCI will not work properly."
 msgstr ""
-"Aby LuCI fungoval správně, musíte mít v prohlížeči povolený Javascript."
+"Aby LuCI fungoval správně, musíte mít v prohlížeči povolený JavaScript."
 
 msgid ""
 "Your Internet Explorer is too old to display this page correctly. Please "
@@ -3752,9 +3744,6 @@ msgstr "libovolný"
 
 msgid "auto"
 msgstr "auto"
-
-msgid "automatic"
-msgstr ""
 
 msgid "baseT"
 msgstr "baseT"
@@ -3832,9 +3821,6 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-msgid "navigation Navigation"
-msgstr ""
-
 msgid "no"
 msgstr "ne"
 
@@ -3866,12 +3852,6 @@ msgid "routed"
 msgstr "směrované"
 
 msgid "server mode"
-msgstr ""
-
-msgid "skiplink1 Skip to navigation"
-msgstr ""
-
-msgid "skiplink2 Skip to content"
 msgstr ""
 
 msgid "stateful-only"
@@ -3909,6 +3889,57 @@ msgstr "ano"
 
 msgid "« Back"
 msgstr "« Zpět"
+
+#~ msgid "Leasetime"
+#~ msgstr "Doba trvání zápůjčky"
+
+#~ msgid "AR Support"
+#~ msgstr "Podpora AR"
+
+#~ msgid "Atheros 802.11%s Wireless Controller"
+#~ msgstr "Atheros 802.11%s bezdrátový ovladač"
+
+#~ msgid "Background Scan"
+#~ msgstr "Vyhledávat na pozadí"
+
+#~ msgid "Compression"
+#~ msgstr "Komprese"
+
+#~ msgid "Disable HW-Beacon timer"
+#~ msgstr "Zakázat HW-Beacon časovač"
+
+#~ msgid "Do not send probe responses"
+#~ msgstr "Neodpovídat na vyhledávání"
+
+#~ msgid "Fast Frames"
+#~ msgstr "Rychlé rámce"
+
+#~ msgid "Maximum Rate"
+#~ msgstr "Nejvyšší míra"
+
+#~ msgid "Minimum Rate"
+#~ msgstr "Nejnižší hodnota"
+
+#~ msgid "Multicast Rate"
+#~ msgstr "Hodnota vícesměrového vysílání"
+
+#~ msgid "Outdoor Channels"
+#~ msgstr "Venkovní kanály"
+
+#~ msgid "Regulatory Domain"
+#~ msgstr "Doména regulátora"
+
+#~ msgid "Separate WDS"
+#~ msgstr "Oddělovat WDS"
+
+#~ msgid "Static WDS"
+#~ msgstr "Statický WDS"
+
+#~ msgid "Turbo Mode"
+#~ msgstr "Turbo mód"
+
+#~ msgid "XR Support"
+#~ msgstr "Podpora XR"
 
 #~ msgid "An additional network will be created if you leave this unchecked."
 #~ msgstr "Pokud není zaškrtnuto, bude vytvořena dodatečná síť."

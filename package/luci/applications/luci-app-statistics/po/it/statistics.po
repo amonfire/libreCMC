@@ -13,6 +13,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.6\n"
 
+msgid "APC UPS"
+msgstr ""
+
+msgid "APCUPS Plugin Configuration"
+msgstr ""
+
 msgid "Action (target)"
 msgstr "Azione (destinazione)"
 
@@ -35,6 +41,9 @@ msgid "Base Directory"
 msgstr ""
 
 msgid "Basic monitoring"
+msgstr ""
+
+msgid "CPU Context Switches Plugin Configuration"
 msgstr ""
 
 msgid "CPU Frequency"
@@ -86,6 +95,9 @@ msgid "Conntrack"
 msgstr ""
 
 msgid "Conntrack Plugin Configuration"
+msgstr ""
+
+msgid "Context Switches"
 msgstr ""
 
 msgid "DF Plugin Configuration"
@@ -287,6 +299,9 @@ msgstr ""
 msgid "Monitor filesystem types"
 msgstr ""
 
+msgid "Monitor host"
+msgstr ""
+
 msgid "Monitor hosts"
 msgstr ""
 
@@ -329,6 +344,11 @@ msgstr ""
 msgid "Network protocol"
 msgstr ""
 
+msgid ""
+"Note: as pages are rendered by user 'nobody', the *.rrd files, the storage "
+"directory and all its parent directories need to be world readable."
+msgstr ""
+
 msgid "Number of threads for data collection"
 msgstr ""
 
@@ -366,6 +386,9 @@ msgid "Ping Plugin Configuration"
 msgstr ""
 
 msgid "Port"
+msgstr ""
+
+msgid "Port for apcupsd communication"
 msgstr ""
 
 msgid "Processes"
@@ -490,6 +513,9 @@ msgstr ""
 
 msgid "Table"
 msgstr "Tabella"
+
+msgid "The APCUPS plugin collects statistics about the APC UPS."
+msgstr ""
 
 msgid "The NUT plugin reads information about Uninterruptible Power Supplies."
 msgstr ""
@@ -640,6 +666,9 @@ msgid "Thermal"
 msgstr ""
 
 msgid "Thermal Plugin Configuration"
+msgstr ""
+
+msgid "This plugin collects statistics about the processor context switches."
 msgstr ""
 
 msgid "This plugin collects statistics about the processor frequency scaling."

@@ -145,6 +145,11 @@ msgstr ""
 msgid "<abbr title='Pairwise: %s / Group: %s'>%s - %s</abbr>"
 msgstr ""
 
+msgid ""
+"<br/>Note: you need to manually restart the cron service if the crontab file "
+"was empty before editing."
+msgstr ""
+
 msgid "A43C + J43 + A43"
 msgstr ""
 
@@ -162,9 +167,6 @@ msgstr ""
 
 msgid "APN"
 msgstr ""
-
-msgid "AR Support"
-msgstr "AR-Penyokong"
 
 msgid "ARP retry threshold"
 msgstr ""
@@ -401,13 +403,7 @@ msgstr ""
 msgid "Associated Stations"
 msgstr "Associated Stesen"
 
-msgid "Atheros 802.11%s Wireless Controller"
-msgstr ""
-
 msgid "Auth Group"
-msgstr ""
-
-msgid "AuthGroup"
 msgstr ""
 
 msgid "Authentication"
@@ -481,9 +477,6 @@ msgstr "Kembali ke ikhtisar"
 
 msgid "Back to scan results"
 msgstr "Kembali ke keputusan scan"
-
-msgid "Background Scan"
-msgstr "Latar Belakang Scan"
 
 msgid "Backup / Flash Firmware"
 msgstr ""
@@ -639,9 +632,6 @@ msgstr "Perintah"
 
 msgid "Common Configuration"
 msgstr ""
-
-msgid "Compression"
-msgstr "Mampatan"
 
 msgid "Configuration"
 msgstr "Konfigurasi"
@@ -856,9 +846,6 @@ msgstr ""
 msgid "Disable Encryption"
 msgstr ""
 
-msgid "Disable HW-Beacon timer"
-msgstr "Mematikan pemasa HW-Beacon"
-
 msgid "Disabled"
 msgstr ""
 
@@ -903,9 +890,6 @@ msgstr ""
 
 msgid "Do not forward reverse lookups for local networks"
 msgstr ""
-
-msgid "Do not send probe responses"
-msgstr "Jangan menghantar jawapan penyelidikan"
 
 msgid "Domain required"
 msgstr "Domain diperlukan"
@@ -1099,9 +1083,6 @@ msgstr ""
 msgid "Extra SSH command options"
 msgstr ""
 
-msgid "Fast Frames"
-msgstr "Frame Cepat"
-
 msgid "File"
 msgstr ""
 
@@ -1136,6 +1117,9 @@ msgstr "Selesai"
 
 msgid "Firewall"
 msgstr "Firewall"
+
+msgid "Firewall Mark"
+msgstr ""
 
 msgid "Firewall Settings"
 msgstr "Tetapan Firewall"
@@ -1180,6 +1164,9 @@ msgid "Force TKIP"
 msgstr ""
 
 msgid "Force TKIP and CCMP (AES)"
+msgstr ""
+
+msgid "Force link"
 msgstr ""
 
 msgid "Force use of NAT-T"
@@ -1427,6 +1414,9 @@ msgstr ""
 msgid "IPv6 routed prefix"
 msgstr ""
 
+msgid "IPv6 suffix"
+msgstr ""
+
 msgid "IPv6-Address"
 msgstr ""
 
@@ -1445,7 +1435,7 @@ msgstr ""
 msgid "Identity"
 msgstr "Identiti"
 
-msgid "If checked, 1DES is enaled"
+msgid "If checked, 1DES is enabled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1532,6 +1522,9 @@ msgstr ""
 msgid "Interface"
 msgstr "Interface"
 
+msgid "Interface %q device auto-migrated from %q to %q."
+msgstr ""
+
 msgid "Interface Configuration"
 msgstr ""
 
@@ -1577,6 +1570,9 @@ msgstr ""
 msgid "Invalid username and/or password! Please try again."
 msgstr "Username dan / atau password tak sah! Sila cuba lagi."
 
+msgid "Isolate Clients"
+msgstr ""
+
 #, fuzzy
 msgid ""
 "It appears that you are trying to flash an image that does not fit into the "
@@ -1585,7 +1581,7 @@ msgstr ""
 "Tampak bahawa anda cuba untuk flash fail gambar yang tidak sesuai dengan "
 "memori flash, sila buat pengesahan pada fail gambar!"
 
-msgid "Java Script required!"
+msgid "JavaScript required!"
 msgstr ""
 
 #, fuzzy
@@ -1654,9 +1650,6 @@ msgstr ""
 
 msgid "Leasefile"
 msgstr "Sewa fail"
-
-msgid "Leasetime"
-msgstr "Masa penyewaan"
 
 msgid "Leasetime remaining"
 msgstr "Sisa masa penyewaan"
@@ -1847,9 +1840,6 @@ msgstr ""
 msgid "Max. Attainable Data Rate (ATTNDR)"
 msgstr ""
 
-msgid "Maximum Rate"
-msgstr "Rate Maksimum"
-
 msgid "Maximum allowed number of active DHCP leases"
 msgstr ""
 
@@ -1885,9 +1875,6 @@ msgstr "Penggunaan Memori (%)"
 
 msgid "Metric"
 msgstr "Metrik"
-
-msgid "Minimum Rate"
-msgstr "Rate Minimum"
 
 #, fuzzy
 msgid "Minimum hold time"
@@ -1963,9 +1950,6 @@ msgstr ""
 msgid "Move up"
 msgstr ""
 
-msgid "Multicast Rate"
-msgstr "Multicast Rate"
-
 msgid "Multicast address"
 msgstr ""
 
@@ -1976,6 +1960,9 @@ msgid "NAT-T Mode"
 msgstr ""
 
 msgid "NAT64 Prefix"
+msgstr ""
+
+msgid "NCM"
 msgstr ""
 
 msgid "NDP-Proxy"
@@ -2166,12 +2153,21 @@ msgstr ""
 msgid "Optional, use when the SIXXS account has more than one tunnel"
 msgstr ""
 
-msgid "Optional."
+msgid ""
+"Optional. 32-bit mark for outgoing encrypted packets. Enter value in hex, "
+"starting with <code>0x</code>."
 msgstr ""
 
 msgid ""
-"Optional. Adds in an additional layer of symmetric-key cryptography for post-"
-"quantum resistance."
+"Optional. Allowed values: 'eui64', 'random', fixed value like '::1' or "
+"'::1:2'. When IPv6 prefix (like 'a:b:c:d::') is received from a delegating "
+"server, use the suffix (like '::1') to form the IPv6 address ('a:b:c:d::1') "
+"for the interface."
+msgstr ""
+
+msgid ""
+"Optional. Base64-encoded preshared key. Adds in an additional layer of "
+"symmetric-key cryptography for post-quantum resistance."
 msgstr ""
 
 msgid "Optional. Create routes for Allowed IPs for this peer."
@@ -2207,9 +2203,6 @@ msgstr "Keluar"
 
 msgid "Outbound:"
 msgstr ""
-
-msgid "Outdoor Channels"
-msgstr "Saluran Outdoor"
 
 msgid "Output Interface"
 msgstr ""
@@ -2318,6 +2311,9 @@ msgstr ""
 msgid "Password successfully changed!"
 msgstr ""
 
+msgid "Password2"
+msgstr ""
+
 msgid "Path to CA-Certificate"
 msgstr "Path ke CA-Sijil"
 
@@ -2388,6 +2384,12 @@ msgid "Power Management Mode"
 msgstr ""
 
 msgid "Pre-emtive CRC errors (CRCP_P)"
+msgstr ""
+
+msgid "Prefer LTE"
+msgstr ""
+
+msgid "Prefer UMTS"
 msgstr ""
 
 msgid "Prefix Delegated"
@@ -2577,9 +2579,6 @@ msgstr ""
 msgid "References"
 msgstr "Rujukan"
 
-msgid "Regulatory Domain"
-msgstr "Peraturan Domain"
-
 msgid "Relay"
 msgstr ""
 
@@ -2628,13 +2627,13 @@ msgstr ""
 msgid "Required. Base64-encoded private key for this interface."
 msgstr ""
 
+msgid "Required. Base64-encoded public key of peer."
+msgstr ""
+
 msgid ""
 "Required. IP addresses and prefixes that this peer is allowed to use inside "
 "the tunnel. Usually the peer's tunnel IP addresses and the networks the peer "
 "routes through the tunnel."
-msgstr ""
-
-msgid "Required. Public key of peer."
 msgstr ""
 
 msgid ""
@@ -2781,9 +2780,6 @@ msgstr ""
 msgid "Separate Clients"
 msgstr "Pisahkan Pelanggan"
 
-msgid "Separate WDS"
-msgstr "Pisahkan WDS"
-
 msgid "Server Settings"
 msgstr ""
 
@@ -2806,6 +2802,11 @@ msgstr ""
 
 msgid "Services"
 msgstr "Perkhidmatan"
+
+msgid ""
+"Set interface properties regardless of the link carrier (If set, carrier "
+"sense events do not invoke hotplug handlers)."
+msgstr ""
 
 msgid "Set up Time Synchronization"
 msgstr ""
@@ -2941,9 +2942,6 @@ msgstr "Statische Einträge"
 
 msgid "Static Routes"
 msgstr "Laluan Statik"
-
-msgid "Static WDS"
-msgstr ""
 
 msgid "Static address"
 msgstr ""
@@ -3328,9 +3326,6 @@ msgstr ""
 msgid "Tunnel type"
 msgstr ""
 
-msgid "Turbo Mode"
-msgstr "Mod Turbo"
-
 msgid "Tx-Power"
 msgstr ""
 
@@ -3610,9 +3605,6 @@ msgstr ""
 msgid "Write system log to file"
 msgstr ""
 
-msgid "XR Support"
-msgstr "Sokongan XR"
-
 msgid ""
 "You can enable or disable installed init scripts here. Changes will applied "
 "after a device reboot.<br /><strong>Warning: If you disable essential init "
@@ -3620,7 +3612,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You must enable Java Script in your browser or LuCI will not work properly."
+"You must enable JavaScript in your browser or LuCI will not work properly."
 msgstr ""
 
 msgid ""
@@ -3634,9 +3626,6 @@ msgstr ""
 
 msgid "auto"
 msgstr "auto"
-
-msgid "automatic"
-msgstr "automatik"
 
 msgid "baseT"
 msgstr ""
@@ -3712,9 +3701,6 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-msgid "navigation Navigation"
-msgstr ""
-
 msgid "no"
 msgstr ""
 
@@ -3746,12 +3732,6 @@ msgid "routed"
 msgstr ""
 
 msgid "server mode"
-msgstr ""
-
-msgid "skiplink1 Skip to navigation"
-msgstr ""
-
-msgid "skiplink2 Skip to content"
 msgstr ""
 
 msgid "stateful-only"
@@ -3789,3 +3769,51 @@ msgstr ""
 
 msgid "« Back"
 msgstr "« Kembali"
+
+#~ msgid "Leasetime"
+#~ msgstr "Masa penyewaan"
+
+#~ msgid "automatic"
+#~ msgstr "automatik"
+
+#~ msgid "AR Support"
+#~ msgstr "AR-Penyokong"
+
+#~ msgid "Background Scan"
+#~ msgstr "Latar Belakang Scan"
+
+#~ msgid "Compression"
+#~ msgstr "Mampatan"
+
+#~ msgid "Disable HW-Beacon timer"
+#~ msgstr "Mematikan pemasa HW-Beacon"
+
+#~ msgid "Do not send probe responses"
+#~ msgstr "Jangan menghantar jawapan penyelidikan"
+
+#~ msgid "Fast Frames"
+#~ msgstr "Frame Cepat"
+
+#~ msgid "Maximum Rate"
+#~ msgstr "Rate Maksimum"
+
+#~ msgid "Minimum Rate"
+#~ msgstr "Rate Minimum"
+
+#~ msgid "Multicast Rate"
+#~ msgstr "Multicast Rate"
+
+#~ msgid "Outdoor Channels"
+#~ msgstr "Saluran Outdoor"
+
+#~ msgid "Regulatory Domain"
+#~ msgstr "Peraturan Domain"
+
+#~ msgid "Separate WDS"
+#~ msgstr "Pisahkan WDS"
+
+#~ msgid "Turbo Mode"
+#~ msgstr "Mod Turbo"
+
+#~ msgid "XR Support"
+#~ msgstr "Sokongan XR"

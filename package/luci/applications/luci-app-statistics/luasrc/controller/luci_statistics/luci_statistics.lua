@@ -23,7 +23,9 @@ function index()
 		s_general	= _("General plugins"),
 		s_network	= _("Network plugins"),
 
+		apcups		= _("APC UPS"),
 		conntrack	= _("Conntrack"),
+		contextswitch	= _("Context Switches"),
 		cpu			= _("Processor"),
 		cpufreq		= _("CPU Frequency"),
 		csv			= _("CSV Output"),
@@ -58,8 +60,8 @@ function index()
 	-- our collectd menu
 	local collectd_menu = {
 		output  = { "csv", "network", "rrdtool", "unixsock" },
-		general = { "cpu", "cpufreq", "df", "disk", "email",
-			"entropy", "exec", "irq", "load", "memory",
+		general = { "apcups", "contextswitch", "cpu", "cpufreq", "df",
+			"disk", "email", "entropy", "exec", "irq", "load", "memory",
 			"nut", "processes", "sensors", "thermal", "uptime" },
 		network = { "conntrack", "dns", "interface", "iptables",
 			"netlink", "olsrd", "openvpn", "ping",
@@ -87,7 +89,7 @@ function index()
 			_entry(
 				{ "admin", "statistics", "collectd", section, plugin },
 				cbi("luci_statistics/" .. plugin ),
-				labels[plugin], j * 10
+				labels[plugin] or plugin, j * 10
 			)
 		end
 

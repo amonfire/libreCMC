@@ -147,6 +147,11 @@ msgstr "<abbr title=\"Maksimal\">Maks.</abbr> samtidige spørringer"
 msgid "<abbr title='Pairwise: %s / Group: %s'>%s - %s</abbr>"
 msgstr "<abbr title='Parvis: %s / Gruppe: %s'>%s - %s</abbr>"
 
+msgid ""
+"<br/>Note: you need to manually restart the cron service if the crontab file "
+"was empty before editing."
+msgstr ""
+
 msgid "A43C + J43 + A43"
 msgstr ""
 
@@ -164,9 +169,6 @@ msgstr ""
 
 msgid "APN"
 msgstr "<abbr title=\"Aksesspunkt Navn\">APN</abbr>"
-
-msgid "AR Support"
-msgstr "AR Støtte"
 
 msgid "ARP retry threshold"
 msgstr "APR terskel for nytt forsøk"
@@ -410,13 +412,7 @@ msgstr ""
 msgid "Associated Stations"
 msgstr "Tilkoblede Klienter"
 
-msgid "Atheros 802.11%s Wireless Controller"
-msgstr "Atheros 802.11%s Trådløs Kontroller"
-
 msgid "Auth Group"
-msgstr ""
-
-msgid "AuthGroup"
 msgstr ""
 
 msgid "Authentication"
@@ -490,9 +486,6 @@ msgstr "Tilbake til oversikt"
 
 msgid "Back to scan results"
 msgstr "Tilbake til skanne resultat"
-
-msgid "Background Scan"
-msgstr "Bakgrunns Skanning"
 
 msgid "Backup / Flash Firmware"
 msgstr "Sikkerhetskopiering/Firmware oppgradering"
@@ -661,9 +654,6 @@ msgstr "Kommando"
 
 msgid "Common Configuration"
 msgstr "Vanlige Innstillinger"
-
-msgid "Compression"
-msgstr "Komprimering"
 
 msgid "Configuration"
 msgstr "Konfigurasjon"
@@ -884,9 +874,6 @@ msgstr "Deaktiver DNS oppsett"
 msgid "Disable Encryption"
 msgstr ""
 
-msgid "Disable HW-Beacon timer"
-msgstr "Deaktiver HW-Beacon timer"
-
 msgid "Disabled"
 msgstr "Deaktivert"
 
@@ -932,9 +919,6 @@ msgstr ""
 
 msgid "Do not forward reverse lookups for local networks"
 msgstr "Ikke videresend reverserte oppslag for lokale nettverk"
-
-msgid "Do not send probe responses"
-msgstr "Ikke send probe svar"
 
 msgid "Domain required"
 msgstr "Domene kreves"
@@ -1135,9 +1119,6 @@ msgstr ""
 msgid "Extra SSH command options"
 msgstr ""
 
-msgid "Fast Frames"
-msgstr "Fast Frames"
-
 msgid "File"
 msgstr "Fil"
 
@@ -1172,6 +1153,9 @@ msgstr "Fullfør"
 
 msgid "Firewall"
 msgstr "Brannmur"
+
+msgid "Firewall Mark"
+msgstr ""
 
 msgid "Firewall Settings"
 msgstr "Brannmur Innstillinger"
@@ -1218,6 +1202,9 @@ msgstr "Bruk TKIP"
 
 msgid "Force TKIP and CCMP (AES)"
 msgstr "Bruk TKIP og CCMP (AES)"
+
+msgid "Force link"
+msgstr ""
 
 msgid "Force use of NAT-T"
 msgstr ""
@@ -1466,6 +1453,9 @@ msgstr "IPv6 prefikslengde"
 msgid "IPv6 routed prefix"
 msgstr ""
 
+msgid "IPv6 suffix"
+msgstr ""
+
 msgid "IPv6-Address"
 msgstr "IPv6-Adresse"
 
@@ -1484,7 +1474,7 @@ msgstr "IPv6-over-IPv4 (6til4)"
 msgid "Identity"
 msgstr "Identitet"
 
-msgid "If checked, 1DES is enaled"
+msgid "If checked, 1DES is enabled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1570,6 +1560,9 @@ msgstr "Installerte pakker"
 msgid "Interface"
 msgstr "Grensesnitt"
 
+msgid "Interface %q device auto-migrated from %q to %q."
+msgstr ""
+
 msgid "Interface Configuration"
 msgstr "Grensesnitt Konfigurasjon"
 
@@ -1615,6 +1608,9 @@ msgstr "Ugyldig VLAN ID gitt! Bare unike ID'er er tillatt"
 msgid "Invalid username and/or password! Please try again."
 msgstr "Ugyldig brukernavn og/eller passord! Vennligst prøv igjen."
 
+msgid "Isolate Clients"
+msgstr ""
+
 #, fuzzy
 msgid ""
 "It appears that you are trying to flash an image that does not fit into the "
@@ -1623,8 +1619,8 @@ msgstr ""
 "Det virker som du prøver å flashe med en firmware som ikke passer inn i "
 "flash-minnet, vennligst kontroller firmware filen!"
 
-msgid "Java Script required!"
-msgstr "Java Script kreves!"
+msgid "JavaScript required!"
+msgstr "JavaScript kreves!"
 
 msgid "Join Network"
 msgstr "Koble til nettverket"
@@ -1691,9 +1687,6 @@ msgstr "Gyldig leietid"
 
 msgid "Leasefile"
 msgstr "<abbr title=\"Leasefile\">Leie-fil</abbr>"
-
-msgid "Leasetime"
-msgstr "<abbr title=\"Leasetime\">Leietid</abbr>"
 
 msgid "Leasetime remaining"
 msgstr "Gjenværende leietid"
@@ -1892,9 +1885,6 @@ msgstr ""
 msgid "Max. Attainable Data Rate (ATTNDR)"
 msgstr ""
 
-msgid "Maximum Rate"
-msgstr "Maksimal hastighet"
-
 msgid "Maximum allowed number of active DHCP leases"
 msgstr "Maksimalt antall aktive DHCP leieavtaler"
 
@@ -1929,9 +1919,6 @@ msgstr "Minne forbruk (%)"
 
 msgid "Metric"
 msgstr "Metrisk"
-
-msgid "Minimum Rate"
-msgstr "Minimum hastighet"
 
 msgid "Minimum hold time"
 msgstr "Minimum holde tid"
@@ -2006,9 +1993,6 @@ msgstr "Flytt ned"
 msgid "Move up"
 msgstr "Flytt opp"
 
-msgid "Multicast Rate"
-msgstr "Multicast hastighet"
-
 msgid "Multicast address"
 msgstr "Multicast adresse"
 
@@ -2019,6 +2003,9 @@ msgid "NAT-T Mode"
 msgstr ""
 
 msgid "NAT64 Prefix"
+msgstr ""
+
+msgid "NCM"
 msgstr ""
 
 msgid "NDP-Proxy"
@@ -2210,12 +2197,21 @@ msgstr ""
 msgid "Optional, use when the SIXXS account has more than one tunnel"
 msgstr ""
 
-msgid "Optional."
+msgid ""
+"Optional. 32-bit mark for outgoing encrypted packets. Enter value in hex, "
+"starting with <code>0x</code>."
 msgstr ""
 
 msgid ""
-"Optional. Adds in an additional layer of symmetric-key cryptography for post-"
-"quantum resistance."
+"Optional. Allowed values: 'eui64', 'random', fixed value like '::1' or "
+"'::1:2'. When IPv6 prefix (like 'a:b:c:d::') is received from a delegating "
+"server, use the suffix (like '::1') to form the IPv6 address ('a:b:c:d::1') "
+"for the interface."
+msgstr ""
+
+msgid ""
+"Optional. Base64-encoded preshared key. Adds in an additional layer of "
+"symmetric-key cryptography for post-quantum resistance."
 msgstr ""
 
 msgid "Optional. Create routes for Allowed IPs for this peer."
@@ -2251,9 +2247,6 @@ msgstr "Ut"
 
 msgid "Outbound:"
 msgstr "Ugående:"
-
-msgid "Outdoor Channels"
-msgstr "Utendørs Kanaler"
 
 msgid "Output Interface"
 msgstr ""
@@ -2364,6 +2357,9 @@ msgstr ""
 msgid "Password successfully changed!"
 msgstr "Passordet er endret!"
 
+msgid "Password2"
+msgstr ""
+
 msgid "Path to CA-Certificate"
 msgstr "Sti til CA-sertifikat"
 
@@ -2434,6 +2430,12 @@ msgid "Power Management Mode"
 msgstr ""
 
 msgid "Pre-emtive CRC errors (CRCP_P)"
+msgstr ""
+
+msgid "Prefer LTE"
+msgstr ""
+
+msgid "Prefer UMTS"
 msgstr ""
 
 msgid "Prefix Delegated"
@@ -2638,9 +2640,6 @@ msgstr "Kobler til igjen"
 msgid "References"
 msgstr "Referanser"
 
-msgid "Regulatory Domain"
-msgstr "Regulerende Domene"
-
 msgid "Relay"
 msgstr "Relay"
 
@@ -2689,13 +2688,13 @@ msgstr "Er nødvendig for noen nettleverandører, f.eks Charter med DOCSIS 3"
 msgid "Required. Base64-encoded private key for this interface."
 msgstr ""
 
+msgid "Required. Base64-encoded public key of peer."
+msgstr ""
+
 msgid ""
 "Required. IP addresses and prefixes that this peer is allowed to use inside "
 "the tunnel. Usually the peer's tunnel IP addresses and the networks the peer "
 "routes through the tunnel."
-msgstr ""
-
-msgid "Required. Public key of peer."
 msgstr ""
 
 msgid ""
@@ -2844,9 +2843,6 @@ msgstr ""
 msgid "Separate Clients"
 msgstr "Separerte Klienter"
 
-msgid "Separate WDS"
-msgstr "Separert WDS"
-
 msgid "Server Settings"
 msgstr "Server Innstillinger"
 
@@ -2869,6 +2865,11 @@ msgstr "Tjeneste type"
 
 msgid "Services"
 msgstr "Tjenester"
+
+msgid ""
+"Set interface properties regardless of the link carrier (If set, carrier "
+"sense events do not invoke hotplug handlers)."
+msgstr ""
 
 #, fuzzy
 msgid "Set up Time Synchronization"
@@ -3008,9 +3009,6 @@ msgstr "Statiske Leier"
 
 msgid "Static Routes"
 msgstr "Statiske Ruter"
-
-msgid "Static WDS"
-msgstr "Statisk WDS"
 
 msgid "Static address"
 msgstr "Statisk adresse"
@@ -3433,9 +3431,6 @@ msgstr ""
 msgid "Tunnel type"
 msgstr ""
 
-msgid "Turbo Mode"
-msgstr "Turbo Modus"
-
 msgid "Tx-Power"
 msgstr "Tx-Styrke"
 
@@ -3722,9 +3717,6 @@ msgstr "Skriv mottatte DNS forespørsler til syslog"
 msgid "Write system log to file"
 msgstr ""
 
-msgid "XR Support"
-msgstr "XR Støtte"
-
 msgid ""
 "You can enable or disable installed init scripts here. Changes will applied "
 "after a device reboot.<br /><strong>Warning: If you disable essential init "
@@ -3736,9 +3728,9 @@ msgstr ""
 "utilgjengelig! </strong>"
 
 msgid ""
-"You must enable Java Script in your browser or LuCI will not work properly."
+"You must enable JavaScript in your browser or LuCI will not work properly."
 msgstr ""
-"Du må aktivere Java Script i nettleseren din ellers vil ikke LuCI fungere "
+"Du må aktivere JavaScript i nettleseren din ellers vil ikke LuCI fungere "
 "skikkelig."
 
 msgid ""
@@ -3752,9 +3744,6 @@ msgstr "enhver"
 
 msgid "auto"
 msgstr "auto"
-
-msgid "automatic"
-msgstr ""
 
 msgid "baseT"
 msgstr "baseT"
@@ -3832,9 +3821,6 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-msgid "navigation Navigation"
-msgstr ""
-
 msgid "no"
 msgstr "nei"
 
@@ -3866,12 +3852,6 @@ msgid "routed"
 msgstr "rutet"
 
 msgid "server mode"
-msgstr ""
-
-msgid "skiplink1 Skip to navigation"
-msgstr ""
-
-msgid "skiplink2 Skip to content"
 msgstr ""
 
 msgid "stateful-only"
@@ -3909,6 +3889,57 @@ msgstr "ja"
 
 msgid "« Back"
 msgstr "« Tilbake"
+
+#~ msgid "Leasetime"
+#~ msgstr "<abbr title=\"Leasetime\">Leietid</abbr>"
+
+#~ msgid "AR Support"
+#~ msgstr "AR Støtte"
+
+#~ msgid "Atheros 802.11%s Wireless Controller"
+#~ msgstr "Atheros 802.11%s Trådløs Kontroller"
+
+#~ msgid "Background Scan"
+#~ msgstr "Bakgrunns Skanning"
+
+#~ msgid "Compression"
+#~ msgstr "Komprimering"
+
+#~ msgid "Disable HW-Beacon timer"
+#~ msgstr "Deaktiver HW-Beacon timer"
+
+#~ msgid "Do not send probe responses"
+#~ msgstr "Ikke send probe svar"
+
+#~ msgid "Fast Frames"
+#~ msgstr "Fast Frames"
+
+#~ msgid "Maximum Rate"
+#~ msgstr "Maksimal hastighet"
+
+#~ msgid "Minimum Rate"
+#~ msgstr "Minimum hastighet"
+
+#~ msgid "Multicast Rate"
+#~ msgstr "Multicast hastighet"
+
+#~ msgid "Outdoor Channels"
+#~ msgstr "Utendørs Kanaler"
+
+#~ msgid "Regulatory Domain"
+#~ msgstr "Regulerende Domene"
+
+#~ msgid "Separate WDS"
+#~ msgstr "Separert WDS"
+
+#~ msgid "Static WDS"
+#~ msgstr "Statisk WDS"
+
+#~ msgid "Turbo Mode"
+#~ msgstr "Turbo Modus"
+
+#~ msgid "XR Support"
+#~ msgstr "XR Støtte"
 
 #~ msgid "An additional network will be created if you leave this unchecked."
 #~ msgstr "Et nytt nettverk vil bli opprettet hvis du tar bort haken."

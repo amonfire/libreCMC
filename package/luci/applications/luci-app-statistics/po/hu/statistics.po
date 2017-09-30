@@ -11,6 +11,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.6\n"
 
+msgid "APC UPS"
+msgstr ""
+
+msgid "APCUPS Plugin Configuration"
+msgstr ""
+
 msgid "Action (target)"
 msgstr "Tevékenység (cél)"
 
@@ -34,6 +40,9 @@ msgstr "Alapkönyvtár"
 
 msgid "Basic monitoring"
 msgstr "Általános figyelés"
+
+msgid "CPU Context Switches Plugin Configuration"
+msgstr ""
 
 msgid "CPU Frequency"
 msgstr ""
@@ -85,6 +94,9 @@ msgstr "Conntrack"
 
 msgid "Conntrack Plugin Configuration"
 msgstr "Conntrack bővítmény beállítása"
+
+msgid "Context Switches"
+msgstr ""
 
 msgid "DF Plugin Configuration"
 msgstr "DF bővítmény beállítása"
@@ -289,6 +301,9 @@ msgstr "Lemezek és partíciók figyelése"
 msgid "Monitor filesystem types"
 msgstr "Fájlrendszer típusok figyelése"
 
+msgid "Monitor host"
+msgstr ""
+
 msgid "Monitor hosts"
 msgstr "Gépek figyelése"
 
@@ -331,6 +346,11 @@ msgstr "Hálózati bővítmények"
 msgid "Network protocol"
 msgstr "Hálózati protokoll"
 
+msgid ""
+"Note: as pages are rendered by user 'nobody', the *.rrd files, the storage "
+"directory and all its parent directories need to be world readable."
+msgstr ""
+
 msgid "Number of threads for data collection"
 msgstr "Az adatgyűjtő szálak száma"
 
@@ -369,6 +389,9 @@ msgstr "Ping bővítmény beállítása"
 
 msgid "Port"
 msgstr "Port"
+
+msgid "Port for apcupsd communication"
+msgstr ""
 
 msgid "Processes"
 msgstr "Folyamatok"
@@ -496,6 +519,9 @@ msgstr "TTL a ping csomagokhoz"
 
 msgid "Table"
 msgstr "Táblázat"
+
+msgid "The APCUPS plugin collects statistics about the APC UPS."
+msgstr ""
 
 msgid "The NUT plugin reads information about Uninterruptible Power Supplies."
 msgstr "A NUT bővítmény a szünetmentes tápokról ad információkat."
@@ -677,6 +703,9 @@ msgid "Thermal"
 msgstr ""
 
 msgid "Thermal Plugin Configuration"
+msgstr ""
+
+msgid "This plugin collects statistics about the processor context switches."
 msgstr ""
 
 msgid "This plugin collects statistics about the processor frequency scaling."

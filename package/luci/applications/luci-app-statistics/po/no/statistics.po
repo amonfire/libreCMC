@@ -4,6 +4,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "APC UPS"
+msgstr ""
+
+msgid "APCUPS Plugin Configuration"
+msgstr ""
+
 msgid "Action (target)"
 msgstr "Handling (mål)"
 
@@ -27,6 +33,9 @@ msgstr "Hoved Katalog"
 
 msgid "Basic monitoring"
 msgstr "Enkel overvåking"
+
+msgid "CPU Context Switches Plugin Configuration"
+msgstr ""
 
 msgid "CPU Frequency"
 msgstr ""
@@ -77,6 +86,9 @@ msgid "Conntrack"
 msgstr ""
 
 msgid "Conntrack Plugin Configuration"
+msgstr ""
+
+msgid "Context Switches"
 msgstr ""
 
 msgid "DF Plugin Configuration"
@@ -276,6 +288,9 @@ msgstr "Overvåk disker og partisjoner"
 msgid "Monitor filesystem types"
 msgstr "Overvåk filsystem typer"
 
+msgid "Monitor host"
+msgstr ""
+
 msgid "Monitor hosts"
 msgstr "Overvåk verter"
 
@@ -318,6 +333,11 @@ msgstr "Nettverks plugin"
 msgid "Network protocol"
 msgstr "Nettverks protokoll"
 
+msgid ""
+"Note: as pages are rendered by user 'nobody', the *.rrd files, the storage "
+"directory and all its parent directories need to be world readable."
+msgstr ""
+
 msgid "Number of threads for data collection"
 msgstr "Antall tråder for datainnsamling"
 
@@ -355,6 +375,9 @@ msgid "Ping Plugin Configuration"
 msgstr "Ping plugin konfigurasjon"
 
 msgid "Port"
+msgstr ""
+
+msgid "Port for apcupsd communication"
 msgstr ""
 
 msgid "Processes"
@@ -479,6 +502,9 @@ msgstr "TTL for ping pakker"
 
 msgid "Table"
 msgstr "Tabell"
+
+msgid "The APCUPS plugin collects statistics about the APC UPS."
+msgstr ""
 
 msgid "The NUT plugin reads information about Uninterruptible Power Supplies."
 msgstr ""
@@ -665,6 +691,9 @@ msgid "Thermal"
 msgstr ""
 
 msgid "Thermal Plugin Configuration"
+msgstr ""
+
+msgid "This plugin collects statistics about the processor context switches."
 msgstr ""
 
 msgid "This plugin collects statistics about the processor frequency scaling."

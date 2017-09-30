@@ -220,6 +220,12 @@ auto.default = (net:proto() == "none") and auto.disabled or auto.enabled
 delegate = s:taboption("advanced", Flag, "delegate", translate("Use builtin IPv6-management"))
 delegate.default = delegate.enabled
 
+force_link = s:taboption("advanced", Flag, "force_link",
+	translate("Force link"),
+	translate("Set interface properties regardless of the link carrier (If set, carrier sense events do not invoke hotplug handlers)."))
+
+force_link.default = (net:proto() == "static") and force_link.enabled or force_link.disabled
+
 
 if not net:is_virtual() then
 	br = s:taboption("physical", Flag, "type", translate("Bridge interfaces"), translate("creates a bridge over specified interface(s)"))
@@ -439,7 +445,7 @@ if has_dnsmasq and net:proto() == "static" then
 		limit.datatype = "uinteger"
 		limit.default = "150"
 
-		local ltime = s:taboption("general", Value, "leasetime", translate("Leasetime"),
+		local ltime = s:taboption("general", Value, "leasetime", translate("Lease time"),
 			translate("Expiry time of leased addresses, minimum is 2 minutes (<code>2m</code>)."))
 		ltime.rmempty = true
 		ltime.default = "12h"

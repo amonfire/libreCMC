@@ -118,6 +118,70 @@ var cbi_validators = {
 		return false;
 	},
 
+	'ip4prefix': function()
+	{
+		return !isNaN(this) && this >= 0 && this <= 32;
+	},
+
+	'ip6prefix': function()
+	{
+		return !isNaN(this) && this >= 0 && this <= 128;
+	},
+
+	'cidr': function()
+	{
+		return cbi_validators.cidr4.apply(this) ||
+			cbi_validators.cidr6.apply(this);
+	},
+
+	'cidr4': function()
+	{
+		if (this.match(/^(\S+)\/(\S+)$/))
+		{
+			ip = RegExp.$1;
+			mask = RegExp.$2;
+			return cbi_validators.ip4addr.apply(ip) &&
+				cbi_validators.ip4prefix.apply(mask);
+		}
+		return false;
+	},
+
+	'cidr6': function()
+	{
+		if (this.match(/^(\S+)\/(\S+)$/))
+		{
+			ip = RegExp.$1;
+			mask = RegExp.$2;
+			return cbi_validators.ip6addr.apply(ip) &&
+				cbi_validators.ip6prefix.apply(mask);
+		}
+		return false;
+	},
+
+	'ipnet4': function()
+	{
+		if (this.match(/^(\S+)\/(\S+)$/))
+		{
+			ip = RegExp.$1;
+			net = RegExp.$2;
+			return cbi_validators.ip4addr.apply(ip) &&
+				cbi_validators.ip4addr.apply(net);
+		}
+		return false;
+	},
+
+	'ipnet6': function()
+	{
+		if (this.match(/^(\S+)\/(\S+)$/))
+		{
+			ip = RegExp.$1;
+			net = RegExp.$2;
+			return cbi_validators.ip6addr.apply(ip) &&
+				cbi_validators.ip6addr.apply(net);
+		}
+		return false;
+	},
+
 	'ipmask': function()
 	{
 		return cbi_validators.ipmask4.apply(this) ||
@@ -126,40 +190,16 @@ var cbi_validators = {
 
 	'ipmask4': function()
 	{
-		var ip = this, mask = 32;
-
-		if (ip.match(/^(\S+)\/(\S+)$/))
-		{
-			ip = RegExp.$1;
-			mask = RegExp.$2;
-		}
-
-		if (!isNaN(mask) && (mask < 0 || mask > 32))
-			return false;
-
-		if (isNaN(mask) && !cbi_validators.ip4addr.apply(mask))
-			return false;
-
-		return cbi_validators.ip4addr.apply(ip);
+		return cbi_validators.cidr4.apply(this) ||
+			cbi_validators.ipnet4.apply(this) ||
+			cbi_validators.ip4addr.apply(this);
 	},
 
 	'ipmask6': function()
 	{
-		var ip = this, mask = 128;
-
-		if (ip.match(/^(\S+)\/(\S+)$/))
-		{
-			ip = RegExp.$1;
-			mask = RegExp.$2;
-		}
-
-		if (!isNaN(mask) && (mask < 0 || mask > 128))
-			return false;
-
-		if (isNaN(mask) && !cbi_validators.ip6addr.apply(mask))
-			return false;
-
-		return cbi_validators.ip6addr.apply(ip);
+		return cbi_validators.cidr6.apply(this) ||
+			cbi_validators.ipnet6.apply(this) ||
+			cbi_validators.ip6addr.apply(this);
 	},
 
 	'port': function()
@@ -481,8 +521,9 @@ function cbi_d_check(deps) {
 				istat = (istat && cbi_d_checkvalue(j, deps[i][j]))
 			}
 		}
-		if (istat) {
-			return !reverse;
+
+		if (istat ^ reverse) {
+			return true;
 		}
 	}
 	return def;
@@ -648,9 +689,6 @@ function cbi_combobox(id, values, def, man, focus) {
 	var dt = obj.getAttribute('cbi_datatype');
 	var op = obj.getAttribute('cbi_optional');
 
-	if (dt)
-		cbi_validate_field(sel, op == 'true', dt);
-
 	if (!values[obj.value]) {
 		if (obj.value == "") {
 			var optdef = document.createElement("option");
@@ -684,6 +722,9 @@ function cbi_combobox(id, values, def, man, focus) {
 	sel.appendChild(optman);
 
 	obj.style.display = "none";
+
+	if (dt)
+		cbi_validate_field(sel, op == 'true', dt);
 
 	cbi_bind(sel, "change", function() {
 		if (sel.selectedIndex == sel.options.length - 1) {
@@ -727,7 +768,7 @@ function cbi_filebrowser(id, defpath) {
 	browser.focus();
 }
 
-function cbi_browser_init(id, defpath)
+function cbi_browser_init(id, resource, defpath)
 {
 	function cbi_browser_btnclick(e) {
 		cbi_filebrowser(id, defpath);
@@ -738,7 +779,7 @@ function cbi_browser_init(id, defpath)
 
 	var btn = document.createElement('img');
 	btn.className = 'cbi-image-button';
-	btn.src = cbi_strings.path.resource + '/cbi/folder.gif';
+	btn.src = (resource || cbi_strings.path.resource) + '/cbi/folder.gif';
 	field.parentNode.insertBefore(btn, field.nextSibling);
 
 	cbi_bind(btn, 'click', cbi_browser_btnclick);
@@ -805,7 +846,7 @@ function cbi_dynlist_init(parent, datatype, optional, choices)
 			parent.appendChild(b);
 			if (datatype == 'file')
 			{
-				cbi_browser_init(t.id, parent.getAttribute('data-browser-path'));
+				cbi_browser_init(t.id, null, parent.getAttribute('data-browser-path'));
 			}
 
 			parent.appendChild(document.createElement('br'));

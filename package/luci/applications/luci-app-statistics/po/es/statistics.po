@@ -13,6 +13,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.6\n"
 
+msgid "APC UPS"
+msgstr ""
+
+msgid "APCUPS Plugin Configuration"
+msgstr ""
+
 msgid "Action (target)"
 msgstr "Acción (objetivo)"
 
@@ -36,6 +42,9 @@ msgstr "Directorio Base"
 
 msgid "Basic monitoring"
 msgstr "Monitorización básica"
+
+msgid "CPU Context Switches Plugin Configuration"
+msgstr ""
 
 msgid "CPU Frequency"
 msgstr ""
@@ -87,6 +96,9 @@ msgstr "Seguimiento"
 
 msgid "Conntrack Plugin Configuration"
 msgstr "Configuración del seguimiento"
+
+msgid "Context Switches"
+msgstr ""
 
 msgid "DF Plugin Configuration"
 msgstr "Configuración del plugin DF"
@@ -286,6 +298,9 @@ msgstr "Monitorizar discos y particiones"
 msgid "Monitor filesystem types"
 msgstr "Monitorizar tipos de sistema de archivos"
 
+msgid "Monitor host"
+msgstr ""
+
 msgid "Monitor hosts"
 msgstr "Monitorizar máquinas"
 
@@ -328,6 +343,11 @@ msgstr "Plugins de red"
 msgid "Network protocol"
 msgstr "Protocolo de red"
 
+msgid ""
+"Note: as pages are rendered by user 'nobody', the *.rrd files, the storage "
+"directory and all its parent directories need to be world readable."
+msgstr ""
+
 msgid "Number of threads for data collection"
 msgstr "Número de hilos para recolección de datos"
 
@@ -366,6 +386,9 @@ msgstr "Configuración del plugin \"Ping\""
 
 msgid "Port"
 msgstr "Puerto"
+
+msgid "Port for apcupsd communication"
+msgstr ""
 
 msgid "Processes"
 msgstr "Procesos"
@@ -489,6 +512,9 @@ msgstr "TTL para paquetes de ping"
 
 msgid "Table"
 msgstr "Tabla"
+
+msgid "The APCUPS plugin collects statistics about the APC UPS."
+msgstr ""
 
 msgid "The NUT plugin reads information about Uninterruptible Power Supplies."
 msgstr ""
@@ -690,6 +716,9 @@ msgid "Thermal"
 msgstr ""
 
 msgid "Thermal Plugin Configuration"
+msgstr ""
+
+msgid "This plugin collects statistics about the processor context switches."
 msgstr ""
 
 msgid "This plugin collects statistics about the processor frequency scaling."

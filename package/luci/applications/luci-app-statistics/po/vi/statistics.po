@@ -14,6 +14,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 1.1.0\n"
 
+msgid "APC UPS"
+msgstr ""
+
+msgid "APCUPS Plugin Configuration"
+msgstr ""
+
 msgid "Action (target)"
 msgstr "Action (target)"
 
@@ -37,6 +43,9 @@ msgstr "Thư mục Cơ sở"
 
 msgid "Basic monitoring"
 msgstr "Monitoring căn bản"
+
+msgid "CPU Context Switches Plugin Configuration"
+msgstr ""
 
 msgid "CPU Frequency"
 msgstr ""
@@ -87,6 +96,9 @@ msgid "Conntrack"
 msgstr ""
 
 msgid "Conntrack Plugin Configuration"
+msgstr ""
+
+msgid "Context Switches"
 msgstr ""
 
 msgid "DF Plugin Configuration"
@@ -288,6 +300,9 @@ msgstr "Kiểm soát đĩa và phân vùng"
 msgid "Monitor filesystem types"
 msgstr "Kiểm soát loại filesystem"
 
+msgid "Monitor host"
+msgstr ""
+
 msgid "Monitor hosts"
 msgstr "Monitor hosts"
 
@@ -330,6 +345,11 @@ msgstr "Network plugins"
 msgid "Network protocol"
 msgstr "Network protocol"
 
+msgid ""
+"Note: as pages are rendered by user 'nobody', the *.rrd files, the storage "
+"directory and all its parent directories need to be world readable."
+msgstr ""
+
 msgid "Number of threads for data collection"
 msgstr "Số lượng các chủ đề để thu thập dữ liệu"
 
@@ -367,6 +387,9 @@ msgid "Ping Plugin Configuration"
 msgstr "Cấu hình Ping plugin"
 
 msgid "Port"
+msgstr ""
+
+msgid "Port for apcupsd communication"
 msgstr ""
 
 msgid "Processes"
@@ -491,6 +514,9 @@ msgstr "TTl cho gói ping"
 
 msgid "Table"
 msgstr "Table"
+
+msgid "The APCUPS plugin collects statistics about the APC UPS."
+msgstr ""
 
 msgid "The NUT plugin reads information about Uninterruptible Power Supplies."
 msgstr ""
@@ -683,6 +709,9 @@ msgid "Thermal"
 msgstr ""
 
 msgid "Thermal Plugin Configuration"
+msgstr ""
+
+msgid "This plugin collects statistics about the processor context switches."
 msgstr ""
 
 msgid "This plugin collects statistics about the processor frequency scaling."

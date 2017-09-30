@@ -155,6 +155,11 @@ msgstr ""
 msgid "<abbr title='Pairwise: %s / Group: %s'>%s - %s</abbr>"
 msgstr "<abbr title='Парный: %s / Групповой: %s'>%s - %s</abbr>"
 
+msgid ""
+"<br/>Note: you need to manually restart the cron service if the crontab file "
+"was empty before editing."
+msgstr ""
+
 msgid "A43C + J43 + A43"
 msgstr ""
 
@@ -172,9 +177,6 @@ msgstr ""
 
 msgid "APN"
 msgstr "APN"
-
-msgid "AR Support"
-msgstr "Поддержка AR"
 
 msgid "ARP retry threshold"
 msgstr "Порог повтора ARP"
@@ -422,13 +424,7 @@ msgstr ""
 msgid "Associated Stations"
 msgstr "Подключенные клиенты"
 
-msgid "Atheros 802.11%s Wireless Controller"
-msgstr "Беспроводной 802.11%s контроллер Atheros"
-
 msgid "Auth Group"
-msgstr ""
-
-msgid "AuthGroup"
 msgstr ""
 
 msgid "Authentication"
@@ -502,9 +498,6 @@ msgstr "Назад к обзору"
 
 msgid "Back to scan results"
 msgstr "Назад к результатам сканирования"
-
-msgid "Background Scan"
-msgstr "Фоновое сканирование"
 
 msgid "Backup / Flash Firmware"
 msgstr "Резервная копия / прошивка"
@@ -674,9 +667,6 @@ msgstr "Команда"
 
 msgid "Common Configuration"
 msgstr "Общая конфигурация"
-
-msgid "Compression"
-msgstr "Сжатие"
 
 msgid "Configuration"
 msgstr "Конфигурация"
@@ -897,9 +887,6 @@ msgstr "Отключить настройку DNS"
 msgid "Disable Encryption"
 msgstr ""
 
-msgid "Disable HW-Beacon timer"
-msgstr "Отключить таймер HW-Beacon"
-
 msgid "Disabled"
 msgstr "Отключено"
 
@@ -945,9 +932,6 @@ msgstr ""
 
 msgid "Do not forward reverse lookups for local networks"
 msgstr "Не перенаправлять обратные DNS-запросы для локальных сетей"
-
-msgid "Do not send probe responses"
-msgstr "Не посылать тестовые ответы"
 
 msgid "Domain required"
 msgstr "Требуется домен"
@@ -1154,9 +1138,6 @@ msgstr ""
 msgid "Extra SSH command options"
 msgstr ""
 
-msgid "Fast Frames"
-msgstr "Быстрые кадры"
-
 msgid "File"
 msgstr "Файл"
 
@@ -1191,6 +1172,9 @@ msgstr "Завершить"
 
 msgid "Firewall"
 msgstr "Межсетевой экран"
+
+msgid "Firewall Mark"
+msgstr ""
 
 msgid "Firewall Settings"
 msgstr "Настройки межсетевого экрана"
@@ -1237,6 +1221,9 @@ msgstr "Требовать TKIP"
 
 msgid "Force TKIP and CCMP (AES)"
 msgstr "TKIP или CCMP (AES)"
+
+msgid "Force link"
+msgstr ""
 
 msgid "Force use of NAT-T"
 msgstr ""
@@ -1486,6 +1473,9 @@ msgstr "Длина префикса IPv6"
 msgid "IPv6 routed prefix"
 msgstr ""
 
+msgid "IPv6 suffix"
+msgstr ""
+
 msgid "IPv6-Address"
 msgstr "IPv6-адрес"
 
@@ -1504,7 +1494,7 @@ msgstr "IPv6 через IPv4 (6to4)"
 msgid "Identity"
 msgstr "Идентификация EAP"
 
-msgid "If checked, 1DES is enaled"
+msgid "If checked, 1DES is enabled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1596,6 +1586,9 @@ msgstr "Установленные пакеты"
 msgid "Interface"
 msgstr "Интерфейс"
 
+msgid "Interface %q device auto-migrated from %q to %q."
+msgstr ""
+
 msgid "Interface Configuration"
 msgstr "Конфигурация интерфейса"
 
@@ -1643,6 +1636,9 @@ msgstr "Указан неверный VLAN ID! Доступны только у�
 msgid "Invalid username and/or password! Please try again."
 msgstr "Неверный логин и/или пароль! Пожалуйста попробуйте снова."
 
+msgid "Isolate Clients"
+msgstr ""
+
 #, fuzzy
 msgid ""
 "It appears that you are trying to flash an image that does not fit into the "
@@ -1651,8 +1647,8 @@ msgstr ""
 "Вы пытаетесь обновить прошивку файлом, который не помещается в память "
 "устройства! Пожалуйста, проверьте файл образа."
 
-msgid "Java Script required!"
-msgstr "Требуется Java Script!"
+msgid "JavaScript required!"
+msgstr "Требуется JavaScript!"
 
 msgid "Join Network"
 msgstr "Подключение к сети"
@@ -1719,9 +1715,6 @@ msgstr "Срок действия аренды"
 
 msgid "Leasefile"
 msgstr "Файл аренд"
-
-msgid "Leasetime"
-msgstr "Время аренды"
 
 msgid "Leasetime remaining"
 msgstr "Оставшееся время аренды"
@@ -1921,9 +1914,6 @@ msgstr ""
 msgid "Max. Attainable Data Rate (ATTNDR)"
 msgstr ""
 
-msgid "Maximum Rate"
-msgstr "Максимальная скорость"
-
 msgid "Maximum allowed number of active DHCP leases"
 msgstr "Максимальное количество активных арендованных DHCP-адресов"
 
@@ -1958,9 +1948,6 @@ msgstr "Использование памяти (%)"
 
 msgid "Metric"
 msgstr "Метрика"
-
-msgid "Minimum Rate"
-msgstr "Минимальная скорость"
 
 msgid "Minimum hold time"
 msgstr "Минимальное время удержания"
@@ -2036,9 +2023,6 @@ msgstr "Переместить вниз"
 msgid "Move up"
 msgstr "Переместить вверх"
 
-msgid "Multicast Rate"
-msgstr "Скорость групповой передачи"
-
 msgid "Multicast address"
 msgstr "Адрес групповой передачи"
 
@@ -2049,6 +2033,9 @@ msgid "NAT-T Mode"
 msgstr ""
 
 msgid "NAT64 Prefix"
+msgstr ""
+
+msgid "NCM"
 msgstr ""
 
 msgid "NDP-Proxy"
@@ -2240,12 +2227,21 @@ msgstr ""
 msgid "Optional, use when the SIXXS account has more than one tunnel"
 msgstr ""
 
-msgid "Optional."
+msgid ""
+"Optional. 32-bit mark for outgoing encrypted packets. Enter value in hex, "
+"starting with <code>0x</code>."
 msgstr ""
 
 msgid ""
-"Optional. Adds in an additional layer of symmetric-key cryptography for post-"
-"quantum resistance."
+"Optional. Allowed values: 'eui64', 'random', fixed value like '::1' or "
+"'::1:2'. When IPv6 prefix (like 'a:b:c:d::') is received from a delegating "
+"server, use the suffix (like '::1') to form the IPv6 address ('a:b:c:d::1') "
+"for the interface."
+msgstr ""
+
+msgid ""
+"Optional. Base64-encoded preshared key. Adds in an additional layer of "
+"symmetric-key cryptography for post-quantum resistance."
 msgstr ""
 
 msgid "Optional. Create routes for Allowed IPs for this peer."
@@ -2281,9 +2277,6 @@ msgstr "Вне"
 
 msgid "Outbound:"
 msgstr "Исходящий:"
-
-msgid "Outdoor Channels"
-msgstr "Внешние каналы"
 
 msgid "Output Interface"
 msgstr ""
@@ -2394,6 +2387,9 @@ msgstr ""
 msgid "Password successfully changed!"
 msgstr "Пароль успешно изменён!"
 
+msgid "Password2"
+msgstr ""
+
 msgid "Path to CA-Certificate"
 msgstr "Путь к центру сертификации"
 
@@ -2464,6 +2460,12 @@ msgid "Power Management Mode"
 msgstr ""
 
 msgid "Pre-emtive CRC errors (CRCP_P)"
+msgstr ""
+
+msgid "Prefer LTE"
+msgstr ""
+
+msgid "Prefer UMTS"
 msgstr ""
 
 msgid "Prefix Delegated"
@@ -2668,9 +2670,6 @@ msgstr "Интерфейс переподключается"
 msgid "References"
 msgstr "Ссылки"
 
-msgid "Regulatory Domain"
-msgstr "Нормативная зона"
-
 msgid "Relay"
 msgstr "Ретранслятор"
 
@@ -2719,13 +2718,13 @@ msgstr "Требуется для некоторых интернет-прова
 msgid "Required. Base64-encoded private key for this interface."
 msgstr ""
 
+msgid "Required. Base64-encoded public key of peer."
+msgstr ""
+
 msgid ""
 "Required. IP addresses and prefixes that this peer is allowed to use inside "
 "the tunnel. Usually the peer's tunnel IP addresses and the networks the peer "
 "routes through the tunnel."
-msgstr ""
-
-msgid "Required. Public key of peer."
 msgstr ""
 
 msgid ""
@@ -2874,9 +2873,6 @@ msgstr ""
 msgid "Separate Clients"
 msgstr "Разделять клиентов"
 
-msgid "Separate WDS"
-msgstr "Отдельный WDS"
-
 msgid "Server Settings"
 msgstr "Настройки сервера"
 
@@ -2899,6 +2895,11 @@ msgstr "Тип службы"
 
 msgid "Services"
 msgstr "Сервисы"
+
+msgid ""
+"Set interface properties regardless of the link carrier (If set, carrier "
+"sense events do not invoke hotplug handlers)."
+msgstr ""
 
 #, fuzzy
 msgid "Set up Time Synchronization"
@@ -3040,9 +3041,6 @@ msgstr "Постоянные аренды"
 
 msgid "Static Routes"
 msgstr "Статические маршруты"
-
-msgid "Static WDS"
-msgstr "Статический WDS"
 
 msgid "Static address"
 msgstr "Статический адрес"
@@ -3468,9 +3466,6 @@ msgstr ""
 msgid "Tunnel type"
 msgstr ""
 
-msgid "Turbo Mode"
-msgstr "Турбо-режим"
-
 msgid "Tx-Power"
 msgstr "Мощность передатчика"
 
@@ -3758,9 +3753,6 @@ msgstr "Записывать полученные DNS-запросы в сист
 msgid "Write system log to file"
 msgstr ""
 
-msgid "XR Support"
-msgstr "Поддержка XR"
-
 msgid ""
 "You can enable or disable installed init scripts here. Changes will applied "
 "after a device reboot.<br /><strong>Warning: If you disable essential init "
@@ -3772,9 +3764,9 @@ msgstr ""
 "(например \"network\"), ваше устройство может оказаться недоступным!</strong>"
 
 msgid ""
-"You must enable Java Script in your browser or LuCI will not work properly."
+"You must enable JavaScript in your browser or LuCI will not work properly."
 msgstr ""
-"Вам необходимо включить Java Script в вашем браузере для корректной работы "
+"Вам необходимо включить JavaScript в вашем браузере для корректной работы "
 "LuCI."
 
 msgid ""
@@ -3788,10 +3780,6 @@ msgstr "любой"
 
 msgid "auto"
 msgstr "авто"
-
-#, fuzzy
-msgid "automatic"
-msgstr "статический"
 
 msgid "baseT"
 msgstr "baseT"
@@ -3870,9 +3858,6 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-msgid "navigation Navigation"
-msgstr ""
-
 msgid "no"
 msgstr "нет"
 
@@ -3904,12 +3889,6 @@ msgid "routed"
 msgstr "маршрутизируемый"
 
 msgid "server mode"
-msgstr ""
-
-msgid "skiplink1 Skip to navigation"
-msgstr ""
-
-msgid "skiplink2 Skip to content"
 msgstr ""
 
 msgid "stateful-only"
@@ -3947,6 +3926,61 @@ msgstr "да"
 
 msgid "« Back"
 msgstr "« Назад"
+
+#~ msgid "Leasetime"
+#~ msgstr "Время аренды"
+
+#, fuzzy
+#~ msgid "automatic"
+#~ msgstr "статический"
+
+#~ msgid "AR Support"
+#~ msgstr "Поддержка AR"
+
+#~ msgid "Atheros 802.11%s Wireless Controller"
+#~ msgstr "Беспроводной 802.11%s контроллер Atheros"
+
+#~ msgid "Background Scan"
+#~ msgstr "Фоновое сканирование"
+
+#~ msgid "Compression"
+#~ msgstr "Сжатие"
+
+#~ msgid "Disable HW-Beacon timer"
+#~ msgstr "Отключить таймер HW-Beacon"
+
+#~ msgid "Do not send probe responses"
+#~ msgstr "Не посылать тестовые ответы"
+
+#~ msgid "Fast Frames"
+#~ msgstr "Быстрые кадры"
+
+#~ msgid "Maximum Rate"
+#~ msgstr "Максимальная скорость"
+
+#~ msgid "Minimum Rate"
+#~ msgstr "Минимальная скорость"
+
+#~ msgid "Multicast Rate"
+#~ msgstr "Скорость групповой передачи"
+
+#~ msgid "Outdoor Channels"
+#~ msgstr "Внешние каналы"
+
+#~ msgid "Regulatory Domain"
+#~ msgstr "Нормативная зона"
+
+#~ msgid "Separate WDS"
+#~ msgstr "Отдельный WDS"
+
+#~ msgid "Static WDS"
+#~ msgstr "Статический WDS"
+
+#~ msgid "Turbo Mode"
+#~ msgstr "Турбо-режим"
+
+#~ msgid "XR Support"
+#~ msgstr "Поддержка XR"
 
 #~ msgid "An additional network will be created if you leave this unchecked."
 #~ msgstr ""

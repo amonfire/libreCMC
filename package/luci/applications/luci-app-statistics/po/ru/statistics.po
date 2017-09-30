@@ -15,6 +15,12 @@ msgstr ""
 "X-Generator: Pootle 2.0.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+msgid "APC UPS"
+msgstr ""
+
+msgid "APCUPS Plugin Configuration"
+msgstr ""
+
 msgid "Action (target)"
 msgstr "Действие (цель)"
 
@@ -38,6 +44,9 @@ msgstr "Базовая директория"
 
 msgid "Basic monitoring"
 msgstr "Базовая статистика"
+
+msgid "CPU Context Switches Plugin Configuration"
+msgstr ""
 
 msgid "CPU Frequency"
 msgstr ""
@@ -88,6 +97,9 @@ msgstr "Отслеживание подключения (Conntrack)"
 
 msgid "Conntrack Plugin Configuration"
 msgstr "Настройка плагина Conntrack"
+
+msgid "Context Switches"
+msgstr ""
 
 msgid "DF Plugin Configuration"
 msgstr "Конфигурация модуля DF"
@@ -291,6 +303,9 @@ msgstr "Собирать статистику с дисков и раздело�
 msgid "Monitor filesystem types"
 msgstr "Собирать статистику с файловых систем"
 
+msgid "Monitor host"
+msgstr ""
+
 msgid "Monitor hosts"
 msgstr "Собирать статистику с хостов"
 
@@ -333,6 +348,11 @@ msgstr "Сетевые модули"
 msgid "Network protocol"
 msgstr "Сетевой протокол"
 
+msgid ""
+"Note: as pages are rendered by user 'nobody', the *.rrd files, the storage "
+"directory and all its parent directories need to be world readable."
+msgstr ""
+
 msgid "Number of threads for data collection"
 msgstr "Количество потоков сбора данных"
 
@@ -371,6 +391,9 @@ msgstr "Конфигурация модуля Ping"
 
 msgid "Port"
 msgstr "Порт"
+
+msgid "Port for apcupsd communication"
+msgstr ""
 
 msgid "Processes"
 msgstr "Процессы"
@@ -496,6 +519,9 @@ msgstr "TTL для ping-пакетов"
 
 msgid "Table"
 msgstr "Таблица"
+
+msgid "The APCUPS plugin collects statistics about the APC UPS."
+msgstr ""
 
 msgid "The NUT plugin reads information about Uninterruptible Power Supplies."
 msgstr ""
@@ -681,6 +707,9 @@ msgid "Thermal"
 msgstr ""
 
 msgid "Thermal Plugin Configuration"
+msgstr ""
+
+msgid "This plugin collects statistics about the processor context switches."
 msgstr ""
 
 msgid "This plugin collects statistics about the processor frequency scaling."

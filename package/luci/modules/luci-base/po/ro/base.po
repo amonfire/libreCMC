@@ -148,6 +148,11 @@ msgstr "<abbr title=\"maximal\">Max.</abbr> interogari simultane"
 msgid "<abbr title='Pairwise: %s / Group: %s'>%s - %s</abbr>"
 msgstr "<abbr title='Pairwise: %s / Group: %s'>%s - %s</abbr>"
 
+msgid ""
+"<br/>Note: you need to manually restart the cron service if the crontab file "
+"was empty before editing."
+msgstr ""
+
 msgid "A43C + J43 + A43"
 msgstr ""
 
@@ -165,9 +170,6 @@ msgstr ""
 
 msgid "APN"
 msgstr "APN"
-
-msgid "AR Support"
-msgstr "Suport AR"
 
 msgid "ARP retry threshold"
 msgstr "ARP prag reincercare"
@@ -409,13 +411,7 @@ msgstr ""
 msgid "Associated Stations"
 msgstr "Statiile asociate"
 
-msgid "Atheros 802.11%s Wireless Controller"
-msgstr "Atheros 802.11%s Controler Fara Fir"
-
 msgid "Auth Group"
-msgstr ""
-
-msgid "AuthGroup"
 msgstr ""
 
 msgid "Authentication"
@@ -489,9 +485,6 @@ msgstr "Inapoi la vedere generala"
 
 msgid "Back to scan results"
 msgstr "Inapoi la rezultatele scanarii"
-
-msgid "Background Scan"
-msgstr "Scanare in fundal"
 
 msgid "Backup / Flash Firmware"
 msgstr "Salveaza / Scrie Firmware"
@@ -649,9 +642,6 @@ msgstr "Comanda"
 
 msgid "Common Configuration"
 msgstr "Configurarea obisnuita"
-
-msgid "Compression"
-msgstr "Comprimare"
 
 msgid "Configuration"
 msgstr "Configurare"
@@ -868,9 +858,6 @@ msgstr "Dezactiveaza configuratia DNS"
 msgid "Disable Encryption"
 msgstr ""
 
-msgid "Disable HW-Beacon timer"
-msgstr ""
-
 msgid "Disabled"
 msgstr "Dezactivat"
 
@@ -909,9 +896,6 @@ msgid "Do not forward requests that cannot be answered by public name servers"
 msgstr ""
 
 msgid "Do not forward reverse lookups for local networks"
-msgstr ""
-
-msgid "Do not send probe responses"
 msgstr ""
 
 msgid "Domain required"
@@ -1105,9 +1089,6 @@ msgstr ""
 msgid "Extra SSH command options"
 msgstr ""
 
-msgid "Fast Frames"
-msgstr ""
-
 msgid "File"
 msgstr "Fisier"
 
@@ -1142,6 +1123,9 @@ msgstr "Termina"
 
 msgid "Firewall"
 msgstr "Firewall"
+
+msgid "Firewall Mark"
+msgstr ""
 
 msgid "Firewall Settings"
 msgstr "Setarile firewall-ului"
@@ -1188,6 +1172,9 @@ msgstr "Forteaza TKIP"
 
 msgid "Force TKIP and CCMP (AES)"
 msgstr "Forteaza TKIP si CCMP (AES)"
+
+msgid "Force link"
+msgstr ""
 
 msgid "Force use of NAT-T"
 msgstr ""
@@ -1434,6 +1421,9 @@ msgstr ""
 msgid "IPv6 routed prefix"
 msgstr ""
 
+msgid "IPv6 suffix"
+msgstr ""
+
 msgid "IPv6-Address"
 msgstr ""
 
@@ -1452,7 +1442,7 @@ msgstr ""
 msgid "Identity"
 msgstr "Identitate"
 
-msgid "If checked, 1DES is enaled"
+msgid "If checked, 1DES is enabled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1534,6 +1524,9 @@ msgstr "Pachete instalate"
 msgid "Interface"
 msgstr "Interfata"
 
+msgid "Interface %q device auto-migrated from %q to %q."
+msgstr ""
+
 msgid "Interface Configuration"
 msgstr "Configurarea interfetei"
 
@@ -1579,6 +1572,9 @@ msgstr ""
 msgid "Invalid username and/or password! Please try again."
 msgstr "Utilizator si/sau parola invalide! Incearcati din nou."
 
+msgid "Isolate Clients"
+msgstr ""
+
 #, fuzzy
 msgid ""
 "It appears that you are trying to flash an image that does not fit into the "
@@ -1587,8 +1583,8 @@ msgstr ""
 "Se pare ca ai incercat sa rescrii o imagine care nu are loc in memoria "
 "flash, verifica fisierul din nou!"
 
-msgid "Java Script required!"
-msgstr "Ai nevoie de Java Script !"
+msgid "JavaScript required!"
+msgstr "Ai nevoie de JavaScript !"
 
 msgid "Join Network"
 msgstr ""
@@ -1654,9 +1650,6 @@ msgid "Lease validity time"
 msgstr ""
 
 msgid "Leasefile"
-msgstr ""
-
-msgid "Leasetime"
 msgstr ""
 
 msgid "Leasetime remaining"
@@ -1848,9 +1841,6 @@ msgstr ""
 msgid "Max. Attainable Data Rate (ATTNDR)"
 msgstr ""
 
-msgid "Maximum Rate"
-msgstr "Rata maxima"
-
 msgid "Maximum allowed number of active DHCP leases"
 msgstr ""
 
@@ -1885,9 +1875,6 @@ msgstr "Utilizarea memoriei (%)"
 
 msgid "Metric"
 msgstr "Metrica"
-
-msgid "Minimum Rate"
-msgstr "Rata minima"
 
 msgid "Minimum hold time"
 msgstr ""
@@ -1960,9 +1947,6 @@ msgstr ""
 msgid "Move up"
 msgstr ""
 
-msgid "Multicast Rate"
-msgstr "Rata de multicast"
-
 msgid "Multicast address"
 msgstr ""
 
@@ -1973,6 +1957,9 @@ msgid "NAT-T Mode"
 msgstr ""
 
 msgid "NAT64 Prefix"
+msgstr ""
+
+msgid "NCM"
 msgstr ""
 
 msgid "NDP-Proxy"
@@ -2158,12 +2145,21 @@ msgstr ""
 msgid "Optional, use when the SIXXS account has more than one tunnel"
 msgstr ""
 
-msgid "Optional."
+msgid ""
+"Optional. 32-bit mark for outgoing encrypted packets. Enter value in hex, "
+"starting with <code>0x</code>."
 msgstr ""
 
 msgid ""
-"Optional. Adds in an additional layer of symmetric-key cryptography for post-"
-"quantum resistance."
+"Optional. Allowed values: 'eui64', 'random', fixed value like '::1' or "
+"'::1:2'. When IPv6 prefix (like 'a:b:c:d::') is received from a delegating "
+"server, use the suffix (like '::1') to form the IPv6 address ('a:b:c:d::1') "
+"for the interface."
+msgstr ""
+
+msgid ""
+"Optional. Base64-encoded preshared key. Adds in an additional layer of "
+"symmetric-key cryptography for post-quantum resistance."
 msgstr ""
 
 msgid "Optional. Create routes for Allowed IPs for this peer."
@@ -2198,9 +2194,6 @@ msgid "Out"
 msgstr "Iesire"
 
 msgid "Outbound:"
-msgstr ""
-
-msgid "Outdoor Channels"
 msgstr ""
 
 msgid "Output Interface"
@@ -2310,6 +2303,9 @@ msgstr ""
 msgid "Password successfully changed!"
 msgstr "Parola schimbata cu succes !"
 
+msgid "Password2"
+msgstr ""
+
 msgid "Path to CA-Certificate"
 msgstr "Calea catre certificatul CA"
 
@@ -2380,6 +2376,12 @@ msgid "Power Management Mode"
 msgstr ""
 
 msgid "Pre-emtive CRC errors (CRCP_P)"
+msgstr ""
+
+msgid "Prefer LTE"
+msgstr ""
+
+msgid "Prefer UMTS"
 msgstr ""
 
 msgid "Prefix Delegated"
@@ -2570,9 +2572,6 @@ msgstr "Interfata se reconecteaza chiar acum"
 msgid "References"
 msgstr "Referinte"
 
-msgid "Regulatory Domain"
-msgstr "Domeniu regulatoriu"
-
 msgid "Relay"
 msgstr ""
 
@@ -2621,13 +2620,13 @@ msgstr ""
 msgid "Required. Base64-encoded private key for this interface."
 msgstr ""
 
+msgid "Required. Base64-encoded public key of peer."
+msgstr ""
+
 msgid ""
 "Required. IP addresses and prefixes that this peer is allowed to use inside "
 "the tunnel. Usually the peer's tunnel IP addresses and the networks the peer "
 "routes through the tunnel."
-msgstr ""
-
-msgid "Required. Public key of peer."
 msgstr ""
 
 msgid ""
@@ -2772,9 +2771,6 @@ msgstr ""
 msgid "Separate Clients"
 msgstr ""
 
-msgid "Separate WDS"
-msgstr ""
-
 msgid "Server Settings"
 msgstr "Setarile serverului"
 
@@ -2797,6 +2793,11 @@ msgstr "Tip de serviciu"
 
 msgid "Services"
 msgstr "Servicii"
+
+msgid ""
+"Set interface properties regardless of the link carrier (If set, carrier "
+"sense events do not invoke hotplug handlers)."
+msgstr ""
 
 #, fuzzy
 msgid "Set up Time Synchronization"
@@ -2932,9 +2933,6 @@ msgstr ""
 
 msgid "Static Routes"
 msgstr "Rute statice"
-
-msgid "Static WDS"
-msgstr ""
 
 msgid "Static address"
 msgstr ""
@@ -3301,9 +3299,6 @@ msgstr ""
 msgid "Tunnel type"
 msgstr ""
 
-msgid "Turbo Mode"
-msgstr "Mod turbo"
-
 msgid "Tx-Power"
 msgstr "Puterea TX"
 
@@ -3583,9 +3578,6 @@ msgstr "Scrie cererile DNS primite in syslog"
 msgid "Write system log to file"
 msgstr ""
 
-msgid "XR Support"
-msgstr "Suport XR"
-
 msgid ""
 "You can enable or disable installed init scripts here. Changes will applied "
 "after a device reboot.<br /><strong>Warning: If you disable essential init "
@@ -3593,7 +3585,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You must enable Java Script in your browser or LuCI will not work properly."
+"You must enable JavaScript in your browser or LuCI will not work properly."
 msgstr ""
 
 msgid ""
@@ -3607,9 +3599,6 @@ msgstr "oricare"
 
 msgid "auto"
 msgstr "auto"
-
-msgid "automatic"
-msgstr ""
 
 msgid "baseT"
 msgstr ""
@@ -3685,9 +3674,6 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-msgid "navigation Navigation"
-msgstr ""
-
 msgid "no"
 msgstr "nu"
 
@@ -3719,12 +3705,6 @@ msgid "routed"
 msgstr "rutat"
 
 msgid "server mode"
-msgstr ""
-
-msgid "skiplink1 Skip to navigation"
-msgstr ""
-
-msgid "skiplink2 Skip to content"
 msgstr ""
 
 msgid "stateful-only"
@@ -3762,6 +3742,36 @@ msgstr "da"
 
 msgid "« Back"
 msgstr "« Inapoi"
+
+#~ msgid "AR Support"
+#~ msgstr "Suport AR"
+
+#~ msgid "Atheros 802.11%s Wireless Controller"
+#~ msgstr "Atheros 802.11%s Controler Fara Fir"
+
+#~ msgid "Background Scan"
+#~ msgstr "Scanare in fundal"
+
+#~ msgid "Compression"
+#~ msgstr "Comprimare"
+
+#~ msgid "Maximum Rate"
+#~ msgstr "Rata maxima"
+
+#~ msgid "Minimum Rate"
+#~ msgstr "Rata minima"
+
+#~ msgid "Multicast Rate"
+#~ msgstr "Rata de multicast"
+
+#~ msgid "Regulatory Domain"
+#~ msgstr "Domeniu regulatoriu"
+
+#~ msgid "Turbo Mode"
+#~ msgstr "Mod turbo"
+
+#~ msgid "XR Support"
+#~ msgstr "Suport XR"
 
 #~ msgid "An additional network will be created if you leave this unchecked."
 #~ msgstr ""

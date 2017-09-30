@@ -13,6 +13,12 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Language-Team: \n"
 
+msgid "APC UPS"
+msgstr ""
+
+msgid "APCUPS Plugin Configuration"
+msgstr ""
+
 msgid "Action (target)"
 msgstr "Ação (destino)"
 
@@ -36,6 +42,9 @@ msgstr "Diretório Base"
 
 msgid "Basic monitoring"
 msgstr "Monitoramento básico"
+
+msgid "CPU Context Switches Plugin Configuration"
+msgstr ""
 
 msgid "CPU Frequency"
 msgstr "Frequência da CPU"
@@ -87,6 +96,9 @@ msgstr "Conntrack"
 
 msgid "Conntrack Plugin Configuration"
 msgstr "Configuração do Plugin do Conntrack"
+
+msgid "Context Switches"
+msgstr ""
 
 msgid "DF Plugin Configuration"
 msgstr "Configuração do plugin DF"
@@ -293,6 +305,9 @@ msgstr "Monitoras discos e partições"
 msgid "Monitor filesystem types"
 msgstr "Monitorar tipos de sistemas de arquivos"
 
+msgid "Monitor host"
+msgstr ""
+
 msgid "Monitor hosts"
 msgstr "Monitorar os equipamentos"
 
@@ -335,6 +350,14 @@ msgstr "Plugins de rede"
 msgid "Network protocol"
 msgstr "Protocolo de rede"
 
+msgid ""
+"Note: as pages are rendered by user 'nobody', the *.rrd files, the storage "
+"directory and all its parent directories need to be world readable."
+msgstr ""
+"Nota: como as páginas são renderizadas pelo usuário 'nobody', os arquivos * ."
+"rrd, o diretório de armazenamento e todos os seus diretórios superiores "
+"precisam ser legíveis a todos."
+
 msgid "Number of threads for data collection"
 msgstr "Número de threads para o coletor de dados"
 
@@ -373,6 +396,9 @@ msgstr "Configuração do plugin Ping"
 
 msgid "Port"
 msgstr "Porta"
+
+msgid "Port for apcupsd communication"
+msgstr ""
 
 msgid "Processes"
 msgstr "Processos"
@@ -496,6 +522,9 @@ msgstr "TTL para os pacotes do ping"
 
 msgid "Table"
 msgstr "Tabela"
+
+msgid "The APCUPS plugin collects statistics about the APC UPS."
+msgstr ""
 
 msgid "The NUT plugin reads information about Uninterruptible Power Supplies."
 msgstr "O plugin NUT lê informações sobre Fontes de alimentação ininterruptas."
@@ -708,6 +737,9 @@ msgstr "Térmico"
 msgid "Thermal Plugin Configuration"
 msgstr "Configuração do Plugin Térmico"
 
+msgid "This plugin collects statistics about the processor context switches."
+msgstr ""
+
 msgid "This plugin collects statistics about the processor frequency scaling."
 msgstr ""
 "Este plugin coleta as estatísticas sobre o escalonamento da frequência do "
@@ -794,15 +826,6 @@ msgstr "segundos; vários valores, separar com espaço"
 
 msgid "server interfaces"
 msgstr "interfaces do servidor"
-
-#~ msgid ""
-#~ "Note: as pages are rendered by user 'nobody', the *.rrd files, the "
-#~ "storage directory and all its parent directories need to be world "
-#~ "readable."
-#~ msgstr ""
-#~ "Nota: como as páginas são renderizadas pelo usuário 'nobody', os arquivos "
-#~ "* .rrd, o diretório de armazenamento e todos os seus diretórios "
-#~ "superiores precisam ser legíveis a todos."
 
 #~ msgid "Collectd"
 #~ msgstr "Coletar"
