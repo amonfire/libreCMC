@@ -1,10 +1,3 @@
-define LegacyDevice/A60
-   DEVICE_TITLE := OpenMesh A40/A60
-   DEVICE_PACKAGES := om-watchdog \
-	mod-usb-core kmod-usb2
-endef
-LEGACY_DEVICES += A60
-
 define LegacyDevice/ALFANX
   DEVICE_TITLE := ALFA Network N2/N5 board
 endef
@@ -292,12 +285,6 @@ define LegacyDevice/DGL5500A1
 endef
 LEGACY_DEVICES += DGL5500A1
 
-define LegacyDevice/TEW823DRU
-  DEVICE_TITLE := TRENDNet TEW-823DRU
-  DEVICE_PACKAGES := kmod-usb-core kmod-usb2
-endef
-LEGACY_DEVICES += TEW823DRU
-
 define LegacyDevice/DHP1565A1
   DEVICE_TITLE := D-Link DHP-1565 rev. A1
   DEVICE_PACKAGES := kmod-usb-core kmod-usb2
@@ -366,18 +353,6 @@ define LegacyDevice/ESR900
   DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport
 endef
 LEGACY_DEVICES += ESR900
-
-define LegacyDevice/ESR1750
-  DEVICE_TITLE := EnGenius ESR1750
-  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-storage
-endef
-LEGACY_DEVICES += ESR1750
-
-define LegacyDevice/EPG5000
-  DEVICE_TITLE := EnGenius EPG5000
-  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-storage
-endef
-LEGACY_DEVICES += EPG5000
 
 define LegacyDevice/WP543_4M
   DEVICE_TITLE := Compex WP543/WPJ543 (4MB flash)

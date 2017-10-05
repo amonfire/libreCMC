@@ -1,3 +1,16 @@
+define Device/ap121f
+  DEVICE_TITLE := ALFA Network AP121F
+  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-storage -swconfig
+  BOARDNAME := AP121F
+  IMAGE_SIZE := 16064k
+  CONSOLE := ttyATH0,115200
+  MTDPARTS := spi0.0:192k(u-boot)ro,64k(u-boot-env),64k(art)ro,-(firmware)
+  SUPPORTED_DEVICES := ap121f
+  IMAGE/sysupgrade.bin = append-kernel | pad-to $$$$(BLOCKSIZE) | \
+	append-rootfs | pad-rootfs | append-metadata | check-size $$$$(IMAGE_SIZE)
+endef
+TARGET_DEVICES += ap121f
+
 define Device/ap90q
   DEVICE_TITLE := YunCore AP90Q
   BOARDNAME = AP90Q
@@ -117,25 +130,12 @@ define Device/gl-ar150
   MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env)ro,16000k(firmware),64k(art)ro
 endef
 
-define Device/gl-usb150
-  DEVICE_TITLE := GL.iNet GL-USB150
-  DEVICE_PACKAGES := -swconfig
-  BOARDNAME := GL-USB150
-  IMAGE_SIZE := 16000k
-  CONSOLE := ttyATH0,115200
-  MTDPARTS := spi0.0:256k(u-boot)ro,64k(u-boot-env)ro,16000k(firmware),64k(art)ro
-  SUPPORTED_DEVICES := gl-usb150
-  IMAGE/sysupgrade.bin = append-kernel | pad-to $$$$(BLOCKSIZE) | \
-        append-rootfs | pad-rootfs | append-metadata | check-size $$$$(IMAGE_SIZE)
-endef
-TARGET_DEVICES += gl-usb150
-
 define Device/tpe-r1100
   $(Device/gl-ar150)
   DEVICE_TITLE := TPE-R1100 Think Penguin Mini Router
 endef
 
-TARGET_DEVICES += tpe-r1100
+TARGET_DEVICES += gl-ar150 tpe-r1100
 
 define Device/gl-ar300
   DEVICE_TITLE := GL AR300
@@ -505,43 +505,6 @@ define Device/oolite
 endef
 TARGET_DEVICES += oolite
 
-
-define Device/NBG6616
-  DEVICE_TITLE := ZyXEL NBG6616
-  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport kmod-usb-storage kmod-rtc-pcf8563
-  BOARDNAME = NBG6616
-  KERNEL_SIZE = 2048k
-  IMAGE_SIZE = 15323k
-  MTDPARTS = spi0.0:192k(u-boot)ro,64k(env)ro,64k(RFdata)ro,384k(zyxel_rfsd),384k(romd),64k(header),2048k(kernel),13184k(rootfs),15232k@0x120000(firmware)
-  CMDLINE += mem=128M
-  IMAGES := sysupgrade.bin
-  KERNEL := kernel-bin | patch-cmdline | lzma | uImage lzma | jffs2 boot/vmlinux.lzma.uImage
-  IMAGE/sysupgrade.bin = append-kernel | pad-to $$$$(KERNEL_SIZE) | append-rootfs | pad-rootfs | check-size $$$$(IMAGE_SIZE)
-  # We cannot currently build a factory image. It is the sysupgrade image
-  # prefixed with a header (which is actually written into the MTD device).
-  # The header is 2kiB and is filled with 0xff. The format seems to be:
-  #   2 bytes:  0x0000
-  #   2 bytes:  checksum of the data partition (big endian)
-  #   4 bytes:  length of the contained image file (big endian)
-  #  32 bytes:  Firmware Version string (NUL terminated, 0xff padded)
-  #   2 bytes:  0x0000
-  #   2 bytes:  checksum over the header partition (big endian)
-  #  32 bytes:  Model (e.g. "NBG6616", NUL termiated, 0xff padded)
-  #      rest: 0xff padding
-  #
-  # The checksums are calculated by adding up all bytes and if a 16bit
-  # overflow occurs, one is added and the sum is masked to 16 bit:
-  #   csum = csum + databyte; if (csum > 0xffff) { csum += 1; csum &= 0xffff };
-  # Should the file have an odd number of bytes then the byte len-0x800 is
-  # used additionally.
-  # The checksum for the header is calcualted over the first 2048 bytes with
-  # the firmware checksum as the placeholder during calculation.
-  #
-  # The header is padded with 0xff to the erase block size of the device.
-endef
-
-TARGET_DEVICES += NBG6616
-
 define Device/c-55
   DEVICE_TITLE := AirTight Networks C-55
   DEVICE_PACKAGES := kmod-ath9k
@@ -631,17 +594,7 @@ $(Device/seama)
   SEAMA_SIGNATURE := wrgnd13_wd_av
 endef
 
-define Device/qihoo-c301
-$(Device/seama)
-  DEVICE_TITLE := Qihoo C301
-  DEVICE_PACKAGES :=  kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport
-  BOARDNAME = QIHOO-C301
-  IMAGE_SIZE = 15744k
-  MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env),64k(devdata),64k(devconf),15744k(firmware),64k(warm_start),64k(action_image_config),64k(radiocfg)ro;spi0.1:15360k(upgrade2),1024k(privatedata)
-  SEAMA_SIGNATURE := wrgac26_qihoo360_360rg
-endef
-
-TARGET_DEVICES += dir-869-a1 mynet-n600 mynet-n750 qihoo-c301
+TARGET_DEVICES += dir-869-a1 mynet-n600 mynet-n750
 
 define Build/mkwrggimg
 	$(STAGING_DIR_HOST)/bin/mkwrggimg -b \
@@ -654,6 +607,8 @@ endef
 define Build/wrgg-pad-rootfs
 	$(STAGING_DIR_HOST)/bin/padjffs2 $(IMAGE_ROOTFS) -c 64 >>$@
 endef
+
+TARGET_DEVICES += dap-2695-a1
 
 define Build/mkbuffaloimg
 	$(STAGING_DIR_HOST)/bin/mkbuffaloimg -B $(BOARDNAME) \

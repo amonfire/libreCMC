@@ -111,7 +111,7 @@ tplink_pharos_check_image() {
 	# is accepted (loading the first 1.5M of a remote image for this check seems
 	# a bit extreme)
 	dd if="$1" bs=1 skip=1511432 count=1024 2>/dev/null | while read line; do
-		[ "$line" == "$model_string" ] && break
+		[ "$line" = "$model_string" ] && break
 	done || {
 		echo "Unsupported image (model not in support-list)"
 		return 1
@@ -203,6 +203,7 @@ platform_check_image() {
 	airgatewaypro|\
 	airgateway|\
 	airrouter|\
+	ap121f|\
 	ap132|\
 	ap90q|\
 	bullet-m|\
@@ -237,7 +238,6 @@ platform_check_image() {
 	ew-dorin-router|\
 	ew-dorin|\
 	gl-ar150|\
-	gl-usb150|\
 	gl-ar300m|\
 	gl-ar300|\
 	gl-domino|\

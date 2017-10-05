@@ -4,10 +4,10 @@
 
 SUBTARGET:=mt7621
 BOARDNAME:=MT7621 based boards
-FEATURES+=usb rtc nand
+FEATURES+=nand ramdisk rtc usb
 CPU_TYPE:=24kc
 
-DEFAULT_PACKAGES += kmod-usb3
+DEFAULT_PACKAGES +=
 
 KERNEL_PATCHVER:=4.4
 

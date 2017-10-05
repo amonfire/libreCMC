@@ -296,6 +296,7 @@ TARGET_DEVICES += dir-620-d1
 
 define Device/dwr-512-b
   DTS := DWR-512-B
+  IMAGE_SIZE := 7700k
   DEVICE_TITLE := D-Link DWR-512 B
   DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-i2c-core kmod-i2c-ralink kmod-spi-dev \
 			kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan comgt
@@ -341,6 +342,13 @@ define Device/freestation5
   DEVICE_PACKAGES := kmod-usb-dwc2 kmod-rt2500-usb kmod-rt2800-usb kmod-rt2x00-usb
 endef
 TARGET_DEVICES += freestation5
+
+define Device/hg255d
+  DTS := HG255D
+  IMAGE_SIZE := $(ralink_default_fw_size_16M)
+  DEVICE_TITLE := HuaWei HG255D
+endef
+TARGET_DEVICES += hg255d
 
 define Device/hlk-rm04
   DTS := HLKRM04
@@ -452,6 +460,7 @@ endef
 TARGET_DEVICES += miniembplug
 
 define Device/miniembwifi
+  DTS := MINIEMBWIFI
   DEVICE_TITLE := Omnima MiniEMBWiFi
 endef
 TARGET_DEVICES += miniembwifi
@@ -634,6 +643,7 @@ TARGET_DEVICES += rt-n13u
 define Device/rut5xx
   DTS := RUT5XX
   DEVICE_TITLE := Teltonika RUT5XX
+  DEVICE_PACKAGES := om-watchdog
 endef
 TARGET_DEVICES += rut5xx
 

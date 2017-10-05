@@ -446,7 +446,6 @@ endef
 
 $(eval $(call KernelPackage,ne2k-pci))
 
-
 define KernelPackage/e1000
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Intel(R) PRO/1000 PCI cards kernel support

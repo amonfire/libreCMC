@@ -37,7 +37,6 @@ define Package/dnsmasq/Default
   CATEGORY:=Base system
   TITLE:=DNS and DHCP server
   URL:=http://www.thekelleys.org.uk/dnsmasq/
-  DEPENDS:=+libubus
   USERID:=dnsmasq=453:dnsmasq=453
 endef
 
@@ -49,14 +48,14 @@ endef
 define Package/dnsmasq-dhcpv6
 $(call Package/dnsmasq/Default)
   TITLE += (with DHCPv6 support)
-  DEPENDS+=@IPV6
+  DEPENDS:=@IPV6
   VARIANT:=dhcpv6
 endef
 
 define Package/dnsmasq-full
 $(call Package/dnsmasq/Default)
   TITLE += (with DNSSEC, DHCPv6, Auth DNS, IPset, Conntrack, NO_ID enabled by default)
-  DEPENDS+=+PACKAGE_dnsmasq_full_dnssec:libnettle \
+  DEPENDS:=+PACKAGE_dnsmasq_full_dnssec:libnettle \
 	+PACKAGE_dnsmasq_full_ipset:kmod-ipt-ipset \
 	+PACKAGE_dnsmasq_full_conntrack:libnetfilter-conntrack
   VARIANT:=full
@@ -138,7 +137,7 @@ endif
 
 MAKE_FLAGS := \
 	$(TARGET_CONFIGURE_OPTS) \
-	CFLAGS="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS)" \
+	CFLAGS="$(TARGET_CFLAGS)" \
 	LDFLAGS="$(TARGET_LDFLAGS)" \
 	COPTS="$(COPTS)" \
 	PREFIX="/usr"
@@ -151,17 +150,8 @@ define Package/dnsmasq/install
 	$(INSTALL_DATA) ./files/dnsmasq.conf $(1)/etc/dnsmasq.conf
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/dnsmasq.init $(1)/etc/init.d/dnsmasq
-	$(INSTALL_DIR) $(1)/etc/hotplug.d/dhcp
-	$(INSTALL_DIR) $(1)/etc/hotplug.d/neigh
 	$(INSTALL_DIR) $(1)/etc/hotplug.d/ntp
-	$(INSTALL_DIR) $(1)/etc/hotplug.d/tftp
 	$(INSTALL_DATA) ./files/dnsmasqsec.hotplug $(1)/etc/hotplug.d/ntp/25-dnsmasqsec
-	$(INSTALL_DIR) $(1)/usr/share/dnsmasq
-	$(INSTALL_DATA) ./files/rfc6761.conf $(1)/usr/share/dnsmasq/
-	$(INSTALL_DIR) $(1)/usr/lib/dnsmasq
-	$(INSTALL_BIN) ./files/dhcp-script.sh $(1)/usr/lib/dnsmasq/dhcp-script.sh
-	$(INSTALL_DIR) $(1)/usr/share/acl.d
-	$(INSTALL_DATA) ./files/dnsmasq_acl.json $(1)/usr/share/acl.d/
 endef
 
 Package/dnsmasq-dhcpv6/install = $(Package/dnsmasq/install)

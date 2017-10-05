@@ -112,6 +112,9 @@ ramips_board_detect() {
 	*"D105")
 		name="d105"
 		;;
+	*"D240")
+		name="d240"
+		;;
 	*"DAP-1350")
 		name="dap-1350"
 		;;
@@ -202,9 +205,6 @@ ramips_board_detect() {
 	*"FreeStation5")
 		name="freestation5"
 		;;
-	*"GB-PC1")
-		name="gb-pc1"
-		;;
 	*"GL-MT300A")
 		name="gl-mt300a"
 		;;
@@ -272,7 +272,7 @@ ramips_board_detect() {
 		name="m2m"
 		;;
 	*"Mercury MAC1200R v2")
-		name="mac1200r-v2"
+		name="mac1200rv2"
 		;;
 	*"MicroWRT")
 		name="microwrt"
@@ -366,6 +366,12 @@ ramips_board_detect() {
 		;;
 	*"NW718")
 		name="nw718"
+		;;
+	*"Onion Omega2")
+		name="omega2"
+		;;
+	*"Onion Omega2+")
+		name="omega2p"
 		;;
 	*"OY-0001")
 		name="oy-0001"
@@ -478,6 +484,9 @@ ramips_board_detect() {
 	*"VoCore (16M)")
 		name="vocore-16M"
 		;;
+	*"VoCore2")
+		name="vocore2"
+		;;
 	*"VR500")
 		name="vr500"
 		;;
@@ -546,6 +555,9 @@ ramips_board_detect() {
 		;;
 	*"WMR-300")
 		name="wmr-300"
+		;;
+	*"WN3000RPv3")
+		name="wn3000rpv3"
 		;;
 	*"WNCE2001")
 		name="wnce2001"
