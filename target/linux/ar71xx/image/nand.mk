@@ -21,6 +21,12 @@ define Build/MerakiNAND
 	@mv $@.new $@
 endef
 
+define LegacyDevice/GL-AR300MD
+	DEVICE_TITLE := GL-AR300M with nand flash
+	DEVICE_PACKAGES := kmod-usb-core kmod-usb2 uboot-envtools
+endef
+LEGACY_DEVICES += GL-AR300MD
+
 define Device/mr18
   DEVICE_TITLE := Meraki MR18
   DEVICE_PACKAGES := kmod-spi-gpio kmod-ath9k
