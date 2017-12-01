@@ -460,7 +460,7 @@ if hwtype == "mac80211" then
 	wmm:depends({mode="ap"})
 	wmm:depends({mode="ap-wds"})
 	wmm.default = wmm.enabled
-	
+
 	isolate = s:taboption("advanced", Flag, "isolate", translate("Isolate Clients"),
 	 translate("Prevents client-to-client communication"))
 	isolate:depends({mode="ap"})
@@ -793,21 +793,6 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 	mobility_domain.datatype = "and(hexstring,rangelength(4,4))"
 	mobility_domain.rmempty = true
 
-	r0_key_lifetime = s:taboption("encryption", Value, "r0_key_lifetime",
-			translate("R0 Key Lifetime"), translate("minutes"))
-	r0_key_lifetime:depends({ieee80211r="1"})
-	r0_key_lifetime.placeholder = "10000"
-	r0_key_lifetime.datatype = "uinteger"
-	r0_key_lifetime.rmempty = true
-
-	r1_key_holder = s:taboption("encryption", Value, "r1_key_holder",
-			translate("R1 Key Holder"),
-			translate("6-octet identifier as a hex string - no colons"))
-	r1_key_holder:depends({ieee80211r="1"})
-	r1_key_holder.placeholder = "00004f577274"
-	r1_key_holder.datatype = "and(hexstring,rangelength(12,12))"
-	r1_key_holder.rmempty = true
-
 	reassociation_deadline = s:taboption("encryption", Value, "reassociation_deadline",
 		translate("Reassociation Deadline"),
 		translate("time units (TUs / 1.024 ms) [1000-65535]"))
@@ -816,8 +801,34 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 	reassociation_deadline.datatype = "range(1000,65535)"
 	reassociation_deadline.rmempty = true
 
+	ft_protocol = s:taboption("encryption", ListValue, "ft_over_ds", translate("FT protocol"))
+	ft_protocol:depends({ieee80211r="1"})
+	ft_protocol:value("1", translatef("FT over DS"))
+	ft_protocol:value("0", translatef("FT over the Air"))
+	ft_protocol.rmempty = true
+
+	ft_psk_generate_local = s:taboption("encryption", Flag, "ft_psk_generate_local",
+		translate("Generate PMK locally"),
+		translate("When using a PSK, the PMK can be generated locally without inter AP communications"))
+	ft_psk_generate_local:depends({ieee80211r="1"})
+
+	r0_key_lifetime = s:taboption("encryption", Value, "r0_key_lifetime",
+			translate("R0 Key Lifetime"), translate("minutes"))
+	r0_key_lifetime:depends({ieee80211r="1", ft_psk_generate_local=""})
+	r0_key_lifetime.placeholder = "10000"
+	r0_key_lifetime.datatype = "uinteger"
+	r0_key_lifetime.rmempty = true
+
+	r1_key_holder = s:taboption("encryption", Value, "r1_key_holder",
+			translate("R1 Key Holder"),
+			translate("6-octet identifier as a hex string - no colons"))
+	r1_key_holder:depends({ieee80211r="1", ft_psk_generate_local=""})
+	r1_key_holder.placeholder = "00004f577274"
+	r1_key_holder.datatype = "and(hexstring,rangelength(12,12))"
+	r1_key_holder.rmempty = true
+
 	pmk_r1_push = s:taboption("encryption", Flag, "pmk_r1_push", translate("PMK R1 Push"))
-	pmk_r1_push:depends({ieee80211r="1"})
+	pmk_r1_push:depends({ieee80211r="1", ft_psk_generate_local=""})
 	pmk_r1_push.placeholder = "0"
 	pmk_r1_push.rmempty = true
 
@@ -827,8 +838,7 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 			"<br />This list is used to map R0KH-ID (NAS Identifier) to a destination " ..
 			"MAC address when requesting PMK-R1 key from the R0KH that the STA " ..
 			"used during the Initial Mobility Domain Association."))
-
-	r0kh:depends({ieee80211r="1"})
+	r0kh:depends({ieee80211r="1", ft_psk_generate_local=""})
 	r0kh.rmempty = true
 
 	r1kh = s:taboption("encryption", DynamicList, "r1kh", translate("External R1 Key Holder List"),
@@ -837,7 +847,7 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 			"<br />This list is used to map R1KH-ID to a destination MAC address " ..
 			"when sending PMK-R1 key from the R0KH. This is also the " ..
 			"list of authorized R1KHs in the MD that can request PMK-R1 keys."))
-	r1kh:depends({ieee80211r="1"})
+	r1kh:depends({ieee80211r="1", ft_psk_generate_local=""})
 	r1kh.rmempty = true
 	-- End of 802.11r options
 
@@ -981,43 +991,54 @@ end
 
 -- ieee802.11w options
 if hwtype == "mac80211" then
-   local has_80211w = (os.execute("hostapd -v11w 2>/dev/null || hostapd -veap 2>/dev/null") == 0)
-   if has_80211w then
-	ieee80211w = s:taboption("encryption", ListValue, "ieee80211w",
-		translate("802.11w Management Frame Protection"),
-		translate("Requires the 'full' version of wpad/hostapd " ..
-			"and support from the wifi driver <br />(as of Feb 2017: " ..
-			"ath9k and ath10k, in LEDE also mwlwifi and mt76)"))
-	ieee80211w.default = ""
-	ieee80211w.rmempty = true
-	ieee80211w:value("", translate("Disabled (default)"))
-	ieee80211w:value("1", translate("Optional"))
-	ieee80211w:value("2", translate("Required"))
-	ieee80211w:depends({mode="ap", encryption="wpa2"})
-	ieee80211w:depends({mode="ap-wds", encryption="wpa2"})
-	ieee80211w:depends({mode="ap", encryption="psk2"})
-	ieee80211w:depends({mode="ap", encryption="psk-mixed"})
-	ieee80211w:depends({mode="ap-wds", encryption="psk2"})
-	ieee80211w:depends({mode="ap-wds", encryption="psk-mixed"})
+	local has_80211w = (os.execute("hostapd -v11w 2>/dev/null || hostapd -veap 2>/dev/null") == 0)
+	if has_80211w then
+		ieee80211w = s:taboption("encryption", ListValue, "ieee80211w",
+			translate("802.11w Management Frame Protection"),
+			translate("Requires the 'full' version of wpad/hostapd " ..
+				"and support from the wifi driver <br />(as of Feb 2017: " ..
+				"ath9k and ath10k, in LEDE also mwlwifi and mt76)"))
+		ieee80211w.default = ""
+		ieee80211w.rmempty = true
+		ieee80211w:value("", translate("Disabled (default)"))
+		ieee80211w:value("1", translate("Optional"))
+		ieee80211w:value("2", translate("Required"))
+		ieee80211w:depends({mode="ap", encryption="wpa2"})
+		ieee80211w:depends({mode="ap-wds", encryption="wpa2"})
+		ieee80211w:depends({mode="ap", encryption="psk2"})
+		ieee80211w:depends({mode="ap", encryption="psk-mixed"})
+		ieee80211w:depends({mode="ap-wds", encryption="psk2"})
+		ieee80211w:depends({mode="ap-wds", encryption="psk-mixed"})
 
-	max_timeout = s:taboption("encryption", Value, "ieee80211w_max_timeout",
-			translate("802.11w maximum timeout"),
-			translate("802.11w Association SA Query maximum timeout"))
-	max_timeout:depends({ieee80211w="1"})
-	max_timeout:depends({ieee80211w="2"})
-	max_timeout.datatype = "uinteger"
-	max_timeout.placeholder = "1000"
-	max_timeout.rmempty = true
+		max_timeout = s:taboption("encryption", Value, "ieee80211w_max_timeout",
+				translate("802.11w maximum timeout"),
+				translate("802.11w Association SA Query maximum timeout"))
+		max_timeout:depends({ieee80211w="1"})
+		max_timeout:depends({ieee80211w="2"})
+		max_timeout.datatype = "uinteger"
+		max_timeout.placeholder = "1000"
+		max_timeout.rmempty = true
 
-	retry_timeout = s:taboption("encryption", Value, "ieee80211w_retry_timeout",
-			translate("802.11w retry timeout"),
-			translate("802.11w Association SA Query retry timeout"))
-	retry_timeout:depends({ieee80211w="1"})
-	retry_timeout:depends({ieee80211w="2"})
-	retry_timeout.datatype = "uinteger"
-	retry_timeout.placeholder = "201"
-	retry_timeout.rmempty = true
-   end
+		retry_timeout = s:taboption("encryption", Value, "ieee80211w_retry_timeout",
+				translate("802.11w retry timeout"),
+				translate("802.11w Association SA Query retry timeout"))
+		retry_timeout:depends({ieee80211w="1"})
+		retry_timeout:depends({ieee80211w="2"})
+		retry_timeout.datatype = "uinteger"
+		retry_timeout.placeholder = "201"
+		retry_timeout.rmempty = true
+	end
+
+	local key_retries = s:taboption("encryption", Flag, "wpa_disable_eapol_key_retries",
+		translate("Enable key reinstallation (KRACK) countermeasures"),
+		translate("Complicates key reinstallation attacks on the client side by disabling retransmission of EAPOL-Key frames that are used to install keys. This workaround might cause interoperability issues and reduced robustness of key negotiation especially in environments with heavy traffic load."))
+
+	key_retries:depends({mode="ap", encryption="wpa2"})
+	key_retries:depends({mode="ap", encryption="psk2"})
+	key_retries:depends({mode="ap", encryption="psk-mixed"})
+	key_retries:depends({mode="ap-wds", encryption="wpa2"})
+	key_retries:depends({mode="ap-wds", encryption="psk2"})
+	key_retries:depends({mode="ap-wds", encryption="psk-mixed"})
 end
 
 if hwtype == "mac80211" or hwtype == "prism2" then

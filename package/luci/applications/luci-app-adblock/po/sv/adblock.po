@@ -2,7 +2,7 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
 msgid "-------"
-msgstr ""
+msgstr "-------"
 
 msgid "Adblock"
 msgstr "Adblock"
@@ -11,10 +11,10 @@ msgid "Adblock Logfile"
 msgstr "Adblock's loggfil"
 
 msgid "Adblock Status"
-msgstr ""
+msgstr "Status för Adblock"
 
 msgid "Adblock Version"
-msgstr "Version för Adblock"
+msgstr "Version av Adblock"
 
 msgid "Additional trigger delay in seconds before adblock processing begins."
 msgstr ""
@@ -28,18 +28,29 @@ msgstr "Tillgängliga källor för blockeringslistor"
 msgid "Backup Directory"
 msgstr "Säkerhetskopiera mapp"
 
+msgid "Backup Mode"
+msgstr ""
+
+msgid ""
+"Block access to all domains except those explicitly listed in the whitelist "
+"file."
+msgstr ""
+
 msgid "Blocklist Sources"
 msgstr "Källor för blockeringslistor"
 
 msgid ""
-"Caution: Please don't select big lists or many lists at once on low memory "
-"devices to prevent OOM exceptions!"
+"Caution: To prevent OOM exceptions on low memory devices with less than 64 "
+"MB free RAM, please do not select too many lists - 5-6 should be sufficient!"
 msgstr ""
 
 msgid ""
 "Choose 'none' to disable automatic startups, 'timed' to use a classic "
 "timeout (default 30 sec.) or select another trigger interface."
 msgstr ""
+"Välj 'inga' för att stänga av automatiska uppstarter, 'tidsinställd för att "
+"använda ett klassiskt avbrott (30 sek. är standard) eller välj ett annat "
+"utlösande gränssnitt."
 
 msgid "Collecting data..."
 msgstr "Samlar in data..."
@@ -52,14 +63,14 @@ msgstr ""
 
 msgid ""
 "Create compressed blocklist backups, they will be used in case of download "
-"errors or during startup in manual mode."
+"errors or during startup in backup mode."
 msgstr ""
 
 msgid "DNS Backend (DNS Directory)"
-msgstr ""
+msgstr "DNS-bakände (DNS-mapp)"
 
 msgid "DNS Directory"
-msgstr ""
+msgstr "DNS-mapp"
 
 msgid "Description"
 msgstr "Beskrivning"
@@ -73,6 +84,12 @@ msgstr ""
 
 msgid "Download Utility (SSL Library)"
 msgstr "Nerladdningsprogram (SSL-bibliotek)"
+
+msgid ""
+"During opkg package installation use the '--force-maintainer' option to "
+"overwrite the pre-existing config file or download a fresh default config "
+"from <a href=\"%s\" target=\"_blank\">here</a>"
+msgstr ""
 
 msgid "Edit Blacklist"
 msgstr "Redigera svartlista"
@@ -91,7 +108,7 @@ msgstr "Aktivera säkerhetskopiering av blockeringslistan"
 
 msgid ""
 "Enable memory intense overall sort / duplicate removal on low memory devices "
-"(&lt; 64 MB RAM)"
+"(&lt; 64 MB free RAM)"
 msgstr ""
 
 msgid "Enable verbose debug logging in case of any processing error."
@@ -109,11 +126,9 @@ msgid ""
 msgstr ""
 
 msgid ""
-"For further information <a href=\"%s\" target=\"_blank\">see online "
+"For further information <a href=\"%s\" target=\"_blank\">check the online "
 "documentation</a>"
 msgstr ""
-"För mer information <a href=\"%s\" target=\"_blank\">se dokumentationen på "
-"internet</a>"
 
 msgid "Force Local DNS"
 msgstr "Tvinga lokal DNS"
@@ -121,10 +136,7 @@ msgstr "Tvinga lokal DNS"
 msgid "Force Overall Sort"
 msgstr ""
 
-msgid ""
-"In OPKG use the '--force-maintainer' option to overwrite the pre-existing "
-"config file or download a fresh default config from <a href=\"%s\" target="
-"\"_blank\">here</a>"
+msgid "Full path to the whitelist file."
 msgstr ""
 
 msgid "Input file not found, please check your configuration."
@@ -135,7 +147,7 @@ msgid "Invalid domain specified!"
 msgstr "Ogiltig domän angiven!"
 
 msgid "Last Run"
-msgstr ""
+msgstr "Kördes senast"
 
 msgid ""
 "List URLs and Shallalist category selections are configurable in the "
@@ -143,8 +155,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"List of available network interfaces. By default the startup will be "
-"triggered by the 'wan' interface.<br />"
+"List of available network interfaces. Usually the startup will be triggered "
+"by the 'wan' interface.<br />"
 msgstr ""
 
 msgid ""
@@ -155,9 +167,6 @@ msgstr ""
 msgid "Loading"
 msgstr "Laddar"
 
-msgid "Manual / Backup mode"
-msgstr "Manuell / Säkerhetskopieringsläge"
-
 msgid "No"
 msgstr "Nej"
 
@@ -165,7 +174,7 @@ msgid ""
 "Options for further tweaking in case the defaults are not suitable for you."
 msgstr ""
 
-msgid "Overall Blocked Domains"
+msgid "Overall Domains"
 msgstr ""
 
 msgid "Overview"
@@ -179,7 +188,7 @@ msgstr ""
 msgid "Please edit this file directly in a terminal session."
 msgstr "Vänligen redigera den här filen direkt i en terminal-session."
 
-msgid "Please update your adblock config file to use this package."
+msgid "Please update your adblock config file to use this package.<br />"
 msgstr ""
 
 msgid "Query"
@@ -192,7 +201,7 @@ msgid "Redirect all DNS queries from 'lan' zone to the local resolver."
 msgstr ""
 
 msgid "Resume"
-msgstr ""
+msgstr "Återuppta"
 
 msgid "Runtime Information"
 msgstr "Information om körtid"
@@ -204,17 +213,17 @@ msgid "Save"
 msgstr "Spara"
 
 msgid "Startup Trigger"
-msgstr ""
+msgstr "Uppstartslösare"
 
 msgid "Suspend"
-msgstr ""
+msgstr "Stäng av"
 
 msgid "Suspend / Resume Adblock"
 msgstr "Upphäv / Återuppta adblock"
 
 msgid ""
-"Target directory for adblock backups. Please use only non-volatile disks, no "
-"ram/tmpfs drives."
+"Target directory for adblock backups. Please use only non-volatile disks, e."
+"g. an external usb stick."
 msgstr ""
 
 msgid "Target directory for the generated blocklist 'adb_list.overall'."
@@ -271,23 +280,51 @@ msgstr "Visa loggfil"
 msgid "Waiting for command to complete..."
 msgstr "Väntar på att kommandot ska slutföras..."
 
+msgid "Whitelist File"
+msgstr ""
+
+msgid "Whitelist Mode"
+msgstr ""
+
 msgid "Yes"
 msgstr "Ja"
 
 msgid "disabled"
-msgstr ""
+msgstr "inaktiverad"
 
 msgid "enabled"
-msgstr ""
+msgstr "aktiverad"
 
 msgid "error"
-msgstr ""
+msgstr "fel"
 
 msgid "n/a"
 msgstr "n/a"
 
 msgid "paused"
-msgstr ""
+msgstr "pausad"
+
+#~ msgid ""
+#~ "Caution: Please don't select big lists or many lists at once on low "
+#~ "memory devices to prevent OOM exceptions!"
+#~ msgstr ""
+#~ "Försiktig: Vänligen välj inte stora listor eller många listor på samma "
+#~ "gång för enheter med lite minne för att undvika OOM-undantag!"
+
+#~ msgid ""
+#~ "For further information <a href=\"%s\" target=\"_blank\">see online "
+#~ "documentation</a>"
+#~ msgstr ""
+#~ "För mer information <a href=\"%s\" target=\"_blank\">se dokumentationen "
+#~ "på internet</a>"
+
+#~ msgid "Manual / Backup mode"
+#~ msgstr "Manuell / Säkerhetskopieringsläge"
+
+#~ msgid "Please update your adblock config file to use this package."
+#~ msgstr ""
+#~ "Vänligen uppdatera din adblock's konfigurationsfil till att använda det "
+#~ "här paketet."
 
 #~ msgid "Blocked domains (overall)"
 #~ msgstr "Blockerade domäner (övergripande)"

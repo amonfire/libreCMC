@@ -7,13 +7,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mkimage
-PKG_VERSION:=2014.10-librecmc
+PKG_VERSION:=2014.10
 
 PKG_SOURCE:=u-boot-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=\
-	https://librecmc.org/librecmc/downloads/sources/v1.4/
-
-PKG_HASH:=e74e658ef6b09ad1b682f5d1651f9ab1755bb3523c5261c6176d212341f7962d
+	http://mirror2.openwrt.org/sources \
+	ftp://ftp.denx.de/pub/u-boot
+PKG_HASH:=d3b132a7a9b3f3182b7aad71c2dfbd4fc15bea83e12c76134eb3ffefc07d1c71
 PKG_CAT:=bzcat
 
 HOST_BUILD_DIR:=$(BUILD_DIR_HOST)/u-boot-$(PKG_VERSION)

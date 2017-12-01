@@ -13,6 +13,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.6\n"
 
+msgid "%.1f dB"
+msgstr ""
+
 msgid "%s is untagged in multiple VLANs!"
 msgstr ""
 
@@ -131,6 +134,9 @@ msgstr "Nom <abbr title=\"Light Emitting Diode\">LED</abbr>"
 
 msgid "<abbr title=\"Media Access Control\">MAC</abbr>-Address"
 msgstr "Adreça <abbr title=\"Media Access Control\">MAC</abbr>"
+
+msgid "<abbr title=\"The DHCP Unique Identifier\">DUID</abbr>"
+msgstr ""
 
 msgid ""
 "<abbr title=\"maximal\">Max.</abbr> <abbr title=\"Dynamic Host Configuration "
@@ -301,7 +307,8 @@ msgstr "Permetre el localhost"
 
 msgid "Allow remote hosts to connect to local SSH forwarded ports"
 msgstr ""
-"Permetre a màquines remotes de connectar-se als ports reenviats de l'SSH local"
+"Permetre a màquines remotes de connectar-se als ports reenviats de l'SSH "
+"local"
 
 msgid "Allow root logins with password"
 msgstr "Accés d'administrador amb contrasenya"
@@ -638,7 +645,7 @@ msgid ""
 msgstr ""
 "Fes clic a \"Genera l'arxiu\" per obtenir un fitxer .tar.gz amb els fitxers "
 "de configuració actuals. Per restablir el microprogramari al seu estat "
-"inicial, fes clic a "\"Restableix la configuració\" (només funciona amb "
+"inicial, fes clic a \"Restableix la configuració\" (només funciona amb "
 "imatges squashfs)."
 
 msgid "Client"
@@ -663,6 +670,13 @@ msgstr "Ordre"
 
 msgid "Common Configuration"
 msgstr "Configuració comuna"
+
+msgid ""
+"Complicates key reinstallation attacks on the client side by disabling "
+"retransmission of EAPOL-Key frames that are used to install keys. This "
+"workaround might cause interoperability issues and reduced robustness of key "
+"negotiation especially in environments with heavy traffic load."
+msgstr ""
 
 msgid "Configuration"
 msgstr "Configuració"
@@ -947,6 +961,9 @@ msgstr "Descarrega i instal·la el paquet"
 msgid "Download backup"
 msgstr "Descarrega còpia de seguretat"
 
+msgid "Downstream SNR offset"
+msgstr ""
+
 msgid "Dropbear Instance"
 msgstr "Instància de Dropbear"
 
@@ -954,9 +971,8 @@ msgid ""
 "Dropbear offers <abbr title=\"Secure Shell\">SSH</abbr> network shell access "
 "and an integrated <abbr title=\"Secure Copy\">SCP</abbr> server"
 msgstr ""
-"El Dropbear ofereix accés a una consola <abbr title=\"Secure Shell\">SSH"
-"</abbr> per xarxa i un servidor <abbr title=\"Secure Copy\">SCP</abbr> "
-"integrat"
+"El Dropbear ofereix accés a una consola <abbr title=\"Secure Shell\">SSH</"
+"abbr> per xarxa i un servidor <abbr title=\"Secure Copy\">SCP</abbr> integrat"
 
 msgid "Dual-Stack Lite (RFC6333)"
 msgstr ""
@@ -1027,6 +1043,9 @@ msgid "Enable VLAN functionality"
 msgstr "Habilita la funcionalitat VLAN"
 
 msgid "Enable WPS pushbutton, requires WPA(2)-PSK"
+msgstr ""
+
+msgid "Enable key reinstallation (KRACK) countermeasures"
 msgstr ""
 
 msgid "Enable learning and aging"
@@ -1120,6 +1139,15 @@ msgid "External system log server protocol"
 msgstr "Protocol del servidor de registre del sistema extern"
 
 msgid "Extra SSH command options"
+msgstr ""
+
+msgid "FT over DS"
+msgstr ""
+
+msgid "FT over the Air"
+msgstr ""
+
+msgid "FT protocol"
 msgstr ""
 
 msgid "File"
@@ -1267,6 +1295,9 @@ msgstr "Opcions generals d'opkg"
 msgid "Generate Config"
 msgstr ""
 
+msgid "Generate PMK locally"
+msgstr ""
+
 msgid "Generate archive"
 msgstr "Genera l'arxiu"
 
@@ -1330,7 +1361,6 @@ msgid ""
 msgstr ""
 "Aquí pots afegir-hi les claus SSH públiques (una per línia) per entrar per "
 "SSH amb autenticació per clau."
-"
 
 msgid "Hermes 802.11b Wireless Controller"
 msgstr "Controlador sense fil Hermes 802.11b"
@@ -1480,7 +1510,7 @@ msgstr "IPv6-sobre-IPv4 (6to4)"
 msgid "Identity"
 msgstr "Identitat"
 
-msgid "If checked, 1DES is enaled"
+msgid "If checked, 1DES is enabled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1770,8 +1800,8 @@ msgstr ""
 
 msgid "Listen only on the given interface or, if unspecified, on all"
 msgstr ""
-"Habilita el servei en totes les interfícies o, si no se n'especifica cap, "
-"en totes"
+"Habilita el servei en totes les interfícies o, si no se n'especifica cap, en "
+"totes"
 
 msgid "Listening port for inbound DNS queries"
 msgstr ""
@@ -3148,7 +3178,7 @@ msgid ""
 msgstr ""
 "S'ha pujat la imatge per a la memòria flaix. A sota hi ha llistades la suma "
 "de verificació i la mida del fitxer per assegurar la integritat de les dades."
-"<br />Fes clic a "\"Procedeix\" a continuació per començar el procés "
+"<br />Fes clic a \"Procedeix\" a continuació per començar el procés "
 "d'escriptura a la memòria flaix."
 
 msgid "The following changes have been committed"
@@ -3251,8 +3281,8 @@ msgid ""
 "There is no password set on this router. Please configure a root password to "
 "protect the web interface and enable SSH."
 msgstr ""
-"No s'ha establert cap contrasenya en aquest encaminador. Si us plau, configura "
-"una contrasenya per protegir la interfície web i l'accés SSH."
+"No s'ha establert cap contrasenya en aquest encaminador. Si us plau, "
+"configura una contrasenya per protegir la interfície web i l'accés SSH."
 
 msgid "This IPv4 address of the relay"
 msgstr ""
@@ -3278,8 +3308,9 @@ msgid ""
 "This is the content of /etc/rc.local. Insert your own commands here (in "
 "front of 'exit 0') to execute them at the end of the boot process."
 msgstr ""
-"Aquest és el contingut de /etc/rc.local. Afegeix-hi les teves comandes (abans "
-"de la línia 'exit 0') per executar-les en finalitzar el procés d'arrencada."
+"Aquest és el contingut de /etc/rc.local. Afegeix-hi les teves comandes "
+"(abans de la línia 'exit 0') per executar-les en finalitzar el procés "
+"d'arrencada."
 
 msgid ""
 "This is the local endpoint address assigned by the tunnel broker, it usually "
@@ -3452,7 +3483,7 @@ msgid ""
 msgstr ""
 "Puja aquí una imatge compatible amb sysupgrade per reemplaçar el "
 "microprogramari actual. Activa \"Mantenir la configuració\" per retenir la "
-"configuració actual (requereix una imatge de microprogramari compatible).""
+"configuració actual (requereix una imatge de microprogramari compatible)."
 
 msgid "Upload archive..."
 msgstr "Puja un arxiu..."
@@ -3623,6 +3654,11 @@ msgid "Warning"
 msgstr "Advertència"
 
 msgid "Warning: There are unsaved changes that will get lost on reboot!"
+msgstr ""
+
+msgid ""
+"When using a PSK, the PMK can be generated locally without inter AP "
+"communications"
 msgstr ""
 
 msgid "Whether to create an IPv6 default route over the tunnel"
