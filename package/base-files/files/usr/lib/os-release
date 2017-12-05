@@ -1,7 +1,7 @@
 NAME="%D"
 VERSION="%V, %N"
 ID="%d"
-ID_LIKE="lede openwrt"
+ID_LIKE="librecmc openwrt"
 PRETTY_NAME="%D %N %V"
 VERSION_ID="%v"
 HOME_URL="%m"
