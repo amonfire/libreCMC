@@ -9,15 +9,15 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=uboot-envtools
 PKG_DISTNAME:=u-boot
-PKG_VERSION:=2015.10
+PKG_VERSION:=2015.10-librecmc
 PKG_RELEASE:=1
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/u-boot-$(PKG_VERSION)
 PKG_SOURCE:=$(PKG_DISTNAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=\
-	http://mirror2.openwrt.org/sources \
-	ftp://ftp.denx.de/pub/u-boot
-PKG_HASH:=bdc68d5f9455ad933b059c735d983f2c8b6b552dafb062e5ff1444f623021955
+	https://librecmc.org/librecmc/downloads/sources/v1.4/
+
+PKG_HASH:=35aa6ad931c9474578ae01c7b565753d9d28059bc4d5444eea923840342f1e86
 
 PKG_BUILD_DEPENDS:=+fstools
 
