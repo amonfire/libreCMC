@@ -1,7 +1,7 @@
 
-== Overview ==
+## Overview
 
-* [http://en.ingenic.cn/product.aspx?ID=60 JZ4720] 336 MHz MIPS compatible processor from [http://www.ingenic.cn Ingenic Semiconductor Co.]
+* [JZ4720](https://web.archive.org/web/20110904201104/http://en.ingenic.cn/product.aspx?ID=60) 336 MHz MIPS compatible processor from [Ingenic Semiconductor Co.](http://www.ingenic.cn)
 
 * 3.0" 320x240 pixels [[LCD|colour TFT LCD]] (40x15 character in a text console)
 
@@ -15,7 +15,7 @@
 
 * Stereo headphones connector, mono speaker and microphone [[Audio_IN_OUT|audio interfaces]].
 
-* [http://wiki.qi-hardware.com/wiki/USB_host USB] 2.0 High-Speed Device, [http://en.wikipedia.org/wiki/USB#Connector_types Mini B] connector
+* [USB](http://wiki.qi-hardware.com/wiki/USB_host) 2.0 High-Speed Device, [Mini B](http://en.wikipedia.org/wiki/USB#Connector_types) connector
 
 * 3.7V 850mAh Li-ion Battery ( [[Compatible_batteries|Compatible batteries]]) and 5V 500mA [[Power_Supply_Circuit|DC input through USB port]]
 
@@ -25,7 +25,7 @@
 
 * Weight: 126g (includes battery)
 
-== Status ==
+## Status
 
 * Flashing bootloader, kernel, and rootfs via USB works.
 * Serial console via GND/RXD/TXD pads under the battery works.
@@ -35,7 +35,7 @@
 * Audio/ALSA works.
 * ...
 
-== Pinouts ==
+## Pinouts
 
 PCB 08.50 (ben)
 
