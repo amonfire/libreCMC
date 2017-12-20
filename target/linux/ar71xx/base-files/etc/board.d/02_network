@@ -125,9 +125,6 @@ ar71xx_setup_interfaces()
 	alfa-nx|\
 	dr344|\
 	gl-ar150|\
-	gl-usb150)
-		ucidef_set_interface_lan "eth0"
-		;;
 	gl-ar300m|\
 	gl-domino|\
 	gl-inet|\
