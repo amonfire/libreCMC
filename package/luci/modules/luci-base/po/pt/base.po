@@ -13,6 +13,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.6\n"
 
+msgid "%.1f dB"
+msgstr ""
+
 msgid "%s is untagged in multiple VLANs!"
 msgstr ""
 
@@ -136,6 +139,9 @@ msgstr "Nome da <abbr title=\"Diodo Emissor de Luz\">LED</abbr>"
 
 msgid "<abbr title=\"Media Access Control\">MAC</abbr>-Address"
 msgstr "Endereço <abbr title=\"Controle de Acesso ao Meio\">MAC</abbr>"
+
+msgid "<abbr title=\"The DHCP Unique Identifier\">DUID</abbr>"
+msgstr ""
 
 msgid ""
 "<abbr title=\"maximal\">Max.</abbr> <abbr title=\"Dynamic Host Configuration "
@@ -668,6 +674,13 @@ msgstr "Comando"
 msgid "Common Configuration"
 msgstr "Configuração comum"
 
+msgid ""
+"Complicates key reinstallation attacks on the client side by disabling "
+"retransmission of EAPOL-Key frames that are used to install keys. This "
+"workaround might cause interoperability issues and reduced robustness of key "
+"negotiation especially in environments with heavy traffic load."
+msgstr ""
+
 msgid "Configuration"
 msgstr "Configuração"
 
@@ -957,6 +970,9 @@ msgstr "Descarregar e instalar pacote"
 msgid "Download backup"
 msgstr "Descarregar backup"
 
+msgid "Downstream SNR offset"
+msgstr ""
+
 msgid "Dropbear Instance"
 msgstr "Instância do Dropbear"
 
@@ -1039,6 +1055,9 @@ msgid "Enable VLAN functionality"
 msgstr "Ativar a funcionalidade VLAN"
 
 msgid "Enable WPS pushbutton, requires WPA(2)-PSK"
+msgstr ""
+
+msgid "Enable key reinstallation (KRACK) countermeasures"
 msgstr ""
 
 msgid "Enable learning and aging"
@@ -1135,6 +1154,15 @@ msgid "External system log server protocol"
 msgstr ""
 
 msgid "Extra SSH command options"
+msgstr ""
+
+msgid "FT over DS"
+msgstr ""
+
+msgid "FT over the Air"
+msgstr ""
+
+msgid "FT protocol"
 msgstr ""
 
 msgid "File"
@@ -1280,6 +1308,9 @@ msgid "General options for opkg"
 msgstr ""
 
 msgid "Generate Config"
+msgstr ""
+
+msgid "Generate PMK locally"
 msgstr ""
 
 msgid "Generate archive"
@@ -3658,6 +3689,11 @@ msgid "Warning"
 msgstr "Aviso"
 
 msgid "Warning: There are unsaved changes that will get lost on reboot!"
+msgstr ""
+
+msgid ""
+"When using a PSK, the PMK can be generated locally without inter AP "
+"communications"
 msgstr ""
 
 msgid "Whether to create an IPv6 default route over the tunnel"

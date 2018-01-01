@@ -1,17 +1,20 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-05-26 17:57+0200\n"
-"PO-Revision-Date: 2017-03-06 11:15+0200\n"
+"PO-Revision-Date: 2017-10-17 22:46+0200\n"
 "Last-Translator: JoeSemler <josef.semler@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.6\n"
+"X-Generator: Poedit 2.0.4\n"
+"Language-Team: \n"
+
+msgid "%.1f dB"
+msgstr ""
 
 msgid "%s is untagged in multiple VLANs!"
 msgstr ""
@@ -129,6 +132,9 @@ msgstr "<abbr title=\"Light Emitting Diode\">LED</abbr> Name"
 
 msgid "<abbr title=\"Media Access Control\">MAC</abbr>-Address"
 msgstr "MAC-Adresse"
+
+msgid "<abbr title=\"The DHCP Unique Identifier\">DUID</abbr>"
+msgstr ""
 
 msgid ""
 "<abbr title=\"maximal\">Max.</abbr> <abbr title=\"Dynamic Host Configuration "
@@ -675,6 +681,17 @@ msgstr "Befehl"
 msgid "Common Configuration"
 msgstr "Allgemeine Konfiguration"
 
+msgid ""
+"Complicates key reinstallation attacks on the client side by disabling "
+"retransmission of EAPOL-Key frames that are used to install keys. This "
+"workaround might cause interoperability issues and reduced robustness of key "
+"negotiation especially in environments with heavy traffic load."
+msgstr ""
+"Deaktiviert bestimmte EAPOL-Key-Retransmissionen um Key-Reinstallation "
+"(KRACK) Angriffe auf Client-Seite zu erschweren. Diese Abhilfemaßnahme kann "
+"Kompatibilitätsprobleme verursachen und die Zuverlässigkeit von "
+"Schlüsselerneuerungen in ausgelasteten Umgebungen verringern."
+
 msgid "Configuration"
 msgstr "Konfiguration"
 
@@ -963,6 +980,9 @@ msgstr "Paket herunterladen und installieren"
 msgid "Download backup"
 msgstr "Backup herunterladen"
 
+msgid "Downstream SNR offset"
+msgstr ""
+
 msgid "Dropbear Instance"
 msgstr "Dropbear Instanz"
 
@@ -1046,6 +1066,10 @@ msgstr "VLAN-Funktionalität aktivieren"
 
 msgid "Enable WPS pushbutton, requires WPA(2)-PSK"
 msgstr "WPS-via-Knopfdruck aktivieren, erfordert WPA(2)-PSK"
+
+#, fuzzy
+msgid "Enable key reinstallation (KRACK) countermeasures"
+msgstr "Key Reinstallation (KRACK) Gegenmaßnahmen aktivieren "
 
 msgid "Enable learning and aging"
 msgstr "Learning und Aging aktivieren"
@@ -1144,6 +1168,15 @@ msgstr "Externes Protokollserver Protokoll"
 
 msgid "Extra SSH command options"
 msgstr "Zusätzliche SSH-Kommando-Optionen"
+
+msgid "FT over DS"
+msgstr ""
+
+msgid "FT over the Air"
+msgstr ""
+
+msgid "FT protocol"
+msgstr ""
 
 msgid "File"
 msgstr "Datei"
@@ -1296,6 +1329,9 @@ msgstr "Allgemeine Optionen für Opkg."
 
 msgid "Generate Config"
 msgstr "Konfiguration generieren"
+
+msgid "Generate PMK locally"
+msgstr ""
 
 msgid "Generate archive"
 msgstr "Sicherung erstellen"
@@ -3791,6 +3827,11 @@ msgid "Warning: There are unsaved changes that will get lost on reboot!"
 msgstr ""
 "Achtung: Es gibt ungespeicherte Änderungen die bei einem Neustart verloren "
 "gehen!"
+
+msgid ""
+"When using a PSK, the PMK can be generated locally without inter AP "
+"communications"
+msgstr ""
 
 msgid "Whether to create an IPv6 default route over the tunnel"
 msgstr ""

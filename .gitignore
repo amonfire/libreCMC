@@ -29,5 +29,4 @@ git-src
 *.so
 *.swp
 *.po~
-/docs
 /package/luci/modules/luci-base/src/po2lmo

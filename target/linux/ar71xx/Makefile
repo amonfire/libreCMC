@@ -11,7 +11,7 @@ BOARD:=ar71xx
 BOARDNAME:=Atheros AR7xxx/AR9xxx
 FEATURES:=
 CPU_TYPE:=24kc
-SUBTARGETS:=generic nand mikrotik
+SUBTARGETS:=generic nand
 
 KERNEL_PATCHVER:=4.4
 

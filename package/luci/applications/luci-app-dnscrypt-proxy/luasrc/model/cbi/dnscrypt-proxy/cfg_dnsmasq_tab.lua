@@ -7,6 +7,8 @@ local uci_input = "/etc/config/dhcp"
 
 if not nxfs.access(uci_input) then
 	m = SimpleForm("error", nil, translate("Input file not found, please check your configuration."))
+	m.reset = false
+	m.submit = false
 	return m
 end
 

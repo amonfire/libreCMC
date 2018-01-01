@@ -461,12 +461,6 @@ define LegacyDevice/MR900
 endef
 LEGACY_DEVICES += MR900
 
-define LegacyDevice/ALL0305
-  DEVICE_TITLE := Allnet ALL0305
-  DEVICE_PACKAGES := fconfig kmod-ath5k -kmod-ath9k
-endef
-LEGACY_DEVICES += ALL0305
-
 define LegacyDevice/EAP7660D
   DEVICE_TITLE := Senao EAP7660D
 endef

@@ -5,6 +5,6 @@ config SDK
 	help
 	  This is essentially a stripped-down version of the buildroot
 	  with a precompiled toolchain. It can be used to develop and
-	  test packages for LEDE before including them in the buildroot
+	  test packages for libreCMC before including them in the buildroot
 
 
