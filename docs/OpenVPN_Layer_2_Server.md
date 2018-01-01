@@ -1,8 +1,10 @@
 # OpenVPN Layer 2 Server
 
-## Installing OpenVPN packages
+## Required packages
 
-TODO
+* openvpn-openssl
+* openvpn-easy-rsa
+* luci-app-openvpn
 
 ## Interface Setup
 
@@ -10,7 +12,19 @@ TODO
 
 ## Certificate and Key Setup Instructions
 
-TODO
+N.B.: The LEDE community rejected easy-rsa on the grounds that it does
+not crease secure enough certs.[1] But it does seem to be, well, easy to
+use:
+
+```
+cd /etc/easy-rsa
+source vars
+clean-all
+build-ca
+build-dh
+build-key-server myvpn
+openvpn --genkey --secret /etc/easy-rsa/keys/ta.key
+```
 
 ## Server configuration
 
@@ -59,3 +73,9 @@ config openvpn 'myvpn'
 ## Client setup information
 
 TODO
+
+## Footnotes
+
+[1] "OpenVPN Server",
+https://lede-project.org/docs/user-guide/openvpn.server?s[]=openvpn&s[]=server,
+retrieved 1 Jan 2017.
