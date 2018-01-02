@@ -1,8 +1,31 @@
 # OpenVPN Layer 2 Server
 
-## Installing OpenVPN packages
+## Introduction
 
-TODO
+Librecmc can operate as an OpenVPN server. OpenVPN technology connects
+two networks via an encrypted tunnel. With proper server, network, and
+client configuration, OpenVPN allows a client outside of your LAN to
+see the LAN as though it were physically connected to the LAN.
+
+OpenVPN can run in layer 2 or layer 3 mode. In layer 3 mode, the
+remote client sees your LAN as though it is on the other side of an IP
+router. In layer 2 mode, the remote client sees your LAN as though
+they are both on the same Data Link segment (e.g., the same Ethernet
+link). Layer 3 mode is easier to set up, but layer 2 mode is sometimes
+desired to give clients a more direct exposure to services on the LAN.
+
+## Warnings
+
+This information is provided for educational purposes only and is not
+meant to be a guide to best network security practices. Readers are
+advised to study all relevant OpenVPN and network security
+documentation.
+
+## Required LibreCMC packages
+
+* openvpn-openssl
+* openvpn-easy-rsa
+* luci-app-openvpn
 
 ## Interface Setup
 
@@ -10,16 +33,27 @@ TODO
 
 ## Certificate and Key Setup Instructions
 
-TODO
+```
+cd /etc/easy-rsa
+source vars
+clean-all
+build-ca
+build-dh
+build-key-server myvpn
+openvpn --genkey --secret /etc/easy-rsa/keys/ta.key
+```
+
+N.B.: Using easy-rsa is a straightforward approach, but it may be
+possible to produce more secure certificates using openssl directly.
 
 ## Server configuration
 
-For server bridge option: First two parameters are the ip/netmask of
-the gateway on the bridged subnet. Next two paraters indicate the
-pool-start-IP and pool-end-IP, which is the part of your IP address
-pool that you have reserved just for VPN clients. You have to make
-sure the DHCP server on the company network is not handing those out
-to on-site systems.
+For the `server bridge` option: The first two parameters are the ip
+and netmask of the gateway on the bridged subnet. The next two
+parameters indicate the pool-start-IP and pool-end-IP, which is the
+part of your IP address pool that you have reserved just for VPN
+clients. You must to make sure that the DHCP server for your LAN is
+not leasing out those IP addresses to local (non-vpn) clients.
 
 /etc/config/openvpn
 ```
