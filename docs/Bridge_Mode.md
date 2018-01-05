@@ -21,6 +21,9 @@ Place a checkmark in the box for the "eth0" interface for wan and
 wan6. (I suppose the interface name might vary amongst different
 routers.)
 
+![alt text](images/librecmc-eth0-added-to-lan.png "Adjustments to
+ LibreCMC interface physical settings")
+
 You can also check the box for Enable STP if desired. There doesn't
 seem to be any downside from this, though I suppose it would use a
 little more CPU cycles and memory. STP is a protocol intended to
@@ -32,8 +35,8 @@ layer 2 switches.
 On the same page, scroll down a little to the DHCP Server section. In
 the General Setup tab, check the "Ignore interface" box.
 
-![alt text](images/librecmc-eth0-added-to-lan.png "Adjustments to
- LibreCMC interface physical settings")
+![alt text](images/librecmc-dhcp-server-ignore-lan.png "Setting
+ LibreCMC DHCP server to ignore LAN interface")
 
 Save and apply your changes.
 
