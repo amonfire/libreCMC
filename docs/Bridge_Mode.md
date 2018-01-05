@@ -6,7 +6,7 @@ to bridge mode, where the devices stops acting like an IP router
 2). LibreCMC does not actually have a bridge mode, but the same effect
 is achievable with two easy steps.
 
-1. Add the LAN ethernet port to the LAN bridge interface
+1. Add the WAN ethernet port to the LAN bridge interface
 2. Set the DHCP server to ignore the LAN interface
 
 ## Adjust the LAN bridge interface
