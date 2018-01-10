@@ -17,9 +17,18 @@ an Ethernet port, so you might need to borrow a laptop.
 * In the address bar of your Web browser, enter the address
   `192.168.10.1` and press `Enter` or `Return`. You should see a page
   appear called `Authorization Required`.
+
+* If you see instead a page complaining that the connection is not
+  secure, you will need to add a security exception. On Mozilla
+  Firefox, you press the `Advanced` button and then the `Add
+  Exception` button, and then the `Confirm Security Exception`
+  button.
   
 * Enter the adminstrative Username and Password for your router. The
   default is `root` for the Username and a blank password.
+
+![alt text](images/librecmc-default-login.png "Default login page for
+ LibreCMC")
 
 If a blank password does not work, and you cannot figure out what it
 is supposed to be, you may need to
@@ -36,9 +45,12 @@ cable. Find a tech savvy relative to help you out.
 
 * Select the `Edit` button to the right side of "libreCMC".
 
-* In the `ESSID` text field, enter the name you would like for your
+* Scroll down to the `ESSID` text field under the `Interface
+  Configuration` section. and enter the name you would like for your
   Wi-Fi network. This is the name people will see when they are
   looking to connect to your Wi-Fi network.
+
+![alt text](images/librecmc-changing-essid.png "Changing ESSID on LibreCMC")
 
 * If that is all you wanted to do, press the `Save & Apply` button at
   the bottom of the page, or go on to the next section.
@@ -48,7 +60,8 @@ cable. Find a tech savvy relative to help you out.
 * If you haven't already, Select the `Network` >> `Wireless` menu, and
   select the `Edit` button to the right side of "libreCMC".
 
-* Select the `Wireless Security` tab under `Interface Configuration`.
+* Select the `Wireless Security` tab under the `Interface
+  Configuration` section.
 
 * In the `Encryption` drop down menu select `WPA2-PSK`. (If you have
   some really old devices on your network, it may be necessary to
@@ -58,6 +71,9 @@ cable. Find a tech savvy relative to help you out.
 * In the `Key` text field, put in the password you want people to use
   to connect to your Wi-Fi network. If you press the green arrows
   button, it will make it easier to type in the password.
+
+![alt text](images/librecmc-changing-wifi-password.png "Changing Wi-Fi
+ password on LibreCMC")
 
 * Press the `Save & Apply` button at the bottom of the page.
 
@@ -73,5 +89,8 @@ cable. Find a tech savvy relative to help you out.
   easier to type in your password.
 
 * Type the exact same password into the `Confirmation` text field.
+
+![alt text](images/librecmc-changing-admin-password.png "Changing
+ admin password on LibreCMC")
 
 * Press the `Save & Apply` button at the bottom of the page.
