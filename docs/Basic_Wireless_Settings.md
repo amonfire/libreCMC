@@ -25,7 +25,7 @@ If a blank password does not work, and you cannot figure out what it
 is supposed to be, you may need to
 [reset the router](Router_Reset_Instructions.md).
 
-If you are unable to view the Authorization Require page, it may be
+If you are unable to view the `Authorization Required` page, it may be
 that you do not have your Ethernet cable connected to the correct
 ports, or your computer is not set to allow use of the Ethernet
 cable. Find a tech savvy relative to help you out.
