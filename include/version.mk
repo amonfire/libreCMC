@@ -31,13 +31,13 @@ qstrip_escape=$(subst ','\'',$(call qstrip,$(1)))
 sanitize = $(call tolower,$(subst _,-,$(subst $(space),-,$(1))))
 
 VERSION_NUMBER:=$(call qstrip_escape,$(CONFIG_VERSION_NUMBER))
-VERSION_NUMBER:=$(if $(VERSION_NUMBER),$(VERSION_NUMBER),v1.4.2)
+VERSION_NUMBER:=$(if $(VERSION_NUMBER),$(VERSION_NUMBER),v1.5-next)
 
 VERSION_CODE:=$(call qstrip_escape,$(CONFIG_VERSION_CODE))
 VERSION_CODE:=$(if $(VERSION_CODE),$(VERSION_CODE),$(REVISION))
 
 VERSION_NICK:=$(call qstrip_escape,$(CONFIG_VERSION_NICK))
-VERSION_NICK:=$(if $(VERSION_NICK),$(VERSION_NICK),$(RELEASE))
+VERSION_NICK:=$(if $(VERSION_NICK),$(VERSION_NICK),Dropstart-STEP)
 
 VERSION_REPO:=$(call qstrip_escape,$(CONFIG_VERSION_REPO))
 VERSION_REPO:=$(if $(VERSION_REPO),$(VERSION_REPO),https://librecmc.org/librecmc/downloads/snapshots/%v)
