@@ -8,7 +8,7 @@
 
 ## Flashing from factory
 
-### Using the factory web UI
+### Using GL-Inet's U-boot-mod and web UI
 
 1) Set computer IP address to 192.168.1.2
 
@@ -16,11 +16,11 @@
 
 3) Press and hold the reset button, and power on the router by plugging in the power
 
-3) Wait until the LED flashes before releasing the reset button.
+4) Wait until the LED flashes once and red LED flashes 5 times before releasing the reset button.
 
-4) Open IP address in the browser 192.168.1.1
+5) Open IP address in the browser 192.168.1.1
 
-5) Flash the appropriate image through the gui
+6) Select the .img for NAND and .bin for NOR
 
 
 ## Tested
