@@ -1,6 +1,6 @@
 # System Log
 
-## Viewing the System Log from LuCi
+## Viewing the system log from LuCi
 
 Select the `Status >> System Log` menu entry.
 
@@ -13,7 +13,7 @@ Select the `Status >> System Log` menu entry.
 The `System Log` page in LuCi does not have an interface for filtering
 output. Therefore, you will likely want to use the shell interface.
 
-## Viewing the System Log from the shell
+## Viewing the system log from the shell
 
 Once logged in via SSH, use the `logread` command
 
