@@ -52,7 +52,7 @@ that not all the same regular expressions work for both:
 ```
 root@libreCMC:~# logread -e 'kern\.warn' # and other similar variations
 (no output)
-````
+```
 
 The system log is contained in a limited size, circular buffer in
 memory. So, if you have some process writing messages periodically,
