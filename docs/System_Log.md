@@ -4,11 +4,11 @@
 
 Select the `Status >> System Log` menu entry.
 
-![alt text](images/librecmc-selecting-system-log.png "Selecting the
- System Log page in LuCi")
+![alt text](images/librecmc-luci-selecting-system-log.png "Selecting
+ the System Log page in LuCi")
 
-![alt text](images/librecmc-system-log.png "The System Log page in
- LuCi")
+![alt text](images/librecmc-luci-system-log.png "The System Log page
+ in LuCi")
 
 The `System Log` page in LuCi does not have an interface for filtering
 output. Therefore, you will likely want to use the shell interface.
