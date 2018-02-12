@@ -38,7 +38,7 @@ Options:
 For example:
 
 ```bash
-root@libreCMC:~# logread | grep 'kern\.warn'
+root@libreCMC:~$ logread | grep 'kern\.warn'
 Mon Jan 15 20:22:01 2018 kern.warn kernel: [    0.000000] No valid device tree found, continuing without
 Mon Jan 15 20:22:01 2018 kern.warn kernel: [    0.000000] Primary instruction cache 64kB, VIPT, 4-way, linesize 32 bytes.
 Mon Jan 15 20:22:01 2018 kern.warn kernel: [    0.000000] Primary data cache 32kB, 4-way, VIPT, cache aliases, linesize 32 bytes
@@ -50,7 +50,7 @@ One should be able to use `logread -e` instead of `grep`, but it seems
 that not all the same regular expressions work for both:
 
 ```bash
-root@libreCMC:~# logread -e 'kern\.warn' # and other similar variations
+root@libreCMC:~$ logread -e 'kern\.warn' # and other similar variations
 (no output)
 ```
 
