@@ -17,7 +17,7 @@ output. Therefore, you will likely want to use the shell interface.
 
 Once logged in via SSH, use the `logread` command
 
-```
+```bash
 Usage: logread [options]
 Options:
     -s <path>		Path to ubus socket
@@ -37,7 +37,7 @@ Options:
 
 For example:
 
-```
+```bash
 root@libreCMC:~# logread | grep 'kern\.warn'
 Mon Jan 15 20:22:01 2018 kern.warn kernel: [    0.000000] No valid device tree found, continuing without
 Mon Jan 15 20:22:01 2018 kern.warn kernel: [    0.000000] Primary instruction cache 64kB, VIPT, 4-way, linesize 32 bytes.
@@ -49,7 +49,7 @@ Mon Jan 15 20:22:01 2018 kern.warn kernel: [    0.752178] m25p80 spi0.0: found m
 One should be able to use `logread -e` instead of `grep`, but it seems
 that not all the same regular expressions work for both:
 
-```
+```bash
 root@libreCMC:~# logread -e 'kern\.warn' # and other similar variations
 (no output)
 ```
