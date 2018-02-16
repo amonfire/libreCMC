@@ -89,7 +89,7 @@ Please note that the serial device might have a different name (ttyUSB(n), ttyS0
 5) You should see ledgible ASCII text scroll by.
 
 If the device gets all the way through the boot process, the libreCMC banner will appear with
-an shell prompt:
+a shell prompt:
 
 ```
                     ____  _____  ____
