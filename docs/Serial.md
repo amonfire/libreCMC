@@ -79,7 +79,7 @@ be 115200
 
 2) Plug the USB part of the serial cable into an available USB port.
 
-3) run `screen /dev/ttyUSB0 115200` or (if you are NOT part of the `dialup` group) `sudo screen /dev/ttyUSB0 115200`
+3) run `screen /dev/ttyUSB0 115200` or (if you are NOT part of the `dialout` group) `sudo screen /dev/ttyUSB0 115200`
 
 4) Power on the device you are connecting to.
 
