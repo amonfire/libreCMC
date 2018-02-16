@@ -41,6 +41,8 @@ Some routers use the following standard:
 
 In this case, transmit is in the marked off box.
 
+
+
 ```
          _________________
         |                 |
@@ -69,10 +71,10 @@ Make sure that the GNU Screen package is installed and make sure that your user 
 `dialout` group.
 
 Before we can use the terminal application, we need to know the baud rate at which the serial
-console will be provided at. With most devices running libreCMC and u-boot, this most likely will
+console will be provided. With most devices running libreCMC and u-boot, this most likely will
 be 115200
 
-## putting it all together
+## Putting it all together
 
 
 1) Plug in / wire up the serial cable to the board.
@@ -80,11 +82,23 @@ be 115200
 2) Plug the USB part of the serial cable into an available USB port.
 
 3) run `screen /dev/ttyUSB0 115200` or (if you are NOT part of the `dialout` group) `sudo screen /dev/ttyUSB0 115200`
+Please note that the serial device might have a different name (ttyUSB(n), ttyS0, etc...).
 
 4) Power on the device you are connecting to.
 
 5) You should see ledgible ASCII text scroll by.
 
+If the device gets all the way through the boot process, the libreCMC banner will appear with
+an shell prompt:
 
-# Still needs final review
+```
+                    ____  _____  ____
+  _ _ _            |  __||     ||  __|
+ | (_) |__ _ _ ___ | |   | | | || |
+ | | | '_ \ '_/ -_)| |__ | | | || |__
+ |_|_|_.__/_| \___||____||_|_|_||____|
+ -----------------------------------------
 
+root@libreCMC:~#
+
+```
