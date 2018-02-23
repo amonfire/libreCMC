@@ -41,6 +41,8 @@ build-ca
 build-dh
 build-key-server myvpn
 openvpn --genkey --secret /etc/easy-rsa/keys/ta.key
+mkdir -m 700 /etc/openvpn/keys
+mv ca.crt myvpn.crt myvpn.key dh2018.pem /etc/openvpn/keys
 ```
 
 N.B.: Using easy-rsa is a straightforward approach, but it may be
@@ -62,32 +64,26 @@ config openvpn 'myvpn'
 	option dev 'tap0'
 	option port '1194'
 	option proto 'udp'
-	option status '/var/log/openvpn_status.log'
-	option log '/tmp/openvpn.log'
-	option verb '3'
-	option mute '5'
 	option keepalive '10 120'
 	option persist_key '1'
 	option persist_tun '1'
 	option user 'nobody'
 	option group 'nogroup'
-	option ca '/etc/easy-rsa/keys/ca.crt'
-	option cert '/etc/easy-rsa/keys/myvpn.crt'
-	option key '/etc/easy-rsa/keys/myvpn.key'
-	option dh '/etc/easy-rsa/keys/dh2048.pem'
+	option ca '/etc/openvpn/keys/ca.crt'
+	option cert '/etc/openvpn/keys/myvpn.crt'
+	option key '/etc/openvpn/keys/myvpn.key'
+	option dh '/etc/openvpn/keys/dh2048.pem'
 	option tls_server '1'
-	option tls_auth '/etc/easy-rsa/keys/ta.key 0'
+	option tls_auth '/etc/openvpn/keys/ta.key 0'
 	option server_bridge '10.0.0.1 255.255.255.0 10.0.0.201 10.0.0.220'
-	option topology 'subnet'
 	option client_to_client '1'
 	list push 'persist-key'
 	list push 'persist-tun'
 	list push 'redirect-gateway def1'
-	# allow your clients to access to your network
 	list push 'route 10.0.0.0 255.255.255.0'
-	# push DNS to your clients
 	list push 'dhcp-option DNS 10.0.0.1'
-        # option comp_lzo 'no'
+	option mute '15'
+	option verb '3'
 ```
 
 ## Client setup information
