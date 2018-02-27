@@ -29,7 +29,19 @@ documentation.
 
 ## Interface Setup
 
-TODO
+In LuCi, select `Network` >> `Interfaces` and then `Add New Interface`.
+
+- Set `Name of the new interface` to `myvpn` or anything else you would like.
+- Set `Protocol of the new interface` to unmanaged.
+- Set `Cover the following interface` to `Custom Interface: vpn0`.
+- In my current working system, the `firewall-zone` for the interface
+  is set to `lan`, but I don't think that really matters in this case.
+
+In my working configuration, I added tap0 into the LAN bridge
+interface, and deleted the WAN interface. However, my vpn server is a
+separate unit on my network, intended to operate in "bridge mode",
+where if you server is your gateway router, a different configuration
+might be necessary.
 
 ## Certificate and Key Setup Instructions
 
