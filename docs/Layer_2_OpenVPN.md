@@ -63,9 +63,14 @@ mv ca.crt l2server.crt l2server.key dh2018.pem /etc/openvpn/keys
 N.B.: Using easy-rsa is a straightforward approach, but it may be
 possible to produce more secure certificates using openssl directly.
 
-### Generating the Client Key
+### Generating a Client Key
 
-TODO
+```
+build-key l2client
+```
+
+You can use a different name, but then you have to be consistent in
+adjusting the client config.
 
 ### Server configuration
 
@@ -117,7 +122,8 @@ TODO
 
 ### Certificate and key storage
 
-TODO
+Client will the need `ca.crt`, `l2client.crt`, `l2client.key', and
+`ta.key` you generated earlier, stored in the /etc/openvpn directory.
 
 ### Client configuration
 
