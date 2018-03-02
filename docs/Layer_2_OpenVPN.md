@@ -130,7 +130,7 @@ This assumes the above configuration for the server.
 
 In LuCi, select `Network` >> `Interfaces` and then `Add New Interface`.
 
-- Set `Name of the new interface` to `l2server`.
+- Set `Name of the new interface` to `l2client`.
 - Set `Protocol of the new interface` to unmanaged.
 - Set `Cover the following interface` to `Custom Interface: vpn0`.
 
