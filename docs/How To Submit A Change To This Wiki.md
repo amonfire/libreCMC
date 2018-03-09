@@ -1,10 +1,16 @@
 How To Submit A Change To This Wiki
 ===================================
+This wiki is written in Markdown and all wiki documenation is located in /docs.
+
 
 Clone this repo and:
 --------------------
 
-    git clone https://gogs.librecmc.org/libreCMC/libreCMC-wiki.git
+    git clone https://gogs.librecmc.org/libreCMC/libreCMC.git
+    
+    
+Make desired documenation changes in /docs
+
 
 then
 
@@ -22,7 +28,7 @@ Clone the upstream repo in Gogs, then clone to your computer:
 
 Add upstream repo to be able to rebase to upstream point commit:
 
-    git remote add upstream https://gogs.librecmc.org/libreCMC/libreCMC-wiki.git
+    git remote add upstream https://gogs.librecmc.org/libreCMC/libreCMC.git
     (git checkout -b optionalBranchName)
     git push (--all)
 
@@ -43,7 +49,7 @@ Clone the upstream repo to your computer.
 
 Example for piping output to haste:
 
-    git request-pull -p b3b8926484feb37c33e5150facf315ef12b4612e https://gogs.librecmc.org/jonasbits2/libreCMC-wiki.git master | haste
+    git request-pull -p b3b8926484feb37c33e5150facf315ef12b4612e https://gogs.librecmc.org/jonasbits2/libreCMC.git master | haste
 
 * Send to hastebin.com or any site you like
 * Paste link in IRC channel
