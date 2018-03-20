@@ -26,8 +26,6 @@ PKG_CONFIG_DEPENDS += \
 	CONFIG_VERSION_HWREV \
 
 qstrip_escape=$(subst ','\'',$(call qstrip,$(1)))
-#'
-
 sanitize = $(call tolower,$(subst _,-,$(subst $(space),-,$(1))))
 
 VERSION_NUMBER:=$(call qstrip_escape,$(CONFIG_VERSION_NUMBER))

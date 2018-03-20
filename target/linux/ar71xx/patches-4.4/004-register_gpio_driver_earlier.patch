@@ -1,3 +1,6 @@
+HACK: register the GPIO driver earlier to ensure that gpio_request calls
+from mach files succeed.
+
 --- a/drivers/gpio/gpio-ath79.c
 +++ b/drivers/gpio/gpio-ath79.c
 @@ -202,7 +202,11 @@ static struct platform_driver ath79_gpio
