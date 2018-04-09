@@ -1,4 +1,4 @@
-# GL-INet AR300M
+# GL.iNet AR300M
 
 ## Hardware Specs
 
@@ -8,7 +8,7 @@
 
 ## Flashing from factory
 
-### Using GL-Inet's U-boot-mod and web UI
+### Using GL.iNet's U-boot-mod and web UI
 
 1) Set computer IP address to 192.168.1.2
 
@@ -37,7 +37,9 @@
 
 * This router is dual flash and stock uboot attempts to boot nand flash first.
 
-* NOR flash uses .bin image and Nand flash uses .img image.
+* NOR flash uses .bin image and NAND flash uses .img image.
+
+* Use librecmc-ar71xx-nand-gl-ar300m-squashfs-sysupgrade.tar to update NAND installations
 
 * Default router ip is 192.168.10.1
 
