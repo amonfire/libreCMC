@@ -62,10 +62,39 @@ LibreCMC device's MAC address, so you don't have trouble finding it.
 
 ![alt text](images/librecmc-switch-lan-to-dhcp.png)
 
-## Adjusting the firewall...?
+## Advanced
 
-To make a more consistent look in the your LibreCMC interface, you
-could go into Network >> Firewall and do things like deleting WAN
-zones or disabling NAT masquerading. But since the ports are bridged,
-it isn't necessary, and it will only make it more work to switch back
-out of "bridge mode" if you want to later.
+These adjustments are not required, but they lead to a configuration
+which will be more consistent and have cleaner logs.
+
+### Disabling odhcpd (DHCP daemon)
+
+In bridge mode, you aren't going to want to serve DHCP out any
+interface. So you might as well just shut down the whole DHCP
+server. Log in via SSH, and run the commands:
+
+```
+/etc/init.d/odhcpd stop
+/etc/init.d/odhcpd disable
+```
+
+### Delete the WAN(6) interfaces
+
+From `Network` >> `Interfaces`, you can delete the WAN and WAN6
+interfaces. See also the "Add a LAN6 interface" section below.
+
+### Delete the WAN Firewall Zone
+
+From `Network` >> `Firewall` you can delete the WAN zone. If you do
+need a WAN firewall, then you should not be running in bridge mode in
+the first place.
+
+### Add a LAN6 Interface
+
+If you have IPv6 access, you will want an interface which receives an
+IPv6 address. From `Network` >> `Interfaces` create a new interface
+called `LAN6` with `Protocol` set to `DHCPv6 client`.
+
+You will likely also want to disable odhcpd (see above). Otherwise
+your logs fill up with RA warnings, as your bridged router tries to
+handle IPv6 RA messages that it shouldn't handle.
