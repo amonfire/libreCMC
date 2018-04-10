@@ -95,6 +95,7 @@ If you have IPv6 access, you will want an interface which receives an
 IPv6 address. From `Network` >> `Interfaces` create a new interface
 called `LAN6` with `Protocol` set to `DHCPv6 client`.
 
-You will likely also want to disable odhcpd (see above). Otherwise
-your logs fill up with RA warnings, as your bridged router tries to
-handle IPv6 RA messages that it shouldn't handle.
+You will likely also want to disable `odhcpd` (see above). Otherwise
+your logs can get filled up with unnecessary IPv6 related messages, as
+libreCMC tries to act like an IPv6 router. `odhcpd` normally handles
+DHCPv6 as well as IPv6 Router Advertisements.
