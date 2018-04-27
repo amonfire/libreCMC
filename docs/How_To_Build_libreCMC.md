@@ -61,6 +61,14 @@ when configuring your build of libreCMC.
  If the build fails, type:
 
  `make V=s`
+ 
+ The build process can be accelerated by running multiple concurrent job processes using the -j-option:
+ 
+ `make -j <your number of CPU cores + 1>`
+ 
+ To avoid build errors with -j option, it is advised to pre-fetch all source code for all dependencies before :
+ 
+ `make download`
 
  if there are missing dependencies in your build environment, please install them and then run `make`.
 
