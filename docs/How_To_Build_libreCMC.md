@@ -33,7 +33,7 @@ libreCMC is licensed under the GPLv2 and contains code from other free software 
 
 `git clone https://gogs.librecmc.org/libreCMC/libreCMC.git`
 
-or download a [release](/releases)
+or download a [release](https://gogs.librecmc.org/libreCMC/libreCMC/releases)
 
 If you want to build packages found in libreCMC's package feed, update and install the make files 
 by running the following from `$SRC_ROOT`:
