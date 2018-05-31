@@ -29,7 +29,7 @@ define Package/shellinabox
 	SECTION:=net
 	CATEGORY:=Network
 	TITLE:=Shell In A Box
-	DEPENDS:= zlib
+	DEPENDS:= +zlib
 	URL:=http://shellinabox.googlecode.com
 endef
 
