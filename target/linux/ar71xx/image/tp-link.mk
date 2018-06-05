@@ -224,7 +224,29 @@ define Device/archer-c7-v1
     TPLINK_HWID := 0x75000001
 endef
 
-TARGET_DEVICES += archer-c7-v1
+define Device/archer-c7-v2
+    $(Device/tplink-16mlzma)
+    DEVICE_TITLE := TP-LINK Archer C7 v2
+    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport
+    BOARDNAME := ARCHER-C7-V2
+    DEVICE_PROFILE := ARCHERC7
+    TPLINK_HWID := 0xc7000002
+    IMAGES := sysupgrade.bin factory.bin factory-us.bin factory-eu.bin
+    IMAGE/factory-us.bin := append-rootfs | mktplinkfw factory -C US
+    IMAGE/factory-eu.bin := append-rootfs | mktplinkfw factory -C EU
+endef
+
+define Device/archer-c7-v2-il
+    $(Device/tplink-16mlzma)
+    DEVICE_TITLE := TP-LINK Archer C7 v2 IL
+    DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-usb-ledtrig-usbport
+    BOARDNAME := ARCHER-C7-V2
+    DEVICE_PROFILE := ARCHERC7
+    TPLINK_HWID := 0xc7000002
+    TPLINK_HWREV := 0x494c0001
+endef
+
+TARGET_DEVICES += archer-c7-v1 archer-c7-v2 archer-c7-v2-il
 
 define Device/tl-mr10u-v1
     $(Device/tplink-4mlzma)
