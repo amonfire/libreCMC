@@ -194,12 +194,8 @@ foreach my $mirror (@ARGV) {
 	} elsif ($mirror =~ /^\@APACHE\/(.+)$/) {
 		push @mirrors, "https://mirror.netcologne.de/apache.org/$1";
 		push @mirrors, "https://mirror.aarnet.edu.au/pub/apache/$1";
-	} elsif ($mirror =~ /^\@GITHUB\/(.+)$/) {
-		# give github a few more tries (different mirrors)
-		for (1 .. 5) {
-			push @mirrors, "https://raw.githubusercontent.com/$1";
-		}
 	} elsif ($mirror =~ /^\@GNU\/(.+)$/) {
+		push @mirrors, "https://librecmc.org/pub/gnu/$1";
 		push @mirrors, "https://mirrors.rit.edu/gnu/$1";
 		push @mirrors, "https://mirror.netcologne.de/gnu/$1";
 	} elsif ($mirror =~ /^\@SAVANNAH\/(.+)$/) {
