@@ -38,7 +38,7 @@ define Download/usb_ids
   FILE:=$(USB_IDS_FILE)
   URL_FILE:=usb.ids
   URL:=$(PROJECT_GIT)/hwids/raw/ae25707c751fff79148328229a76fc44232abeae/usb.ids
-  HASH:=eca5d4b4b2c72e61d5d6d67b5dc6f75e92b4ac9cf9cdf1344f06622e0f57d82f
+  HASH:=6a575d07a71cb7f7f72480fb0286d812d180404f45b00b68334f5ababf190b87
 endef
 $(eval $(call Download,usb_ids))
 
