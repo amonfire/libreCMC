@@ -1,0 +1,125 @@
+<script type="text/javascript">//<![CDATA[
+	function duid2mac(duid) {
+		// DUID-LLT / Ethernet
+		if (duid.length === 28 && duid.substr(0, 8) === '00010001')
+			return duid.substr(16).replace(/(..)(?=..)/g, '$1:').toUpperCase();
+
+		// DUID-LL / Ethernet
+		if (duid.length === 20 && duid.substr(0, 8) === '00030001')
+			return duid.substr(8).replace(/(..)(?=..)/g, '$1:').toUpperCase();
+
+		return null;
+	}
+
+	var hosts = <%=luci.http.write_json(luci.sys.net.host_hints())%>;
+
+	XHR.poll(5, '<%=url('admin/network/dhcplease_status')%>', null,
+		function(x, st)
+		{
+			var tb = document.getElementById('lease_status_table');
+			if (st && st[0] && tb)
+			{
+				/* clear all rows */
+				while (tb.firstElementChild !== tb.lastElementChild)
+					tb.removeChild(tb.lastElementChild);
+
+				for (var i = 0; i < st[0].length; i++)
+				{
+					var timestr;
+
+					if (st[0][i].expires === false)
+						timestr = '<em><%:unlimited%></em>';
+					else if (st[0][i].expires <= 0)
+						timestr = '<em><%:expired%></em>';
+					else
+						timestr = String.format('%t', st[0][i].expires);
+
+					tb.appendChild(E('<div class="tr cbi-section-table-row cbi-rowstyle-%d">'.format((i % 2) + 1), [
+						E('<div class="td">', st[0][i].hostname || '?'),
+						E('<div class="td">', st[0][i].ipaddr),
+						E('<div class="td">', st[0][i].macaddr),
+						E('<div class="td">', timestr)
+					]));
+				}
+
+				if (tb.firstElementChild === tb.lastElementChild)
+					tb.appendChild(E('<div class="tr cbi-section-table-row"><div class="td"><em><br /><%:There are no active leases.%></em></div></div>'));
+			}
+
+			var tb6 = document.getElementById('lease6_status_table');
+			if (st && st[1] && tb6)
+			{
+				tb6.parentNode.style.display = 'block';
+
+				/* clear all rows */
+				while (tb6.firstElementChild !== tb6.lastElementChild)
+					tb6.removeChild(tb6.lastElementChild);
+
+				for (var i = 0; i < st[1].length; i++)
+				{
+					var timestr;
+
+					if (st[1][i].expires === false)
+						timestr = '<em><%:unlimited%></em>';
+					else if (st[1][i].expires <= 0)
+						timestr = '<em><%:expired%></em>';
+					else
+						timestr = String.format('%t', st[1][i].expires);
+
+					var host = hosts[duid2mac(st[1][i].duid)],
+					    name = st[1][i].hostname,
+					    hint = null;
+
+					if (!name) {
+						if (host)
+							hint = host.name || host.ipv4 || host.ipv6;
+					}
+					else {
+						if (host && host.name && st[1][i].hostname != host.name)
+							hint = host.name;
+					}
+
+					tb6.appendChild(E('<div class="tr cbi-section-table-row cbi-rowstyle-%d" style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap">'.format((i % 2) + 1), [
+						E('<div class="td">', hint ? '<div style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap">%h (%h)</div>'.format(name || '?', hint) : (name || '?')),
+						E('<div class="td">', st[1][i].ip6addr),
+						E('<div class="td">', st[1][i].duid),
+						E('<div class="td">', timestr)
+					]));
+				}
+
+				if (tb6.firstElementChild === tb6.lastElementChild)
+					tb6.appendChild(E('<div class="tr cbi-section-table-row"><div class="td"><em><br /><%:There are no active leases.%></em></div></div>'));
+			}
+		}
+	);
+//]]></script>
+
+<fieldset class="cbi-section">
+	<legend><%:Active DHCP Leases%></legend>
+	<div class="table cbi-section-table" id="lease_status_table">
+		<div class="tr cbi-section-table-titles">
+			<div class="th cbi-section-table-cell"><%:Hostname%></div>
+			<div class="th cbi-section-table-cell"><%:IPv4-Address%></div>
+			<div class="th cbi-section-table-cell"><%:MAC-Address%></div>
+			<div class="th cbi-section-table-cell"><%:Leasetime remaining%></div>
+		</div>
+		<div class="tr cbi-section-table-row">
+			<div class="td" colspan="4"><em><br /><%:Collecting data...%></em></div>
+		</div>
+	</div>
+</fieldset>
+
+<fieldset class="cbi-section" style="display:none">
+	<legend><%:Active DHCPv6 Leases%></legend>
+	<div class="table cbi-section-table" id="lease6_status_table">
+		<div class="tr cbi-section-table-titles">
+			<div class="th cbi-section-table-cell"><%:Host%></div>
+			<div class="th cbi-section-table-cell"><%:IPv6-Address%></div>
+			<div class="th cbi-section-table-cell"><%:DUID%></div>
+			<div class="th cbi-section-table-cell"><%:Leasetime remaining%></div>
+		</div>
+		<div class="tr cbi-section-table-row">
+			<div class="td" colspan="4"><em><br /><%:Collecting data...%></em></div>
+		</div>
+	</div>
+</fieldset>
