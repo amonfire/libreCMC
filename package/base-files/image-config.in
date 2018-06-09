@@ -18,11 +18,11 @@ config TARGET_PREINIT_SUPPRESS_STDERR
 	default y
 	help
 		Sends stderr to null during preinit.  This is the default behaviour
-		in previous versions of OpenWrt.  This also prevents init process
+		in previous versions of libreCMC.  This also prevents init process
 		itself from displaying stderr, however processes launched by init
 		in multiuser through inittab will use the current terminal (e.g.
 		the ash shell launched by inittab will display stderr).  That's
-		the same behaviour as seen in previous version of OpenWrt.
+		the same behaviour as seen in previous version of libreCMC.
 
 config TARGET_PREINIT_DISABLE_FAILSAFE
 	bool
@@ -139,7 +139,7 @@ menuconfig INITOPT
 		help
 			Prevents showing stderr messages for init command if not already
 			suppressed during preinit.  This is the default behaviour in
-			previous versions of OpenWrt.  Removing this does nothing if
+			previous versions of libreCMC.  Removing this does nothing if
 			stderr is suppressed during preinit (which is the default).
 
 
@@ -162,13 +162,6 @@ if VERSIONOPT
 		help
 			This is the name of the release distribution.
 			If unspecified, it defaults to OpenWrt.
-
-	config VERSION_NICK
-		string
-		prompt "Release version nickname"
-		help
-			This is the release codename embedded in the image.
-			If unspecified, it defaults to the name of source branch.
 
 	config VERSION_NUMBER
 		string
@@ -199,15 +192,13 @@ if VERSIONOPT
 			 %v .. Configured release version number or "snapshot", lowercase
 			 %C .. Configured release revision code or value of %R, uppercase
 			 %c .. Configured release revision code or value of %R, lowercase
-			 %N .. Release name, uppercase
-			 %n .. Release name, lowercase
-			 %D .. Distribution name or "libreCMC", uppercase
-			 %d .. Distribution name or "librecmc", lowercase
+			 %D .. Distribution name or "OpenWrt", uppercase
+			 %d .. Distribution name or "openwrt", lowercase
 			 %T .. Target name
 			 %S .. Target/Subtarget name
 			 %A .. Package architecture
 			 %t .. Build taint flags, e.g. "no-all busybox"
-			 %M .. Manufacturer name or "libreCMC"
+			 %M .. Manufacturer name or "OpenWrt"
 			 %P .. Product name or "Generic"
 			 %h .. Hardware revision or "v0"
 

@@ -75,7 +75,7 @@ static unsigned long kernel_la;
 #ifdef CONFIG_KERNEL_CMDLINE
 #define kernel_argc	2
 static const char kernel_cmdline[] = CONFIG_KERNEL_CMDLINE;
-static const char *kernel_argv[] = {
+static const char *const kernel_argv[] = {
 	NULL,
 	kernel_cmdline,
 	NULL,
@@ -179,7 +179,7 @@ static void lzma_init_data(void)
 
 	flash_base = (unsigned char *) KSEG1ADDR(AR71XX_FLASH_START);
 
-	printf("Looking for OpenWrt image... ");
+	printf("Looking for libreCMC image... ");
 
 	for (flash_ofs = CONFIG_FLASH_OFFS;
 	     flash_ofs <= (CONFIG_FLASH_OFFS + CONFIG_FLASH_MAX);

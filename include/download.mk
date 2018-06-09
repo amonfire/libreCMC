@@ -6,8 +6,10 @@
 # See /LICENSE for more information.
 #
 
-OPENWRT_GIT = http://git.openwrt.org
-LEDE_GIT = https://git.lede-project.org
+PROJECT_GIT = https://gogs.librecmc.org/OWEALs
+
+OPENWRT_GIT = $(PROJECT_GIT)
+LEDE_GIT = $(PROJECT_GIT)
 
 ifdef PKG_SOURCE_VERSION
 PKG_VERSION ?= $(if $(PKG_SOURCE_DATE),$(PKG_SOURCE_DATE)-)$(call version_abbrev,$(PKG_SOURCE_VERSION))
@@ -21,7 +23,7 @@ DOWNLOAD_RDEP=$(STAMP_PREPARED) $(HOST_STAMP_PREPARED)
 define dl_method
 $(strip \
   $(if $(2),$(2), \
-    $(if $(filter @APACHE/% @GITHUB/% @GNOME/% @GNU/% @KERNEL_LIBRE/% @KERNEL/% @SF/% @SAVANNAH/% ftp://% http://% https://% file://%,$(1)),default, \
+    $(if $(filter @APACHE/% @GNOME/% @GNU/% @KERNEL_LIBRE/% @KERNEL/% @SF/% @SAVANNAH/% ftp://% http://% https://% file://%,$(1)),default, \
       $(if $(filter git://%,$(1)),git, \
         $(if $(filter svn://%,$(1)),svn, \
           $(if $(filter cvs://%,$(1)),cvs, \
@@ -103,7 +105,7 @@ hash_var = $(if $(filter-out x,$(1)),MD5SUM,HASH)
 endif
 
 define DownloadMethod/unknown
-	@echo "ERROR: No download method available"; false
+	echo "ERROR: No download method available"; false
 endef
 
 define DownloadMethod/default

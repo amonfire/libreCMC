@@ -209,7 +209,7 @@ $(eval $(call KernelPackage,switch-ip17xx))
 define KernelPackage/switch-rtl8366-smi
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Realtek RTL8366 SMI switch interface support
-  DEPENDS:=@GPIO_SUPPORT +kmod-swconfig
+  DEPENDS:=@GPIO_SUPPORT +kmod-swconfig +(TARGET_armvirt||TARGET_brcm2708_bcm2708):kmod-of-mdio
   KCONFIG:=CONFIG_RTL8366_SMI
   FILES:=$(LINUX_DIR)/drivers/net/phy/rtl8366_smi.ko
   AUTOLOAD:=$(call AutoLoad,42,rtl8366_smi)
@@ -302,6 +302,22 @@ define KernelPackage/r6040/description
 endef
 
 $(eval $(call KernelPackage,r6040))
+
+
+define KernelPackage/niu
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Sun Neptune 10Gbit Ethernet support
+  DEPENDS:=@PCI_SUPPORT
+  KCONFIG:=CONFIG_NIU
+  FILES:=$(LINUX_DIR)/drivers/net/ethernet/sun/niu.ko
+  AUTOLOAD:=$(call AutoProbe,niu)
+endef
+
+define KernelPackage/niu/description
+ This enables support for cards based upon Sun's Neptune chipset.
+endef
+
+$(eval $(call KernelPackage,niu))
 
 
 define KernelPackage/sis900
@@ -411,6 +427,24 @@ endef
 $(eval $(call KernelPackage,8139cp))
 
 
+define KernelPackage/r8169
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=RealTek RTL-8169 PCI Gigabit Ethernet Adapter kernel support
+  DEPENDS:=@PCI_SUPPORT +kmod-mii +r8169-firmware
+  KCONFIG:=CONFIG_R8169 \
+    CONFIG_R8169_NAPI=y \
+    CONFIG_R8169_VLAN=n
+  FILES:=$(LINUX_DIR)/drivers/net/ethernet/realtek/r8169.ko
+  AUTOLOAD:=$(call AutoProbe,r8169)
+endef
+
+define KernelPackage/r8169/description
+ Kernel modules for RealTek RTL-8169 PCI Gigabit Ethernet adapters
+endef
+
+$(eval $(call KernelPackage,r8169))
+
+
 define KernelPackage/ne2k-pci
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=ne2k-pci Ethernet Adapter kernel support
@@ -427,7 +461,6 @@ define KernelPackage/ne2k-pci/description
 endef
 
 $(eval $(call KernelPackage,ne2k-pci))
-
 
 define KernelPackage/e1000
   SUBMENU:=$(NETWORK_DEVICES_MENU)
@@ -454,6 +487,9 @@ define KernelPackage/e1000e
   KCONFIG:=CONFIG_E1000E
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/intel/e1000e/e1000e.ko
   AUTOLOAD:=$(call AutoProbe,e1000e)
+  MODPARAMS.e1000e:= \
+    IntMode=1 \
+    InterruptThrottleRate=4,4,4,4,4,4,4,4
 endef
 
 define KernelPackage/e1000e/description
@@ -466,9 +502,9 @@ $(eval $(call KernelPackage,e1000e))
 define KernelPackage/igb
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Intel(R) 82575/82576 PCI-Express Gigabit Ethernet support
-  DEPENDS:=@PCI_SUPPORT +kmod-i2c-core +kmod-i2c-algo-bit +kmod-ptp
+  DEPENDS:=@PCI_SUPPORT +kmod-i2c-core +kmod-i2c-algo-bit +kmod-ptp +kmod-hwmon-core
   KCONFIG:=CONFIG_IGB \
-    CONFIG_IGB_HWMON=n \
+    CONFIG_IGB_HWMON=y \
     CONFIG_IGB_DCA=n
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/intel/igb/igb.ko
   AUTOLOAD:=$(call AutoLoad,35,igb)
@@ -479,6 +515,62 @@ define KernelPackage/igb/description
 endef
 
 $(eval $(call KernelPackage,igb))
+
+
+define KernelPackage/igbvf
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Intel(R) 82576 Virtual Function Ethernet support
+  DEPENDS:=@PCI_SUPPORT @TARGET_x86 +kmod-i2c-core +kmod-i2c-algo-bit +kmod-ptp
+  KCONFIG:=CONFIG_IGBVF \
+    CONFIG_IGB_HWMON=y \
+    CONFIG_IGB_DCA=n
+  FILES:=$(LINUX_DIR)/drivers/net/ethernet/intel/igbvf/igbvf.ko
+  AUTOLOAD:=$(call AutoLoad,35,igbvf)
+endef
+
+define KernelPackage/igbvf/description
+ Kernel modules for Intel(R) 82576 Virtual Function Ethernet adapters.
+endef
+
+$(eval $(call KernelPackage,igbvf))
+
+
+define KernelPackage/ixgbe
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Intel(R) 82598/82599 PCI-Express 10 Gigabit Ethernet support
+  DEPENDS:=@PCI_SUPPORT +kmod-mdio +kmod-ptp +kmod-hwmon-core
+  KCONFIG:=CONFIG_IXGBE \
+    CONFIG_IXGBE_VXLAN=n \
+    CONFIG_IXGBE_HWMON=y \
+    CONFIG_IXGBE_DCA=n
+  FILES:=$(LINUX_DIR)/drivers/net/ethernet/intel/ixgbe/ixgbe.ko
+  AUTOLOAD:=$(call AutoLoad,35,ixgbe)
+endef
+
+define KernelPackage/ixgbe/description
+ Kernel modules for Intel(R) 82598/82599 PCI-Express 10 Gigabit Ethernet adapters.
+endef
+
+$(eval $(call KernelPackage,ixgbe))
+
+
+define KernelPackage/ixgbevf
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Intel(R) 82599 Virtual Function Ethernet support
+  DEPENDS:=@PCI_SUPPORT +kmod-ixgbe
+  KCONFIG:=CONFIG_IXGBEVF \
+    CONFIG_IXGBE_VXLAN=n \
+    CONFIG_IXGBE_HWMON=y \
+    CONFIG_IXGBE_DCA=n
+  FILES:=$(LINUX_DIR)/drivers/net/ethernet/intel/ixgbevf/ixgbevf.ko
+  AUTOLOAD:=$(call AutoLoad,35,ixgbevf)
+endef
+
+define KernelPackage/ixgbevf/description
+ Kernel modules for Intel(R) 82599 Virtual Function Ethernet adapters.
+endef
+
+$(eval $(call KernelPackage,ixgbevf))
 
 
 define KernelPackage/b44
@@ -537,8 +629,9 @@ $(eval $(call KernelPackage,pcnet32))
 
 define KernelPackage/tg3
   TITLE:=Broadcom Tigon3 Gigabit Ethernet
-  KCONFIG:=CONFIG_TIGON3
-  DEPENDS:=+!TARGET_brcm47xx:kmod-libphy +kmod-hwmon-core +kmod-ptp
+  KCONFIG:=CONFIG_TIGON3 \
+	CONFIG_TIGON3_HWMON=n
+  DEPENDS:=+!TARGET_brcm47xx:kmod-libphy +!LINUX_4_14:kmod-hwmon-core +kmod-ptp
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/broadcom/tg3.ko
   AUTOLOAD:=$(call AutoLoad,19,tg3,1)
@@ -718,7 +811,7 @@ $(eval $(call KernelPackage,ifb))
 define KernelPackage/dm9000
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Davicom 9000 Ethernet support
-  DEPENDS:=@PCI_SUPPORT +kmod-mii
+  DEPENDS:=+kmod-mii
   KCONFIG:=CONFIG_DM9000 \
     CONFIG_DM9000_DEBUGLEVEL=4 \
     CONFIG_DM9000_FORCE_SIMPLE_PHY_POLL=y
@@ -753,7 +846,9 @@ define KernelPackage/of-mdio
   TITLE:=OpenFirmware MDIO support
   DEPENDS:=+kmod-libphy
   KCONFIG:=CONFIG_OF_MDIO
-  FILES:=$(LINUX_DIR)/drivers/of/of_mdio.ko
+  FILES:= \
+	$(LINUX_DIR)/drivers/net/phy/fixed_phy.ko@ge4.9 \
+	$(LINUX_DIR)/drivers/of/of_mdio.ko
   AUTOLOAD:=$(call AutoLoad,41,of_mdio)
 endef
 
