@@ -67,7 +67,7 @@ else
       LINUX_UNAME_VERSION:=$(strip $(shell cat $(LINUX_DIR)/include/config/kernel.release 2>/dev/null))
   endif
 
-  MODULES_SUBDIR:=lib/modules/$(LINUX_UNAME_VERSION)-gnu
+  MODULES_SUBDIR:=lib/modules/$(LINUX_UNAME_VERSION)
   TARGET_MODULES_DIR:=$(LINUX_TARGET_DIR)/$(MODULES_SUBDIR)
 
   ifneq ($(TARGET_BUILD),1)
