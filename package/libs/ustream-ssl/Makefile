@@ -1,13 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ustream-ssl
-PKG_RELEASE:=3
+PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=$(PROJECT_GIT)/ustream-ssl.git
-PKG_SOURCE_DATE:=2018-04-30
-PKG_SOURCE_VERSION:=527e7002d0429465bd49c0c0d416ef22fbf5ae86
-PKG_MIRROR_HASH:=b0b4219730a369741a192a67d4fbf7328bd62df8ae4f0d0e3084461e3bbaba54
+PKG_SOURCE_DATE:=2018-05-24
+PKG_SOURCE_VERSION:=189cd38b4188bfcb4c8cf67d8ae71741ffc2b906
+PKG_MIRROR_HASH:=114d229828d95229e2b7134f668c0d2c3cee63ffa90e970d4c50a331f505b17d
 CMAKE_INSTALL:=1
 
 PKG_BUILD_DIR=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_SOURCE_SUBDIR)
@@ -35,11 +35,11 @@ define Package/libustream-openssl
   VARIANT:=openssl
 endef
 
-define Package/libustream-cyassl
+define Package/libustream-wolfssl
   $(Package/libustream/default)
-  TITLE += (cyassl)
-  DEPENDS += +PACKAGE_libustream-cyassl:libcyassl
-  VARIANT:=cyassl
+  TITLE += (wolfssl)
+  DEPENDS += +PACKAGE_libustream-wolfssl:libwolfssl
+  VARIANT:=wolfssl
 endef
 
 define Package/libustream-mbedtls
@@ -50,7 +50,7 @@ define Package/libustream-mbedtls
   DEFAULT_VARIANT:=1
 endef
 
-ifeq ($(BUILD_VARIANT),cyassl)
+ifeq ($(BUILD_VARIANT),wolfssl)
   TARGET_CFLAGS += -I$(STAGING_DIR)/usr/include/cyassl -DHAVE_SNI
   CMAKE_OPTIONS += -DCYASSL=on
 endif
@@ -64,9 +64,9 @@ define Package/libustream/default/install
 endef
 
 Package/libustream-openssl/install = $(Package/libustream/default/install)
-Package/libustream-cyassl/install = $(Package/libustream/default/install)
+Package/libustream-wolfssl/install = $(Package/libustream/default/install)
 Package/libustream-mbedtls/install = $(Package/libustream/default/install)
 
 $(eval $(call BuildPackage,libustream-mbedtls))
-$(eval $(call BuildPackage,libustream-cyassl))
+$(eval $(call BuildPackage,libustream-wolfssl))
 $(eval $(call BuildPackage,libustream-openssl))
