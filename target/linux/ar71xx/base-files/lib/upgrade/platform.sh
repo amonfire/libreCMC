@@ -275,6 +275,7 @@ platform_check_image() {
 		return 1
 	;;
 	gl-ar300|\
+	gl-ar750|\
 	gl-domino|\
 	gl-mifi|\
 	hiwifi-hc6361|\

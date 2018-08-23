@@ -286,6 +286,9 @@ gl-ar150|\
 gl-usb150|\
 gl-ar300|\
 gl-ar300m|\
+gl-ar750)
+	ucidef_set_led_wlan "wlan2g" "WLAN2G" "$board:white:wlan2g" "phy0tpt"
+	;;
 gl-mifi)
 	ucidef_set_led_wlan "wlan" "WLAN" "$board:wlan" "phy0tpt"
 

@@ -348,6 +348,7 @@ ar71xx_setup_interfaces()
 	onion-omega)
 		ucidef_set_interface_lan "wlan0"
 		;;
+	gl-ar750|\
 	rb-435g)
 		ucidef_set_interfaces_lan_wan "eth1" "eth0"
 		ucidef_add_switch "switch0" \

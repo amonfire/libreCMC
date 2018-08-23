@@ -187,6 +187,7 @@ get_status_led() {
 	esr1750)
 		status_led="$board:amber:power"
 		;;
+	gl-ar750|\
 	esr900)
 		status_led="engenius:amber:power"
 		;;
@@ -478,7 +479,8 @@ set_state() {
 	done)
 		status_led_on
 		case $(ar71xx_board_name) in
-		gl-ar300m)
+		gl-ar300m|\
+		gl-ar750)
 			fw_printenv lc >/dev/null 2>&1 && fw_setenv "bootcount" 0
 			;;
 		qihoo-c301)
