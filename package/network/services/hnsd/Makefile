@@ -50,7 +50,6 @@ define Build/Compile
 		LDLIBS="$(LDLIBS)" \
 		LDFLAGS="$(TARGET_LDFLAGS)"
 		CROSS_COMPILE="$(TARGET_CROSS)" \
-		EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		ARCH="$(ARCH)"
 
 endef
