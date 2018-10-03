@@ -45,6 +45,14 @@ define Build/mktplinkfw-kernel
 	@mv $@.new $@
 endef
 
+define Build/uImageArcher
+	mkimage -A $(LINUX_KARCH) \
+		-O linux -T kernel \
+		-C $(1) -a $(KERNEL_LOADADDR) -e $(if $(KERNEL_ENTRY),$(KERNEL_ENTRY),$(KERNEL_LOADADDR)) \
+		-n '$(call toupper,$(LINUX_KARCH)) libreCMC Linux-$(LINUX_VERSION)' -d $@ $@.new
+	@mv $@.new $@
+endef
+
 define Device/tplink
   TPLINK_HWREV := 0x1
   TPLINK_HEADER_VERSION := 1
@@ -93,6 +101,14 @@ define Device/tplink-16mlzma
 $(Device/tplink)
   TPLINK_FLASHLAYOUT := 16Mlzma
   IMAGE_SIZE := 15872k
+endef
+
+define Device/archer-cxx
+  KERNEL := kernel-bin | patch-cmdline | lzma | uImageArcher lzma
+  IMAGES := sysupgrade.bin factory.bin
+  IMAGE/sysupgrade.bin := append-rootfs | tplink-safeloader sysupgrade | \
+	append-metadata | check-size $$$$(IMAGE_SIZE)
+  IMAGE/factory.bin := append-rootfs | tplink-safeloader factory
 endef
 
 define Device/cpe510-520
