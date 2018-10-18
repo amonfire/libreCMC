@@ -106,3 +106,15 @@ See our [flavors](https://librecmc.org/flavors.html) page for a description of e
 [TL-WR1043N v5 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-factory.bin) *NOT TESTED!!
 
 [TL-WR1043N v5 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-sysupgrade.bin) *NOT TESTED!!
+
+## Image File Signatures 
+
+[Main sha256sums](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/sha256sums)
+
+[Main sha256sums.asc](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/sha256sums.asc)
+
+
+[Core sha256sums](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/sha256sums)
+
+[Core sha256sums.asc](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/sha256sums.asc)
+

@@ -27,3 +27,11 @@ See our [flavors](https://librecmc.org/flavors.html) page for a description of e
 [TL-WR741ND v5 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr741nd-v5-squashfs-factory.bin)
 
 [TL-WR741ND v5 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr741nd-v5-squashfs-sysupgrade.bin)
+
+
+## Image File Signatures
+
+[Legacy sha256sums](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/sha256sums)
+
+[Legacy sha256sums.asc](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/sha256sums.asc)
+
