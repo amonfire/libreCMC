@@ -18,3 +18,18 @@ a chip clip and SPI flasher). Some versions (v1) requires the flash chip to be r
 ThinkPenguin's offering ships with libreCMC, does not ship with DRM and can be fully re-programmed.
 
 * The names of the firmware images for this device are `librecmc-ar71xx-generic-tl-wr841-v8-squashfs-*`
+
+# Firmware Images
+
+See our [flavors](https://librecmc.org/flavors.html) page for a description of each type of libreCMC image.
+
+## Legacy
+
+[TL-WR841n[d] v8 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v8-squashfs-factory.bin)
+[TL-WR841n[d] v8 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v8-squashfs-sysupgrade.bin)
+
+## Core
+
+[TL-WR841n[d] v8 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v8-squashfs-factory.bin)
+[TL-WR841n[d] v8 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v8-squashfs-sysupgrade.bin)
+
