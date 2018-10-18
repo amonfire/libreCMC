@@ -10,6 +10,6 @@ libreCMC is a set of fully [free](http://www.gnu.org/philosophy/free-sw.en.html)
 
 * [Router reset instructions](/docs/Router_Reset_Instructions.md) : Generic libreCMC router reset instructions.
 
-* [Report a bug or issue](/issues) : Is something broken? Did you find a non-free component or do you want to make libreCMC better? Submit an issue.
+* [Report a bug or issue](https://gogs.librecmc.org/libreCMC/libreCMC/issues) : Is something broken? Did you find a non-free component or do you want to make libreCMC better? Submit an issue.
 
 * [Build Documentation](/docs/How_To_Build_libreCMC.md) : Learn how to build libreCMC for your device. 
