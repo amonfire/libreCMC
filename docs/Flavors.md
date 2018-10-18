@@ -1,7 +1,7 @@
 # Three Flavors of libreCMC : What are they for?
 
 The libreCMC project ships different flavored images to achieve a desired result and 
-allows for the continued support of hardware with limited resources. These different flavors
+for the continued support of hardware with limited resources. These different flavors
 include:
 
 ## Main
