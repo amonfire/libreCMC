@@ -58,33 +58,51 @@ See our [flavors](https://librecmc.org/flavors.html) page for a description of e
 ## Main Images
 
 [TL-WR1043ND v1 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v1-squashfs-factory.bin)
+
 [TL-WR1043ND v1 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v1-squashfs-sysupgrade.bin)
 
+
 [TL-WR1043ND v2 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v2-squashfs-factory.bin)
+
 [TL-WR1043ND v2 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v2-squashfs-sysupgrade.bin)
 
+
 [TL-WR1043ND v3 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v3-squashfs-factory.bin)
+
 [TL-WR1043ND v3 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v3-squashfs-sysupgrade.bin)
 
+
 [TL-WR1043ND v4 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v4-squashfs-factory.bin)
+
 [TL-WR1043ND v4 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v4-squashfs-sysupgrade.bin)
 
+
 [TL-WR1043N v5 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-factory.bin) *NOT TESTED!!
+
 [TL-WR1043N v5 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-sysupgrade.bin) *NOT TESTED!!
 
 ## Core Images
 
 [TL-WR1043ND v1 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v1-squashfs-factory.bin)
+
 [TL-WR1043ND v1 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v1-squashfs-sysupgrade.bin)
 
+
 [TL-WR1043ND v2 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v2-squashfs-factory.bin)
+
 [TL-WR1043ND v2 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v2-squashfs-sysupgrade.bin)
 
+
 [TL-WR1043ND v3 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v3-squashfs-factory.bin)
+
 [TL-WR1043ND v3 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v3-squashfs-sysupgrade.bin)
 
+
 [TL-WR1043ND v4 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v4-squashfs-factory.bin)
+
 [TL-WR1043ND v4 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v4-squashfs-sysupgrade.bin)
 
+
 [TL-WR1043N v5 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-factory.bin) *NOT TESTED!!
+
 [TL-WR1043N v5 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-sysupgrade.bin) *NOT TESTED!!

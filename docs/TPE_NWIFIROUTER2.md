@@ -26,10 +26,12 @@ See our [flavors](https://librecmc.org/flavors.html) page for a description of e
 ## Legacy
 
 [TL-WR841n[d] v8 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v8-squashfs-factory.bin)
+
 [TL-WR841n[d] v8 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v8-squashfs-sysupgrade.bin)
 
 ## Core
 
 [TL-WR841n[d] v8 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v8-squashfs-factory.bin)
+
 [TL-WR841n[d] v8 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v8-squashfs-sysupgrade.bin)
 

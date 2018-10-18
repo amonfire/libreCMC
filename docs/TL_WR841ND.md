@@ -30,16 +30,25 @@ See our [flavors](https://librecmc.org/flavors.html) page for a description of e
 
 ## Legacy
 [TL-WR841n[d] v8 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v8-squashfs-factory.bin)
+
 [TL-WR841n[d] v8 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v8-squashfs-sysupgrade.bin)
 
+
 [TL-WR841n[d] v9 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v9-squashfs-factory.bin)
+
 [TL-WR841n[d] v9 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v9-squashfs-sysupgrade.bin)
 
+
 [TL-WR841n[d] v10 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v10-squashfs-factory.bin)
+
 [TL-WR841n[d] v10 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v10-squashfs-sysupgrade.bin)
 
+
 [TL-WR841n[d] v11 Factory EU](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v11-squashfs-factory-eu.bin)
+
 [TL-WR841n[d] v11 Factory US](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v11-squashfs-factory-us.bin)
+
 [TL-WR841n[d] v11 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v11-squashfs-factory.bin)
+
 [TL-WR841n[d] v11 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/librecmc-ar71xx-generic-tl-wr841-v11-squashfs-sysupgrade.bin)
 
