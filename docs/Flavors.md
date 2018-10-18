@@ -13,7 +13,7 @@ These images only run on routers with more than 8M of flash.
 ## Core
 
 A bare-bones image with package management, basic IPv6 stack and no web interface.
-These images on routers with <8M of flash, but package management is limited on 4M targets.
+These images run on routers with <8M of flash, but package management is limited on 4M targets.
 
 ## Legacy
 
