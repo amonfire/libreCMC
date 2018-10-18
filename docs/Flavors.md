@@ -8,7 +8,7 @@ include:
 
 Provides an easier to use out of the box experience; includes
 the luci web interface, full package management support and basic IPv6 stack. 
-These images only run on routers with more than 8M of flash.
+These images only run on routers with 8M of flash or more.
 
 ## Core
 
