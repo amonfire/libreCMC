@@ -8,13 +8,17 @@ menuconfig CCS
 	  for a given target, which should be part of the CCS. Please see /docs/ccs.md
 
 	config CCS_GIT_UPSTREAM
-		string "Enter git repository to clone" if CCS
+		string "Enter source repository to clone" if CCS
 		default "https://gogs.librecmc.org/librecmc" if !CCS_GIT_TOPDIR
+		help
+		  The git repository specified here is for the corresponding libreCMC
+		  Buildroot that was used to build and generate firmware images.
 
 	config CCS_GIT_TOPDIR
 		bool "Use local checkout for sources" if CCS
 		help
-		  If using this option, make sure that all changes have been
+		  This option will use the current checkout for the libreCMC Buildroot
+		  source. If using this option, make sure that all changes have been
 		  properly checked in.
 
 
