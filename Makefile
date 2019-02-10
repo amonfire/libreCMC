@@ -87,6 +87,8 @@ prereq: $(target/stamp-prereq) tmp/.prereq_packages
 checksum: FORCE
 	$(call sha256sums,$(BIN_DIR))
 
+ccsdisk: $(target/ccsdisk/install)
+
 diffconfig: FORCE
 	mkdir -p $(BIN_DIR)
 	$(SCRIPT_DIR)/diffconfig.sh > $(BIN_DIR)/config.seed
