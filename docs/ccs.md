@@ -15,7 +15,7 @@ compliant if the disk is handed off with the device.
 
 ## `make ccsdisk`
 
-A new target was created to build a CCS disk based upon the option of using a
+A new target was created to build a CCS disk based upon the option of using an
 external repository or to use a local checkout. As it stands, this includes
 everything except for u-boot sources for a given target. In the near future, the
 libreCMC project will start including versions of u-boot for all officially
