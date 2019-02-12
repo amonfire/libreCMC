@@ -12,7 +12,7 @@ try_version() {
 }
 
 try_git() {
-	REBOOT=35e9515064308d77f01f53badcf02973ba94b387
+	REBOOT=dc0e62a006c976755ff80264aca2f77046206ddb
 	git rev-parse --git-dir >/dev/null 2>&1 || return 1
 
 	[ -n "$GET_REV" ] || GET_REV="HEAD"
