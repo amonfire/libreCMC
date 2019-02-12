@@ -109,8 +109,6 @@ static struct gpio_led wnr2200_leds_gpio[] __initdata = {
 	}
 };
 
-static const char *wnr2200_wmac_led_name = "netgear:blue:wlan";
-
 static struct gpio_led wnr2200_wmac_leds_gpio[] = {
 	{
 		.name		= "netgear:amber:test",
@@ -121,6 +119,10 @@ static struct gpio_led wnr2200_wmac_leds_gpio[] = {
 		.gpio		= WNR2200_GPIO_WMAC_LED_POWER_GREEN,
 		.active_low	= 1,
 		.default_state	= LEDS_GPIO_DEFSTATE_ON,
+	}, {
+		.name		= "netgear:blue:wlan",
+		.gpio		= WNR2200_GPIO_WMAC_LED_WLAN_BLUE,
+		.active_low	= 1,
 	}
 };
 
@@ -152,7 +154,7 @@ static struct gpio_keys_button wnr2200_wmac_keys_gpio[] = {
 /*
  * For WNR2200 ART flash area used for WLAN MAC is usually empty (0xff)
  * so ath9k driver uses random MAC instead each time module is loaded.
- * OpenWrt's original fix was to copy eth1 address to WLAN interface.
+ * libreCMC's original fix was to copy eth1 address to WLAN interface.
  * New solution does not duplicate hardware addresses and is taken from
  * WNR2000v3 code. It assigns permanent WLAN MAC equal to ethN's MAC
  * plus 1, so network interfaces get sequential addresses.
@@ -224,9 +226,6 @@ static void __init wnr2200_setup(void)
 
 	ath79_register_leds_gpio(-1, ARRAY_SIZE(wnr2200_leds_gpio),
 				 wnr2200_leds_gpio);
-
-	ap9x_pci_setup_wmac_led_pin(0, WNR2200_GPIO_WMAC_LED_WLAN_BLUE);
-	ap9x_pci_setup_wmac_led_name(0, wnr2200_wmac_led_name);
 
 	ap9x_pci_setup_wmac_leds(0, wnr2200_wmac_leds_gpio,
 				 ARRAY_SIZE(wnr2200_wmac_leds_gpio));

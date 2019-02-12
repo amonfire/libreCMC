@@ -30,7 +30,7 @@ struct seama_header {
 };
 
 static int mtdsplit_parse_seama(struct mtd_info *master,
-				struct mtd_partition **pparts,
+				const struct mtd_partition **pparts,
 				struct mtd_part_parser_data *data)
 {
 	struct seama_header hdr;
@@ -93,9 +93,16 @@ static int mtdsplit_parse_seama(struct mtd_info *master,
 	return SEAMA_NR_PARTS;
 }
 
+static const struct of_device_id mtdsplit_seama_of_match_table[] = {
+	{ .compatible = "seama" },
+	{},
+};
+MODULE_DEVICE_TABLE(of, mtdsplit_seama_of_match_table);
+
 static struct mtd_part_parser mtdsplit_seama_parser = {
 	.owner = THIS_MODULE,
 	.name = "seama-fw",
+	.of_match_table = mtdsplit_seama_of_match_table,
 	.parse_fn = mtdsplit_parse_seama,
 	.type = MTD_PARSER_TYPE_FIRMWARE,
 };

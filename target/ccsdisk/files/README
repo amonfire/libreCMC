@@ -1,0 +1,94 @@
+                    ____  _____	 ____  
+  _ _ _            |  __||     ||  __| 
+ | (_) |__ _ _ ___ | |   | | | || |    
+ | | | '_ \ '_/ -_)| |__ | | | || |__  
+ |_|_|_.__/_| \___||____||_|_|_||____| 
+ -----------------------------------------
+  The libre embedded GNU/Linux distro.
+
+This compact disk contains the source code and firmware images
+for the %T line of routers.
+
+
+Disk Layout:
+============================
+
+/bin/%T/*				: Contains firmware images for %T family of routers
+
+ 
+libreCMC-%V-src.tar.gz		: The full libreCMC source code w/ original configuration.
+
+
+Building libreCMC image from source:
+============================
+
+To build your own firmware, you need to have access to a GNU/Linux system
+(case-sensitive filesystem required) with the following installed :
+
+gcc, binutils, bzip2, flex, python, perl, make, find,
+grep, diff, unzip, gawk, getopt, libssl-dev (openssl-devel), libz-dev and libc headers.
+
+References to this and other documentation use : "$LIBRECMC_SRC" , which
+is the directory where the libreCMC source code resides.
+
+Before starting, please extract : libreCMC-%V.tar.gz
+
+tar fxv librecmc-%V.tar.gz
+
+cd libreCMC/
+
+Within the libreCMC src. directory (in this case, trunk), please use "make menuconfig" to create your 
+desired configuration for the toolchain and firmware. Please note that the default configuration is 
+what was used to build the firmware image for your router. It is advised that you use this configuration. If
+you need to restore the default configuration, copy librecmc_config to libreCMC/trunk/.config
+
+Simply running "make" will build your firmware. The build system will extract all included sources, 
+build the cross-compile toolchain, the kernel and all chosen applications. If there is an issue, please run:
+
+make V=s
+
+This will show debugging output and give a clue as to why the build failed.
+
+When the build completes without any issues, the resulting librecmc-ar71xx-generic-tpe-r1100-squashfs-sysupgrade.bin image will 
+be found in : $SRC_ROOT/bin/targets/ar71xx/
+
+Flashing The libreCMC firmware
+============================
+
+1) Open a web browser and go to : https://192.168.10.1
+
+2) You will see a security warning because SSL cert is self-
+signed. Click the "understand the risks" and then "add exception" buttons.
+
+3) Enter the admin password for the router (stock password is : none )
+
+4) The backup / flash utility is under "System -> Backup / Flash Firmware".
+
+5) Make sure to backup your configuration (if you are upgrading to a new release)
+by clicking the "Generate archive" button. This will download a file named 
+backup-libreCMC-$(DATE).tar.gz
+
+6) Upload the new firmware by clicking the "browse" button under "Flash new firmware image".
+If you wish to keep your current settings, make sure that the "Keep Settings" checkbox is
+checked. If the file name is correct, make sure to click the "Flash Image" button.
+
+7) Wait a about 1 - 2.5 min. The router will restart itself then the page should refresh, bringing
+you back to the login page. 
+
+
+Final Words
+============================
+
+We would like to thank you for supporting the libreCMC project. If you find any 
+software in this release that is non-free software, please report it to info@librecmc.org. 
+We will review the offending piece of software and devise a workaround or patch. 
+libreCMC aims to always be a 100% libre Free Software project.
+
+
+Happy Hacking,
+
+	Your libreCMC Project
+	http://librecmc.org
+	info@librecmc.org
+
+

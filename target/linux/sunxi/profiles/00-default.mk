@@ -17,8 +17,7 @@ define Profile/Default
 	kmod-sun4i-emac \
 	rtl8188eu-firmware \
 	swconfig \
-	uboot-sunxi-all \
-	wpad-mini
+	wpad-basic
   PRIORITY := 1
 endef
 

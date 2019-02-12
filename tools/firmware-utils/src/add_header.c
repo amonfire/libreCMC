@@ -1,5 +1,5 @@
 /*
- * add_header.c - partially based on OpenWrt's motorola-bin.c
+ * add_header.c - partially based on libreCMC's motorola-bin.c
  *
  * Copyright (C) 2008 Imre Kaloz  <kaloz@openwrt.org>
  *                    Gabor Juhos <juhosg@openwrt.org>

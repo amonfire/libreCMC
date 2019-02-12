@@ -1,4 +1,4 @@
-# Makefile for OpenWrt
+# Makefile for libreCMC
 #
 # Copyright (C) 2007-2015 OpenWrt.org
 #
@@ -14,11 +14,11 @@ export TOPDIR LC_ALL LANG SDK
 
 world:
 
-include $(TOPDIR)/include/host.mk
+export PATH:=$(TOPDIR)/staging_dir/host/bin:$(PATH)
 
-ifneq ($(OPENWRT_BUILD),1)
-  override OPENWRT_BUILD=1
-  export OPENWRT_BUILD
+ifneq ($(LIBRECMC_BUILD),1)
+  override LIBRECMC_BUILD=1
+  export LIBRECMC_BUILD
 
   empty:=
   space:= $(empty) $(empty)

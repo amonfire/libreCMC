@@ -8,18 +8,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=odhcp6c
-PKG_RELEASE:=2
+PKG_RELEASE:=16
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=$(PROJECT_GIT)/odhcp6c.git
-PKG_SOURCE_DATE:=2017-01-30
-PKG_SOURCE_VERSION:=c13b6a05dbd9174356cc4b7fd1edf39445efd982
-PKG_MIRROR_HASH:=001e58f1ab6eb8903d9e47060ae037a2e4f021f1fef5032347b767f56f4664f6
+PKG_SOURCE_URL=$(PROJECT_GIT)/project/odhcp6c.git
+PKG_SOURCE_DATE:=2019-01-11
+PKG_SOURCE_VERSION:=d2e247d8d87ecf8c60fcf0acdad05667bd379521
+PKG_MIRROR_HASH:=514e9536b47d1cd34659ed88bd48751ec8219194f7f4f3fa23636ae7fb13c2f8
 PKG_MAINTAINER:=Hans Dedecker <dedeckeh@gmail.com>
 PKG_LICENSE:=GPL-2.0
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
+
+CMAKE_OPTIONS += \
+	-DUSE_LIBUBOX=on
 
 ifneq ($(CONFIG_PACKAGE_odhcp6c_ext_cer_id),0)
   CMAKE_OPTIONS += -DEXT_CER_ID=$(CONFIG_PACKAGE_odhcp6c_ext_cer_id)
@@ -28,7 +31,7 @@ endif
 define Package/odhcp6c
   SECTION:=net
   CATEGORY:=Network
-  TITLE:=Embedded DHCPv6-client for OpenWrt
+  TITLE:=Embedded DHCPv6-client for libreCMC
   DEPENDS:=@IPV6 +libubox
 endef
 

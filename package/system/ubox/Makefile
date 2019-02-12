@@ -5,9 +5,9 @@ PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=$(PROJECT_GIT)/project/ubox.git
-PKG_SOURCE_DATE:=2018-02-14
-PKG_SOURCE_VERSION:=128bc35fa951ac3beff6e977bc3cced87c2e2600
-PKG_MIRROR_HASH:=f58dfb9a9bb69c6303cb69bbd850b14bd29ec59ea240bac4063fd74a7fce64aa
+PKG_SOURCE_DATE:=2018-12-18
+PKG_SOURCE_VERSION:=876c7f5bfb9b13d48e6d7960dd114082a0a95a6d
+PKG_MIRROR_HASH:=7c51ede116f7b17d8249453b10023398a4b662e78294c6fc269c8ed375cb47ce
 CMAKE_INSTALL:=1
 
 PKG_LICENSE:=GPL-2.0
@@ -24,14 +24,14 @@ define Package/ubox
   SECTION:=base
   CATEGORY:=Base system
   DEPENDS:=+libubox +ubusd +ubus +libubus +libuci +USE_GLIBC:librt
-  TITLE:=OpenWrt system helper toolbox
+  TITLE:=libreCMC system helper toolbox
 endef
 
 define Package/logd
 SECTION:=base
   CATEGORY:=Base system
   DEPENDS:=+libubox +libubus +libblobmsg-json +USE_GLIBC:librt
-  TITLE:=OpenWrt system log implementation
+  TITLE:=libreCMC system log implementation
 endef
 
 define Package/ubox/install

@@ -34,7 +34,7 @@ LUCI_LANG.ru=Русский (Russian)
 LUCI_LANG.sk=Slovenčina (Slovak)
 LUCI_LANG.sv=Svenska (Swedish)
 LUCI_LANG.tr=Türkçe (Turkish)
-LUCI_LANG.uk=украї́нська (Ukrainian)
+LUCI_LANG.uk=Українська (Ukrainian)
 LUCI_LANG.vi=Tiếng Việt (Vietnamese)
 LUCI_LANG.zh-cn=中文 (Chinese)
 LUCI_LANG.zh-tw=臺灣華語 (Taiwanese)
@@ -83,8 +83,8 @@ PKG_GITBRANCH?=$(if $(DUMP),x,$(strip $(shell \
 
 PKG_RELEASE?=1
 PKG_INSTALL:=$(if $(realpath src/Makefile),1)
-PKG_BUILD_DEPENDS += lua/host luci-base/host $(LUCI_BUILD_DEPENDS)
-PKG_CONFIG_DEPENDS += CONFIG_LUCI_SRCDIET
+PKG_BUILD_DEPENDS += lua/host luci-base/host LUCI_CSSTIDY:csstidy/host $(LUCI_BUILD_DEPENDS)
+PKG_CONFIG_DEPENDS += CONFIG_LUCI_SRCDIET CONFIG_LUCI_JSMIN CONFIG_LUCI_CSSTIDY
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
@@ -96,6 +96,7 @@ define Package/$(PKG_NAME)
   SUBMENU:=$(if $(LUCI_MENU.$(LUCI_TYPE)),$(LUCI_MENU.$(LUCI_TYPE)),$(LUCI_MENU.app))
   TITLE:=$(if $(LUCI_TITLE),$(LUCI_TITLE),LuCI $(LUCI_NAME) $(LUCI_TYPE))
   DEPENDS:=$(LUCI_DEPENDS)
+  $(if $(LUCI_EXTRA_DEPENDS),EXTRA_DEPENDS:=$(LUCI_EXTRA_DEPENDS))
   $(if $(LUCI_PKGARCH),PKGARCH:=$(LUCI_PKGARCH))
 endef
 
@@ -111,6 +112,14 @@ ifeq ($(PKG_NAME),luci-base)
    config LUCI_SRCDIET
 	bool "Minify Lua sources"
 	default n
+
+   config LUCI_JSMIN
+	bool "Minify JavaScript sources"
+	default y
+
+   config LUCI_CSSTIDY
+        bool "Minify CSS files"
+        default y
 
    menu "Translations"$(foreach lang,$(LUCI_LANGUAGES),
 
@@ -152,7 +161,21 @@ LUCI_LIBRARYDIR = $(LUA_LIBRARYDIR)/luci
 
 define SrcDiet
 	$(FIND) $(1) -type f -name '*.lua' | while read src; do \
-		if LuaSrcDiet --noopt-binequiv -o "$$$$src.o" "$$$$src"; \
+		if LUA_PATH="$(STAGING_DIR_HOSTPKG)/lib/lua/5.1/?.lua" luasrcdiet --noopt-binequiv -o "$$$$src.o" "$$$$src"; \
+		then mv "$$$$src.o" "$$$$src"; fi; \
+	done
+endef
+
+define JsMin
+	$(FIND) $(1) -type f -name '*.js' | while read src; do \
+		if jsmin < "$$$$src" > "$$$$src.o"; \
+		then mv "$$$$src.o" "$$$$src"; fi; \
+	done
+endef
+
+define CssTidy
+	$(FIND) $(1) -type f -name '*.css' | while read src; do \
+		if csstidy "$$$$src" --template=highest --remove_last_semicolon=true "$$$$src.o"; \
 		then mv "$$$$src.o" "$$$$src"; fi; \
 	done
 endef
@@ -176,6 +199,8 @@ define Package/$(PKG_NAME)/install
 	if [ -d $(PKG_BUILD_DIR)/htdocs ]; then \
 	  $(INSTALL_DIR) $(1)$(HTDOCS); \
 	  cp -pR $(PKG_BUILD_DIR)/htdocs/* $(1)$(HTDOCS)/; \
+	  $(if $(CONFIG_LUCI_JSMIN),$(call JsMin,$(1)$(HTDOCS)/),true); \
+	  $(if $(CONFIG_LUCI_CSSTIDY),$(call CssTidy,$(1)$(HTDOCS)/),true); \
 	else true; fi
 	if [ -d $(PKG_BUILD_DIR)/root ]; then \
 	  $(INSTALL_DIR) $(1)/; \

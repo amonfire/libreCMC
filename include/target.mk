@@ -13,11 +13,11 @@ __target_inc=1
 DEVICE_TYPE?=router
 
 # Default packages - the really basic set
-DEFAULT_PACKAGES:=base-files ca-bundle libmbedtls libustream-mbedtls libc libgcc busybox dropbear mtd uci opkg netifd fstools uclient-fetch logd
+DEFAULT_PACKAGES:=base-files libc libgcc busybox dropbear mtd uci opkg netifd fstools uclient-fetch logd
 # For nas targets
 DEFAULT_PACKAGES.nas:=block-mount fdisk lsblk mdadm
 # For router targets
-DEFAULT_PACKAGES.router:=dnsmasq iptables ip6tables ppp ppp-mod-pppoe ppp-mod-pppoa firewall odhcpd odhcp6c
+DEFAULT_PACKAGES.router:=dnsmasq iptables ip6tables ppp ppp-mod-pppoe firewall odhcpd-ipv6only odhcp6c kmod-ipt-offload
 DEFAULT_PACKAGES.bootloader:=
 
 ifneq ($(DUMP),)
@@ -51,11 +51,15 @@ else
   endif
 endif
 
+ifneq ($(filter 3.18 4.9,$(KERNEL_PATCHVER)),)
+  DEFAULT_PACKAGES.router:=$(filter-out kmod-ipt-offload,$(DEFAULT_PACKAGES.router))
+endif
+
 # Add device specific packages (here below to allow device type set from subtarget)
 DEFAULT_PACKAGES += $(DEFAULT_PACKAGES.$(DEVICE_TYPE))
 
 filter_packages = $(filter-out -% $(patsubst -%,%,$(filter -%,$(1))),$(1))
-extra_packages = $(if $(filter wpad-mini wpad nas,$(1)),iwinfo)
+extra_packages = $(if $(filter wpad-mini wpad-basic wpad nas,$(1)),iwinfo)
 
 define ProfileDefault
   NAME:=
@@ -68,6 +72,7 @@ define Profile
   $(eval $(call ProfileDefault))
   $(eval $(call Profile/$(1)))
   dumpinfo : $(call shexport,Profile/$(1)/Description)
+  PACKAGES := $(filter-out -%,$(PACKAGES))
   DUMPINFO += \
 	echo "Target-Profile: $(1)"; \
 	$(if $(PRIORITY), echo "Target-Profile-Priority: $(PRIORITY)"; ) \
@@ -104,7 +109,9 @@ ifneq ($(TARGET_BUILD)$(if $(DUMP),,1),)
 endif
 
 GENERIC_PLATFORM_DIR := $(TOPDIR)/target/linux/generic
-GENERIC_PATCH_DIR := $(GENERIC_PLATFORM_DIR)/patches$(if $(wildcard $(GENERIC_PLATFORM_DIR)/patches-$(KERNEL_PATCHVER)),-$(KERNEL_PATCHVER))
+GENERIC_BACKPORT_DIR := $(GENERIC_PLATFORM_DIR)/backport$(if $(wildcard $(GENERIC_PLATFORM_DIR)/backport-$(KERNEL_PATCHVER)),-$(KERNEL_PATCHVER))
+GENERIC_PATCH_DIR := $(GENERIC_PLATFORM_DIR)/pending$(if $(wildcard $(GENERIC_PLATFORM_DIR)/pending-$(KERNEL_PATCHVER)),-$(KERNEL_PATCHVER))
+GENERIC_HACK_DIR := $(GENERIC_PLATFORM_DIR)/hack$(if $(wildcard $(GENERIC_PLATFORM_DIR)/hack-$(KERNEL_PATCHVER)),-$(KERNEL_PATCHVER))
 GENERIC_FILES_DIR := $(foreach dir,$(wildcard $(GENERIC_PLATFORM_DIR)/files $(GENERIC_PLATFORM_DIR)/files-$(KERNEL_PATCHVER)),"$(dir)")
 
 __config_name_list = $(1)/config-$(KERNEL_PATCHVER) $(1)/config-default
@@ -167,7 +174,7 @@ ifeq ($(DUMP),1)
     CPU_CFLAGS_mips64 = -mips64 -mtune=mips64 -mabi=64
     CPU_CFLAGS_24kc = -mips32r2 -mtune=24kc
     CPU_CFLAGS_74kc = -mips32r2 -mtune=74kc
-    CPU_CFLAGS_octeon = -march=octeon -mabi=64
+    CPU_CFLAGS_octeonplus = -march=octeon+ -mabi=64
   endif
   ifeq ($(ARCH),i386)
     CPU_TYPE ?= pentium
@@ -186,6 +193,7 @@ ifeq ($(DUMP),1)
     CPU_CFLAGS_cortex-a9 = -mcpu=cortex-a9
     CPU_CFLAGS_cortex-a15 = -mcpu=cortex-a15
     CPU_CFLAGS_cortex-a53 = -mcpu=cortex-a53
+    CPU_CFLAGS_cortex-a72 = -mcpu=cortex-a72
     CPU_CFLAGS_fa526 = -mcpu=fa526
     CPU_CFLAGS_mpcore = -mcpu=mpcore
     CPU_CFLAGS_xscale = -mcpu=xscale
@@ -203,20 +211,29 @@ ifeq ($(DUMP),1)
     CPU_CFLAGS_440:=-mcpu=440
     CPU_CFLAGS_464fp:=-mcpu=464fp
   endif
+  ifeq ($(ARCH),powerpc64)
+    CPU_TYPE ?= powerpc64
+    CPU_CFLAGS_powerpc64:=-mcpu=powerpc64
+  endif
   ifeq ($(ARCH),sparc)
     CPU_TYPE = sparc
     CPU_CFLAGS_ultrasparc = -mcpu=ultrasparc
   endif
   ifeq ($(ARCH),aarch64)
-    CPU_TYPE ?= armv8-a
-    CPU_CFLAGS_armv8-a = -mcpu=armv8-a
+    CPU_TYPE ?= generic
+    CPU_CFLAGS_generic = -mcpu=generic
     CPU_CFLAGS_cortex-a53 = -mcpu=cortex-a53
   endif
   ifeq ($(ARCH),arc)
     CPU_TYPE ?= arc700
     CPU_CFLAGS += -matomic
-    CPU_CFLAGS_arc700 = -marc700
-    CPU_CFLAGS_archs = -marchs
+    CPU_CFLAGS_arc700 = -mcpu=arc700
+    CPU_CFLAGS_archs = -mcpu=archs
+  endif
+  ifneq ($(CPU_TYPE),)
+    ifndef CPU_CFLAGS_$(CPU_TYPE)
+      $(warning CPU_TYPE "$(CPU_TYPE)" doesn't correspond to a known type)
+    endif
   endif
   DEFAULT_CFLAGS=$(strip $(CPU_CFLAGS) $(CPU_CFLAGS_$(CPU_TYPE)) $(CPU_CFLAGS_$(CPU_SUBTYPE)))
 

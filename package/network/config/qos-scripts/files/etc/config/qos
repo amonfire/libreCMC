@@ -1,4 +1,4 @@
-# QoS configuration for OpenWrt
+# QoS configuration for libreCMC
 
 # INTERFACES:
 config interface wan

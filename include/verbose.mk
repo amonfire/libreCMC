@@ -5,22 +5,22 @@
 # See /LICENSE for more information.
 #
 
-ifndef OPENWRT_VERBOSE
-  OPENWRT_VERBOSE:=
+ifndef LIBRECMC_VERBOSE
+  LIBRECMC_VERBOSE:=
 endif
 ifeq ("$(origin V)", "command line")
-  OPENWRT_VERBOSE:=$(V)
+  LIBRECMC_VERBOSE:=$(V)
 endif
 
-ifeq ($(OPENWRT_VERBOSE),1)
-  OPENWRT_VERBOSE:=w
+ifeq ($(LIBRECMC_VERBOSE),1)
+  LIBRECMC_VERBOSE:=w
 endif
-ifeq ($(OPENWRT_VERBOSE),99)
-  OPENWRT_VERBOSE:=s
+ifeq ($(LIBRECMC_VERBOSE),99)
+  LIBRECMC_VERBOSE:=s
 endif
 
 ifeq ($(NO_TRACE_MAKE),)
-NO_TRACE_MAKE := $(MAKE) V=s$(OPENWRT_VERBOSE)
+NO_TRACE_MAKE := $(MAKE) V=s$(LIBRECMC_VERBOSE)
 export NO_TRACE_MAKE
 endif
 
@@ -32,7 +32,7 @@ ifeq ($(IS_TTY),1)
   endif
 endif
 
-ifeq ($(findstring s,$(OPENWRT_VERBOSE)),)
+ifeq ($(findstring s,$(LIBRECMC_VERBOSE)),)
   define MESSAGE
 	printf "$(_Y)%s$(_N)\n" "$(1)" >&8
   endef
@@ -52,9 +52,9 @@ ifeq ($(findstring s,$(OPENWRT_VERBOSE)),)
     ))
     SUBMAKE=$(MAKE)
   else
-    SILENT:=>/dev/null $(if $(findstring w,$(OPENWRT_VERBOSE)),,2>&1)
+    SILENT:=>/dev/null $(if $(findstring w,$(LIBRECMC_VERBOSE)),,2>&1)
     export QUIET:=1
-    SUBMAKE=cmd() { $(SILENT) $(MAKE) -s $$* < /dev/null || { echo "make $$*: build failed. Please re-run make with -j1 V=s to see what's going on"; false; } } 8>&1 9>&2; cmd
+    SUBMAKE=cmd() { $(SILENT) $(MAKE) -s "$$@" < /dev/null || { echo "make $$*: build failed. Please re-run make with -j1 V=s or V=sc for a higher verbosity level to see what's going on"; false; } } 8>&1 9>&2; cmd
   endif
 
   .SILENT: $(MAKECMDGOALS)

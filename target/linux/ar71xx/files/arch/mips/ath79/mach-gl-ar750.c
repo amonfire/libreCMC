@@ -144,4 +144,3 @@ static void __init gl_ar750_setup(void)
 
 MIPS_MACHINE(ATH79_MACH_GL_AR750, "GL-AR750", "GL.iNet GL-AR750",
 	     gl_ar750_setup);
-

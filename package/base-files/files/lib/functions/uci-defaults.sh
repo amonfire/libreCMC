@@ -27,29 +27,32 @@ json_select_object() {
 	json_select "$1"
 }
 
-_ucidef_set_interface() {
-	local name="$1"
-	local iface="$2"
-	local proto="$3"
+ucidef_set_interface() {
+	local network=$1; shift
 
-	json_select_object "$name"
-	json_add_string ifname "$iface"
+	[ -z "$network" ] && return
 
-	if ! json_is_a protocol string || [ -n "$proto" ]; then
-		case "$proto" in
-			static|dhcp|none|pppoe) : ;;
-			*)
-				case "$name" in
-					lan) proto="static" ;;
-					wan) proto="dhcp" ;;
-					*) proto="none" ;;
-				esac
-			;;
+	json_select_object network
+	json_select_object "$network"
+
+	while [ -n "$1" ]; do
+		local opt=$1; shift
+		local val=$1; shift
+
+		[ -n "$opt" -a -n "$val" ] || break
+
+		json_add_string "$opt" "$val"
+	done
+
+	if ! json_is_a protocol string; then
+		case "$network" in
+			lan) json_add_string protocol static ;;
+			wan) json_add_string protocol dhcp ;;
+			*) json_add_string protocol none ;;
 		esac
-
-		json_add_string protocol "$proto"
 	fi
 
+	json_select ..
 	json_select ..
 }
 
@@ -66,31 +69,19 @@ ucidef_set_model_name() {
 }
 
 ucidef_set_interface_lan() {
-	json_select_object network
-	_ucidef_set_interface lan "$@"
-	json_select ..
+	ucidef_set_interface "lan" ifname "$1" protocol "${2:-static}"
 }
 
 ucidef_set_interface_wan() {
-	json_select_object network
-	_ucidef_set_interface wan "$@"
-	json_select ..
+	ucidef_set_interface "wan" ifname "$1" protocol "${2:-dhcp}"
 }
 
 ucidef_set_interfaces_lan_wan() {
 	local lan_if="$1"
 	local wan_if="$2"
 
-	json_select_object network
-	_ucidef_set_interface lan "$lan_if"
-	_ucidef_set_interface wan "$wan_if"
-	json_select ..
-}
-
-ucidef_set_interface_raw() {
-	json_select_object network
-	_ucidef_set_interface "$@"
-	json_select ..
+	ucidef_set_interface_lan "$lan_if"
+	ucidef_set_interface_wan "$wan_if"
 }
 
 _ucidef_add_switch_port() {
@@ -160,7 +151,7 @@ _ucidef_finish_switch_roles() {
 					json_select ..
 				json_select ..
 
-				if [ $n_vlan -gt $n_cpu -o ${need_tag:-0} -eq 1 ]; then
+				if [ ${need_tag:-0} -eq 1 -o ${want_untag:-0} -ne 1 ]; then
 					num="${num}t"
 					device="${device}.${index}"
 				fi
@@ -185,9 +176,9 @@ _ucidef_finish_switch_roles() {
 					devices="${devices:+$devices }$device"
 				fi
 			json_select ..
-
-			_ucidef_set_interface "$role" "$devices"
 		json_select ..
+
+		ucidef_set_interface "$role" ifname "$devices"
 	done
 }
 
@@ -300,18 +291,7 @@ ucidef_set_interface_macaddr() {
 	local network="$1"
 	local macaddr="$2"
 
-	json_select_object network
-
-	json_select "$network"
-	[ $? -eq 0 ] || {
-		json_select ..
-		return
-	}
-
-	json_add_string macaddr "$macaddr"
-	json_select ..
-
-	json_select ..
+	ucidef_set_interface "$network" macaddr "$macaddr"
 }
 
 ucidef_add_atm_bridge() {
@@ -319,6 +299,7 @@ ucidef_add_atm_bridge() {
 	local vci="$2"
 	local encaps="$3"
 	local payload="$4"
+	local nameprefix="$5"
 
 	json_select_object dsl
 		json_select_object atmbridge
@@ -326,6 +307,7 @@ ucidef_add_atm_bridge() {
 			json_add_int vci "$vci"
 			json_add_string encaps "$encaps"
 			json_add_string payload "$payload"
+			json_add_string nameprefix "$nameprefix"
 		json_select ..
 	json_select ..
 }
@@ -358,19 +340,59 @@ ucidef_add_vdsl_modem() {
 	json_select ..
 }
 
-ucidef_set_led_netdev() {
+ucidef_set_led_ataport() {
+	_ucidef_set_led_trigger "$1" "$2" "$3" ata"$4"
+}
+
+_ucidef_set_led_common() {
 	local cfg="led_$1"
 	local name="$2"
 	local sysfs="$3"
-	local dev="$4"
-	local mode="${5:-link tx rx}"
 
 	json_select_object led
 
 	json_select_object "$1"
 	json_add_string name "$name"
-	json_add_string type netdev
 	json_add_string sysfs "$sysfs"
+}
+
+ucidef_set_led_default() {
+	local default="$4"
+
+	_ucidef_set_led_common "$1" "$2" "$3"
+
+	json_add_string default "$default"
+	json_select ..
+
+	json_select ..
+}
+
+ucidef_set_led_gpio() {
+	local gpio="$4"
+	local inverted="$5"
+
+	_ucidef_set_led_common "$1" "$2" "$3"
+
+	json_add_string trigger "$trigger"
+	json_add_string type gpio
+	json_add_int gpio "$gpio"
+	json_add_boolean inverted "$inverted"
+	json_select ..
+
+	json_select ..
+}
+
+ucidef_set_led_ide() {
+	_ucidef_set_led_trigger "$1" "$2" "$3" ide-disk
+}
+
+ucidef_set_led_netdev() {
+	local dev="$4"
+	local mode="${5:-link tx rx}"
+
+	_ucidef_set_led_common "$1" "$2" "$3"
+
+	json_add_string type netdev
 	json_add_string device "$dev"
 	json_add_string mode "$mode"
 	json_select ..
@@ -378,22 +400,106 @@ ucidef_set_led_netdev() {
 	json_select ..
 }
 
+ucidef_set_led_oneshot() {
+	_ucidef_set_led_timer $1 $2 $3 "oneshot" $4 $5
+}
+
+ucidef_set_led_portstate() {
+	local port_state="$4"
+
+	_ucidef_set_led_common "$1" "$2" "$3"
+
+	json_add_string trigger port_state
+	json_add_string type portstate
+	json_add_string port_state "$port_state"
+	json_select ..
+
+	json_select ..
+}
+
+ucidef_set_led_rssi() {
+	local iface="$4"
+	local minq="$5"
+	local maxq="$6"
+	local offset="${7:-0}"
+	local factor="${8:-1}"
+
+	_ucidef_set_led_common "$1" "$2" "$3"
+
+	json_add_string type rssi
+	json_add_string name "$name"
+	json_add_string iface "$iface"
+	json_add_string minq "$minq"
+	json_add_string maxq "$maxq"
+	json_add_string offset "$offset"
+	json_add_string factor "$factor"
+	json_select ..
+
+	json_select ..
+}
+
+ucidef_set_led_switch() {
+	local trigger_name="$4"
+	local port_mask="$5"
+	local speed_mask="$6"
+	local mode="$7"
+
+	_ucidef_set_led_common "$1" "$2" "$3"
+
+	json_add_string trigger "$trigger_name"
+	json_add_string type switch
+	json_add_string mode "$mode"
+	json_add_string port_mask "$port_mask"
+	json_add_string speed_mask "$speed_mask"
+	json_select ..
+
+	json_select ..
+}
+
+_ucidef_set_led_timer() {
+	local trigger_name="$4"
+	local delayon="$5"
+	local delayoff="$6"
+
+	_ucidef_set_led_common "$1" "$2" "$3"
+
+	json_add_string trigger "$trigger_name"
+	json_add_int delayon "$delayon"
+	json_add_int delayoff "$delayoff"
+	json_select ..
+
+	json_select ..
+}
+
+ucidef_set_led_timer() {
+	_ucidef_set_led_timer $1 $2 $3 "timer" $4 $5
+}
+
+_ucidef_set_led_trigger() {
+	local trigger_name="$4"
+
+	_ucidef_set_led_common "$1" "$2" "$3"
+
+	json_add_string trigger "$trigger_name"
+	json_select ..
+
+	json_select ..
+}
+
 ucidef_set_led_usbdev() {
-	local cfg="led_$1"
-	local name="$2"
-	local sysfs="$3"
 	local dev="$4"
 
-	json_select_object led
+	_ucidef_set_led_common "$1" "$2" "$3"
 
-	json_select_object "$1"
-	json_add_string name "$name"
 	json_add_string type usb
-	json_add_string sysfs "$sysfs"
 	json_add_string device "$dev"
 	json_select ..
 
 	json_select ..
+}
+
+ucidef_set_led_usbhost() {
+	_ucidef_set_led_trigger "$1" "$2" "$3" usb-host
 }
 
 ucidef_set_led_usbport() {
@@ -404,12 +510,9 @@ ucidef_set_led_usbport() {
 	shift
 	shift
 
-	json_select_object led
+	_ucidef_set_led_common "$obj" "$name" "$sysfs"
 
-	json_select_object "$obj"
-	json_add_string name "$name"
 	json_add_string type usbport
-	json_add_string sysfs "$sysfs"
 	json_select_array ports
 		for port in "$@"; do
 			json_add_string port "$port"
@@ -421,171 +524,7 @@ ucidef_set_led_usbport() {
 }
 
 ucidef_set_led_wlan() {
-	local cfg="led_$1"
-	local name="$2"
-	local sysfs="$3"
-	local trigger="$4"
-
-	json_select_object led
-
-	json_select_object "$1"
-	json_add_string name "$name"
-	json_add_string type trigger
-	json_add_string sysfs "$sysfs"
-	json_add_string trigger "$trigger"
-	json_select ..
-
-	json_select ..
-}
-
-ucidef_set_led_switch() {
-	local cfg="led_$1"
-	local name="$2"
-	local sysfs="$3"
-	local trigger="$4"
-	local port_mask="$5"
-	local speed_mask="$6"
-
-	json_select_object led
-
-	json_select_object "$1"
-	json_add_string name "$name"
-	json_add_string type switch
-	json_add_string sysfs "$sysfs"
-	json_add_string trigger "$trigger"
-	json_add_string port_mask "$port_mask"
-	json_add_string speed_mask "$speed_mask"
-	json_select ..
-
-	json_select ..
-}
-
-ucidef_set_led_portstate() {
-	local cfg="led_$1"
-	local name="$2"
-	local sysfs="$3"
-	local port_state="$4"
-
-	json_select_object led
-
-	json_select_object "$1"
-	json_add_string name "$name"
-	json_add_string type portstate
-	json_add_string sysfs "$sysfs"
-	json_add_string trigger port_state
-	json_add_string port_state "$port_state"
-	json_select ..
-
-	json_select ..
-}
-
-ucidef_set_led_default() {
-	local cfg="led_$1"
-	local name="$2"
-	local sysfs="$3"
-	local default="$4"
-
-	json_select_object led
-
-	json_select_object "$1"
-	json_add_string name "$name"
-	json_add_string sysfs "$sysfs"
-	json_add_string default "$default"
-	json_select ..
-
-	json_select ..
-}
-
-ucidef_set_led_gpio() {
-	local cfg="led_$1"
-	local name="$2"
-	local sysfs="$3"
-	local gpio="$4"
-	local inverted="$5"
-
-	json_select_object led
-
-	json_select_object "$1"
-	json_add_string type gpio
-	json_add_string name "$name"
-	json_add_string sysfs "$sysfs"
-	json_add_string trigger "$trigger"
-	json_add_int gpio "$gpio"
-	json_add_boolean inverted "$inverted"
-	json_select ..
-
-	json_select ..
-}
-
-ucidef_set_led_ide() {
-	local cfg="led_$1"
-	local name="$2"
-	local sysfs="$3"
-
-	json_select_object led
-
-	json_select_object "$1"
-	json_add_string name "$name"
-	json_add_string sysfs "$sysfs"
-	json_add_string trigger ide-disk
-	json_select ..
-
-	json_select ..
-}
-
-__ucidef_set_led_timer() {
-	local cfg="led_$1"
-	local name="$2"
-	local sysfs="$3"
-	local trigger="$4"
-	local delayon="$5"
-	local delayoff="$6"
-
-	json_select_object led
-
-	json_select_object "$1"
-	json_add_string type "$trigger"
-	json_add_string name "$name"
-	json_add_string sysfs "$sysfs"
-	json_add_int delayon "$delayon"
-	json_add_int delayoff "$delayoff"
-	json_select ..
-
-	json_select ..
-}
-
-ucidef_set_led_oneshot() {
-	__ucidef_set_led_timer $1 $2 $3 "oneshot" $4 $5
-}
-
-ucidef_set_led_timer() {
-	__ucidef_set_led_timer $1 $2 $3 "timer" $4 $5
-}
-
-ucidef_set_led_rssi() {
-	local cfg="led_$1"
-	local name="$2"
-	local sysfs="$3"
-	local iface="$4"
-	local minq="$5"
-	local maxq="$6"
-	local offset="$7"
-	local factor="$8"
-
-	json_select_object led
-
-	json_select_object "$1"
-	json_add_string type rssi
-	json_add_string name "$name"
-	json_add_string iface "$iface"
-	json_add_string sysfs "$sysfs"
-	json_add_string minq "$minq"
-	json_add_string maxq "$maxq"
-	json_add_string offset "$offset"
-	json_add_string factor "$factor"
-	json_select ..
-
-	json_select ..
+	_ucidef_set_led_trigger "$1" "$2" "$3" "$4"
 }
 
 ucidef_set_rssimon() {
@@ -601,7 +540,6 @@ ucidef_set_rssimon() {
 	json_select ..
 
 	json_select ..
-
 }
 
 ucidef_add_gpio_switch() {

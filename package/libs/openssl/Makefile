@@ -36,7 +36,7 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_OPENSSL_WITH_EC2M \
 	CONFIG_OPENSSL_WITH_SSL3 \
 	CONFIG_OPENSSL_HARDWARE_SUPPORT \
-	CONFIG_OPENSSL_WITH_DEPRECATED \
+	CONFIG_OPENSSL_NO_DEPRECATED \
 	CONFIG_OPENSSL_WITH_DTLS \
 	CONFIG_OPENSSL_WITH_COMPRESSION \
 	CONFIG_OPENSSL_WITH_NPN \
@@ -130,7 +130,7 @@ ifndef CONFIG_OPENSSL_HARDWARE_SUPPORT
   OPENSSL_OPTIONS += no-hw
 endif
 
-ifndef CONFIG_OPENSSL_WITH_DEPRECATED
+ifdef CONFIG_OPENSSL_NO_DEPRECATED
   OPENSSL_OPTIONS += no-deprecated
 endif
 
@@ -161,18 +161,18 @@ ifeq ($(CONFIG_OPENSSL_OPTIMIZE_SPEED),y)
 endif
 
 ifeq ($(CONFIG_x86_64),y)
-  OPENSSL_TARGET:=linux-x86_64-openwrt
+  OPENSSL_TARGET:=linux-x86_64-librecmc
   OPENSSL_MAKEFLAGS += LIBDIR=lib
 else
   OPENSSL_OPTIONS+=no-sse2
   ifeq ($(CONFIG_mips)$(CONFIG_mipsel),y)
-    OPENSSL_TARGET:=linux-mips-openwrt
+    OPENSSL_TARGET:=linux-mips-librecmc
   else ifeq ($(CONFIG_aarch64),y)
-    OPENSSL_TARGET:=linux-aarch64-openwrt
+    OPENSSL_TARGET:=linux-aarch64-librecmc
   else ifeq ($(CONFIG_arm)$(CONFIG_armeb),y)
-    OPENSSL_TARGET:=linux-armv4-openwrt
+    OPENSSL_TARGET:=linux-armv4-librecmc
   else
-    OPENSSL_TARGET:=linux-generic-openwrt
+    OPENSSL_TARGET:=linux-generic-librecmc
     OPENSSL_OPTIONS+=no-perlasm
   endif
 endif
@@ -197,7 +197,7 @@ define Build/Configure
 	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) \
 		CROSS_COMPILE="$(TARGET_CROSS)" \
 		MAKEDEPPROG="$(TARGET_CROSS)gcc" \
-		OPENWRT_OPTIMIZATION_FLAGS="$(TARGET_CFLAGS)" \
+		LIBRECMC_OPTIMIZATION_FLAGS="$(TARGET_CFLAGS)" \
 		$(OPENSSL_MAKEFLAGS) \
 		depend
 endef
@@ -212,7 +212,7 @@ define Build/Compile
 		ASFLAGS="$(TARGET_ASFLAGS) -I$(PKG_BUILD_DIR)/crypto -c" \
 		AR="$(TARGET_CROSS)ar r" \
 		RANLIB="$(TARGET_CROSS)ranlib" \
-		OPENWRT_OPTIMIZATION_FLAGS="$(TARGET_CFLAGS)" \
+		LIBRECMC_OPTIMIZATION_FLAGS="$(TARGET_CFLAGS)" \
 		$(OPENSSL_MAKEFLAGS) \
 		all
 	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) \
@@ -221,7 +221,7 @@ define Build/Compile
 		ASFLAGS="$(TARGET_ASFLAGS) -I$(PKG_BUILD_DIR)/crypto -c" \
 		AR="$(TARGET_CROSS)ar r" \
 		RANLIB="$(TARGET_CROSS)ranlib" \
-		OPENWRT_OPTIMIZATION_FLAGS="$(TARGET_CFLAGS)" \
+		LIBRECMC_OPTIMIZATION_FLAGS="$(TARGET_CFLAGS)" \
 		$(OPENSSL_MAKEFLAGS) \
 		build-shared
 	# Work around openssl build bug to link libssl.so with libcrypto.so.
@@ -229,7 +229,7 @@ define Build/Compile
 	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) \
 		CROSS_COMPILE="$(TARGET_CROSS)" \
 		CC="$(TARGET_CC)" \
-		OPENWRT_OPTIMIZATION_FLAGS="$(TARGET_CFLAGS)" \
+		LIBRECMC_OPTIMIZATION_FLAGS="$(TARGET_CFLAGS)" \
 		$(OPENSSL_MAKEFLAGS) \
 		do_linux-shared
 	$(MAKE) -C $(PKG_BUILD_DIR) \

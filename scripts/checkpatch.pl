@@ -1,17 +1,18 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl 
 # (c) 2001, Dave Jones. (the file handling bit)
 # (c) 2005, Joel Schopp <jschopp@austin.ibm.com> (the ugly bit)
 # (c) 2007,2008, Andy Whitcroft <apw@uk.ibm.com> (new conditions, test suite)
 # (c) 2008-2010 Andy Whitcroft <apw@canonical.com>
-# (c) 2013 Vasilis Tsiligiannis <acinonyx@openwrt.gr> (adapt for OpenWrt tree)
+# (c) 2013 Vasilis Tsiligiannis <acinonyx@librecmc.gr> (adapt for libreCMC tree)
 # Licensed under the terms of the GNU GPL License version 2
 
 use strict;
+use warnings;
 
 my $P = $0;
 $P =~ s@.*/@@g;
 
-my $V = '0.32-openwrt';
+my $V = '0.32-librecmc';
 
 use Getopt::Long qw(:config no_auto_abbrev);
 
@@ -160,20 +161,20 @@ if ($terse) {
 
 if ($tree) {
 	if (defined $root) {
-		if (!top_of_openwrt_tree($root)) {
+		if (!top_of_librecmc_tree($root)) {
 			die "$P: $root: --root does not point at a valid tree\n";
 		}
 	} else {
-		if (top_of_openwrt_tree('.')) {
+		if (top_of_librecmc_tree('.')) {
 			$root = '.';
 		} elsif ($0 =~ m@(.*)/scripts/[^/]*$@ &&
-						top_of_openwrt_tree($1)) {
+						top_of_librecmc_tree($1)) {
 			$root = $1;
 		}
 	}
 
 	if (!defined $root) {
-		print "Must be run from the top-level dir. of a LEDE tree\n";
+		print "Must be run from the top-level dir. of a libreCMC tree\n";
 		exit(2);
 	}
 }
@@ -386,7 +387,7 @@ for my $filename (@ARGV) {
 
 exit($exit);
 
-sub top_of_openwrt_tree {
+sub top_of_librecmc_tree {
 	my ($root) = @_;
 
 	my @tree_check = (

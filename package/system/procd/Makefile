@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=procd
-PKG_RELEASE:=3
+PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL=$(PROJECT_GIT)/procd.git
-PKG_SOURCE_DATE:=2018-01-23
-PKG_SOURCE_VERSION:=9a4036fb1b7412ab2ea4f360d2cc7e6a5e0fa6b5
-PKG_MIRROR_HASH:=bc500e2afe76fc0ce591900ddc5d68b33092841229a835699abc1e3455fc4499
+PKG_SOURCE_URL=$(PROJECT_GIT)/project/procd.git
+PKG_SOURCE_DATE:=2018-11-23
+PKG_SOURCE_VERSION:=d6673547adc3768ce674799fa35952351866c9d0
+PKG_MIRROR_HASH:=ee11e1f652e9268e21dfd7835d26993c682ed33f6ba474c283cb9ef04f71e626
 CMAKE_INSTALL:=1
 
 PKG_LICENSE:=GPL-2.0
@@ -22,11 +22,9 @@ PKG_LICENSE_FILES:=
 
 PKG_MAINTAINER:=John Crispin <john@phrozen.org>
 
-PKG_FLAGS:=nonshared
-
 PKG_CONFIG_DEPENDS:= \
 	CONFIG_TARGET_INIT_PATH CONFIG_KERNEL_SECCOMP \
-	CONFIG_NAND_SUPPORT CONFIG_PROCD_SHOW_BOOT CONFIG_PROCD_ZRAM_TMPFS \
+	CONFIG_PROCD_SHOW_BOOT CONFIG_PROCD_ZRAM_TMPFS \
 	CONFIG_KERNEL_NAMESPACES CONFIG_PACKAGE_procd-ujail CONFIG_PACKAGE_procd-seccomp
 
 include $(INCLUDE_DIR)/package.mk
@@ -39,39 +37,28 @@ endif
 CMAKE_OPTIONS += -DEARLY_PATH="$(TARGET_INIT_PATH)"
 TARGET_LDFLAGS += $(if $(CONFIG_USE_GLIBC),-lrt)
 
+TARGET_CFLAGS += -flto
+TARGET_LDFLAGS += -flto
+
 define Package/procd
   SECTION:=base
   CATEGORY:=Base system
-  DEPENDS:=+ubusd +ubus +libjson-script +ubox +USE_GLIBC:librt +libubox +libubus +NAND_SUPPORT:procd-nand
-  TITLE:=OpenWrt system process manager
+  DEPENDS:=+ubusd +ubus +libjson-script +ubox +USE_GLIBC:librt +libubox +libubus
+  TITLE:=libreCMC system process manager
 endef
 
 define Package/procd-ujail
   SECTION:=base
   CATEGORY:=Base system
   DEPENDS:=@KERNEL_NAMESPACES +@KERNEL_UTS_NS +@KERNEL_IPC_NS +@KERNEL_PID_NS +libubox +libblobmsg-json
-  TITLE:=OpenWrt process jail helper
+  TITLE:=libreCMC process jail helper
 endef
 
 define Package/procd-seccomp
   SECTION:=base
   CATEGORY:=Base system
   DEPENDS:=@arm||@armeb||@mips||@mipsel||@i386||@x86_64 @!TARGET_uml @KERNEL_SECCOMP +libubox +libblobmsg-json
-  TITLE:=OpenWrt process seccomp helper + utrace
-endef
-
-define Package/procd-nand
-  SECTION:=utils
-  CATEGORY:=Utilities
-  DEPENDS:=@NAND_SUPPORT +ubi-utils
-  TITLE:=OpenWrt sysupgrade nand helper
-endef
-
-define Package/procd-nand-firstboot
-  SECTION:=utils
-  CATEGORY:=Utilities
-  DEPENDS:=procd-nand
-  TITLE:=OpenWrt firstboot nand helper
+  TITLE:=libreCMC process seccomp helper + utrace
 endef
 
 define Package/procd/config
@@ -91,10 +78,6 @@ endmenu
 endef
 
 
-ifeq ($(CONFIG_NAND_SUPPORT),y)
-  CMAKE_OPTIONS += -DBUILD_UPGRADED=1
-endif
-
 ifeq ($(CONFIG_PROCD_SHOW_BOOT),y)
   CMAKE_OPTIONS += -DSHOW_BOOT_ON_CONSOLE=1
 endif
@@ -113,10 +96,10 @@ CMAKE_OPTIONS += -DSECCOMP_SUPPORT=$(SECCOMP) -DUTRACE_SUPPORT=$(SECCOMP)
 define Package/procd/install
 	$(INSTALL_DIR) $(1)/sbin $(1)/etc $(1)/lib/functions
 
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/{init,procd,askfirst,udevtrigger} $(1)/sbin/
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/{init,procd,askfirst,udevtrigger,upgraded} $(1)/sbin/
 	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/libsetlbf.so $(1)/lib
 	$(INSTALL_BIN) ./files/reload_config $(1)/sbin/
-	$(INSTALL_DATA) ./files/hotplug*.json $(1)/etc/
+	$(INSTALL_CONF) ./files/hotplug*.json $(1)/etc/
 	$(INSTALL_DATA) ./files/procd.sh $(1)/lib/functions/
 endef
 
@@ -129,25 +112,10 @@ define Package/procd-seccomp/install
 	$(INSTALL_DIR) $(1)/sbin $(1)/lib
 	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/libpreload-seccomp.so $(1)/lib
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/utrace $(1)/sbin/
-	ln -s utrace $(1)/sbin/seccomp-trace
+	$(LN) utrace $(1)/sbin/seccomp-trace
 	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/libpreload-trace.so $(1)/lib
-endef
-
-define Package/procd-nand/install
-	$(INSTALL_DIR) $(1)/sbin $(1)/lib/upgrade
-
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/upgraded $(1)/sbin/
-	$(INSTALL_DATA) ./files/nand.sh $(1)/lib/upgrade/
-endef
-
-define Package/procd-nand-firstboot/install
-	$(INSTALL_DIR) $(1)/lib/preinit
-
-	$(INSTALL_DATA) ./files/nand-preinit.sh $(1)/lib/preinit/60-nand-firstboot.sh
 endef
 
 $(eval $(call BuildPackage,procd))
 $(eval $(call BuildPackage,procd-ujail))
 $(eval $(call BuildPackage,procd-seccomp))
-$(eval $(call BuildPackage,procd-nand))
-$(eval $(call BuildPackage,procd-nand-firstboot))

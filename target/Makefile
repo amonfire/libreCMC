@@ -6,12 +6,14 @@
 #
 curdir:=target
 
-$(curdir)/builddirs:=linux sdk imagebuilder toolchain
+$(curdir)/subtargets:=install
+$(curdir)/builddirs:=linux sdk ccsdisk imagebuilder toolchain
 $(curdir)/builddirs-default:=linux
-$(curdir)/builddirs-install:=linux $(if $(CONFIG_SDK),sdk) $(if $(CONFIG_IB),imagebuilder) $(if $(CONFIG_MAKE_TOOLCHAIN),toolchain)
+$(curdir)/builddirs-install:=linux $(if $(CONFIG_SDK),sdk) $(if $(CONFIG_IB),imagebuilder) $(if $(CONFIG_MAKE_TOOLCHAIN),toolchain) $(if $(CONFIG_CCS),ccsdisk)
 
 $(curdir)/sdk/install:=$(curdir)/linux/install
 $(curdir)/imagebuilder/install:=$(curdir)/linux/install
+$(curdir)/ccsdisk/install:=$(curdir)/ccsdisk/install
 
 $(eval $(call stampfile,$(curdir),target,prereq,.config))
 $(eval $(call stampfile,$(curdir),target,compile,$(TMP_DIR)/.build))

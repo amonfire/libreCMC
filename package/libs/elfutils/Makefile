@@ -1,6 +1,6 @@
 #
 # Copyright (C) 2010-2014 OpenWrt.org
-# Copyright (C) 2016 Luiz Angelo Daros de Luca <luizluca@gmail.com>
+# Copyright (C) 2016-2017 Luiz Angelo Daros de Luca <luizluca@gmail.com>
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -8,15 +8,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=elfutils
-PKG_VERSION:=0.168
+PKG_VERSION:=0.175
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://sourceware.org/$(PKG_NAME)/ftp/$(PKG_VERSION)
-PKG_HASH:=b88d07893ba1373c7dd69a7855974706d05377766568a7d9002706d5de72c276
+PKG_HASH:=f7ef925541ee32c6d15ae5cb27da5f119e01a5ccdbe9fe57bf836730d7b7a65b
 PKG_MAINTAINER:=Luiz Angelo Daros de Luca <luizluca@gmail.com>
 PKG_LICENSE:=GPL-3.0+
 PKG_LICENSE_FILES:=COPYING COPYING-GPLV2 COPYING-LGPLV3
+PKG_CPE_ID:=cpe:/a:elfutils_project:elfutils
+PKG_FIXUP:=autoreconf
 
 PKG_INSTALL:=1
 PKG_USE_MIPS16:=0
@@ -52,46 +54,42 @@ define Package/libelf1
 endef
 
 ifeq ($(CONFIG_BUILD_NLS),y)
-TARGET_LDFLAGS += "-lintl"
-endif
-
-ifdef CONFIG_USE_UCLIBC
-CONFIGURE_VARS += \
-	LIBS="-largp"
-endif
-
-ifdef CONFIG_USE_MUSL
-CONFIGURE_VARS += \
-	LIBS="-largp"
+TARGET_LDFLAGS += -lintl
+else
+CONFIGURE_ARGS += --disable-nls
 endif
 
 CONFIGURE_ARGS += \
+	--program-prefix=eu- \
 	--without-lzma
 
-TARGET_CFLAGS += -D_GNU_SOURCE
+TARGET_CFLAGS += -D_GNU_SOURCE -Wno-unused-result -Wno-format-nonliteral
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/* $(1)/usr/include/
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/libasm/libasm.{a,so*} $(1)/usr/lib/
-	$(CP) $(PKG_BUILD_DIR)/libdw/libdw.{a,so*} $(1)/usr/lib/
-	$(CP) $(PKG_BUILD_DIR)/libelf/libelf.{a,so*} $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libasm*.{a,so*} $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libdw*.{a,so*} $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libelf*.{a,so*} $(1)/usr/lib/
+	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/libelf.pc $(1)/usr/lib/pkgconfig/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/libdw.pc $(1)/usr/lib/pkgconfig/
 endef
 
 define Package/libasm/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/libasm/libasm.so* $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libasm*.so* $(1)/usr/lib/
 endef
 
 define Package/libdw/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/libdw/libdw.so* $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libdw*.so* $(1)/usr/lib/
 endef
 
 define Package/libelf1/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/libelf/libelf.so* $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libelf*.so* $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,libasm))

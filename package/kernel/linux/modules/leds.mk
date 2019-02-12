@@ -32,7 +32,7 @@ define KernelPackage/ledtrig-heartbeat
   AUTOLOAD:=$(call AutoLoad,50,ledtrig-heartbeat)
 endef
 
-define KernelPackage/ledtrig-gpio/description
+define KernelPackage/ledtrig-heartbeat/description
  Kernel module that allows LEDs to blink like heart beat
 endef
 
@@ -58,7 +58,7 @@ define KernelPackage/ledtrig-netdev
   SUBMENU:=$(LEDS_MENU)
   TITLE:=LED NETDEV Trigger
   KCONFIG:=CONFIG_LEDS_TRIGGER_NETDEV
-  FILES:=$(LINUX_DIR)/drivers/leds/ledtrig-netdev.ko
+  FILES:=$(LINUX_DIR)/drivers/leds/trigger/ledtrig-netdev.ko
   AUTOLOAD:=$(call AutoLoad,50,ledtrig-netdev)
 endef
 

@@ -128,6 +128,49 @@ ar8327_get_pad_cfg(struct ar8327_pad_cfg *cfg)
 }
 
 static void
+ar8327_phy_rgmii_set(struct ar8xxx_priv *priv, struct phy_device *phydev)
+{
+	u16 phy_val = 0;
+	int phyaddr = phydev->mdio.addr;
+	struct device_node *np = phydev->mdio.dev.of_node;
+
+	if (!np)
+		return;
+
+	if (!of_property_read_bool(np, "qca,phy-rgmii-en")) {
+		pr_err("ar8327: qca,phy-rgmii-en is not specified\n");
+		return;
+	}
+	ar8xxx_phy_dbg_read(priv, phyaddr,
+				AR8327_PHY_MODE_SEL, &phy_val);
+	phy_val |= AR8327_PHY_MODE_SEL_RGMII;
+	ar8xxx_phy_dbg_write(priv, phyaddr,
+				AR8327_PHY_MODE_SEL, phy_val);
+
+	/* set rgmii tx clock delay if needed */
+	if (!of_property_read_bool(np, "qca,txclk-delay-en")) {
+		pr_err("ar8327: qca,txclk-delay-en is not specified\n");
+		return;
+	}
+	ar8xxx_phy_dbg_read(priv, phyaddr,
+				AR8327_PHY_SYS_CTRL, &phy_val);
+	phy_val |= AR8327_PHY_SYS_CTRL_RGMII_TX_DELAY;
+	ar8xxx_phy_dbg_write(priv, phyaddr,
+				AR8327_PHY_SYS_CTRL, phy_val);
+
+	/* set rgmii rx clock delay if needed */
+	if (!of_property_read_bool(np, "qca,rxclk-delay-en")) {
+		pr_err("ar8327: qca,rxclk-delay-en is not specified\n");
+		return;
+	}
+	ar8xxx_phy_dbg_read(priv, phyaddr,
+				AR8327_PHY_TEST_CTRL, &phy_val);
+	phy_val |= AR8327_PHY_TEST_CTRL_RGMII_RX_DELAY;
+	ar8xxx_phy_dbg_write(priv, phyaddr,
+				AR8327_PHY_TEST_CTRL, phy_val);
+}
+
+static void
 ar8327_phy_fixup(struct ar8xxx_priv *priv, int phy)
 {
 	switch (priv->chip_rev) {
@@ -619,11 +662,11 @@ ar8327_hw_init(struct ar8xxx_priv *priv)
 	if (!priv->chip_data)
 		return -ENOMEM;
 
-	if (priv->phy->dev.of_node)
-		ret = ar8327_hw_config_of(priv, priv->phy->dev.of_node);
+	if (priv->phy->mdio.dev.of_node)
+		ret = ar8327_hw_config_of(priv, priv->phy->mdio.dev.of_node);
 	else
 		ret = ar8327_hw_config_pdata(priv,
-					     priv->phy->dev.platform_data);
+					     priv->phy->mdio.dev.platform_data);
 
 	if (ret)
 		return ret;
@@ -885,10 +928,19 @@ ar8327_setup_port(struct ar8xxx_priv *priv, int port, u32 members)
 
 	t = pvid << AR8327_PORT_VLAN0_DEF_SVID_S;
 	t |= pvid << AR8327_PORT_VLAN0_DEF_CVID_S;
+	if (priv->vlan && priv->port_vlan_prio[port]) {
+		u32 prio = priv->port_vlan_prio[port];
+
+		t |= prio << AR8327_PORT_VLAN0_DEF_SPRI_S;
+		t |= prio << AR8327_PORT_VLAN0_DEF_CPRI_S;
+	}
 	ar8xxx_write(priv, AR8327_REG_PORT_VLAN0(port), t);
 
 	t = AR8327_PORT_VLAN1_PORT_VLAN_PROP;
 	t |= egress << AR8327_PORT_VLAN1_OUT_MODE_S;
+	if (priv->vlan && priv->port_vlan_prio[port])
+		t |= AR8327_PORT_VLAN1_VLAN_PRI_PROP;
+
 	ar8xxx_write(priv, AR8327_REG_PORT_VLAN1(port), t);
 
 	t = members;
@@ -1033,8 +1085,10 @@ ar8327_wait_atu_ready(struct ar8xxx_priv *priv, u16 r2, u16 r1)
 {
 	int timeout = 20;
 
-	while (ar8xxx_mii_read32(priv, r2, r1) & AR8327_ATU_FUNC_BUSY && --timeout)
-                udelay(10);
+	while (ar8xxx_mii_read32(priv, r2, r1) & AR8327_ATU_FUNC_BUSY && --timeout) {
+		udelay(10);
+		cond_resched();
+	}
 
 	if (!timeout)
 		pr_err("ar8327: timeout waiting for atu to become ready\n");
@@ -1046,8 +1100,7 @@ static void ar8327_get_arl_entry(struct ar8xxx_priv *priv,
 	struct mii_bus *bus = priv->mii_bus;
 	u16 r2, page;
 	u16 r1_data0, r1_data1, r1_data2, r1_func;
-	u32 t, val0, val1, val2;
-	int i;
+	u32 val0, val1, val2;
 
 	split_addr(AR8327_REG_ATU_DATA0, &r1_data0, &r2, &page);
 	r2 |= 0x10;
@@ -1084,12 +1137,7 @@ static void ar8327_get_arl_entry(struct ar8xxx_priv *priv,
 		if (!*status)
 			break;
 
-		i = 0;
-		t = AR8327_ATU_PORT0;
-		while (!(val1 & t) && ++i < AR8327_NUM_PORTS)
-			t <<= 1;
-
-		a->port = i;
+		a->portmap = (val1 & AR8327_ATU_PORTS) >> AR8327_ATU_PORTS_S;
 		a->mac[0] = (val0 & AR8327_ATU_ADDR0) >> AR8327_ATU_ADDR0_S;
 		a->mac[1] = (val0 & AR8327_ATU_ADDR1) >> AR8327_ATU_ADDR1_S;
 		a->mac[2] = (val0 & AR8327_ATU_ADDR2) >> AR8327_ATU_ADDR2_S;
@@ -1227,6 +1275,37 @@ ar8327_sw_set_igmp_v3(struct switch_dev *dev,
 	return 0;
 }
 
+static int
+ar8327_sw_set_port_vlan_prio(struct switch_dev *dev, const struct switch_attr *attr,
+			     struct switch_val *val)
+{
+	struct ar8xxx_priv *priv = swdev_to_ar8xxx(dev);
+	int port = val->port_vlan;
+
+	if (port >= dev->ports)
+		return -EINVAL;
+	if (port == 0 || port == 6)
+		return -EOPNOTSUPP;
+	if (val->value.i < 0 || val->value.i > 7)
+		return -EINVAL;
+
+	priv->port_vlan_prio[port] = val->value.i;
+
+	return 0;
+}
+
+static int
+ar8327_sw_get_port_vlan_prio(struct switch_dev *dev, const struct switch_attr *attr,
+                  struct switch_val *val)
+{
+	struct ar8xxx_priv *priv = swdev_to_ar8xxx(dev);
+	int port = val->port_vlan;
+
+	val->value.i = priv->port_vlan_prio[port];
+
+	return 0;
+}
+
 static const struct switch_attr ar8327_sw_attr_globals[] = {
 	{
 		.type = SWITCH_TYPE_INT,
@@ -1273,7 +1352,7 @@ static const struct switch_attr ar8327_sw_attr_globals[] = {
 		.set = ar8xxx_sw_set_mirror_source_port,
 		.get = ar8xxx_sw_get_mirror_source_port,
 		.max = AR8327_NUM_PORTS - 1
- 	},
+	},
 	{
 		.type = SWITCH_TYPE_INT,
 		.name = "arl_age_time",
@@ -1348,6 +1427,14 @@ static const struct switch_attr ar8327_sw_attr_port[] = {
 		.get = ar8327_sw_get_port_igmp_snooping,
 		.max = 1
 	},
+	{
+		.type = SWITCH_TYPE_INT,
+		.name = "vlan_prio",
+		.description = "Port VLAN default priority (VLAN PCP) (0-7)",
+		.set = ar8327_sw_set_port_vlan_prio,
+		.get = ar8327_sw_get_port_vlan_prio,
+		.max = 7,
+	},
 };
 
 static const struct switch_dev_ops ar8327_sw_ops = {
@@ -1370,6 +1457,16 @@ static const struct switch_dev_ops ar8327_sw_ops = {
 	.apply_config = ar8327_sw_hw_apply,
 	.reset_switch = ar8xxx_sw_reset_switch,
 	.get_port_link = ar8xxx_sw_get_port_link,
+/* The following op is disabled as it hogs the CPU and degrades performance.
+   An implementation has been attempted in 4d8a66d but reading MIB data is slow
+   on ar8xxx switches.
+
+   The high CPU load has been traced down to the ar8xxx_reg_wait() call in
+   ar8xxx_mib_op(), which has to usleep_range() till the MIB busy flag set by
+   the request to update the MIB counter is cleared. */
+#if 0
+	.get_port_stats = ar8xxx_sw_get_port_stats,
+#endif
 };
 
 const struct ar8xxx_chip ar8327_chip = {
@@ -1436,6 +1533,7 @@ const struct ar8xxx_chip ar8337_chip = {
 	.set_mirror_regs = ar8327_set_mirror_regs,
 	.get_arl_entry = ar8327_get_arl_entry,
 	.sw_hw_apply = ar8327_sw_hw_apply,
+	.phy_rgmii_set = ar8327_phy_rgmii_set,
 
 	.num_mibs = ARRAY_SIZE(ar8236_mibs),
 	.mib_decs = ar8236_mibs,

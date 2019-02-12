@@ -1,13 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libubox
-PKG_RELEASE=1
+PKG_RELEASE=2
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL=$(PROJECT_GIT)/libubox.git
-PKG_SOURCE_DATE:=2017-02-24
-PKG_SOURCE_VERSION:=96305a3cafcc9c0df7f189567671bb26ce3eb129
-PKG_MIRROR_HASH:=19dc9f73621a65d1374427160f59e338db45ee6edc30edff6a6fee10dcdfc8b6
+PKG_SOURCE_URL=$(PROJECT_GIT)/project/libubox.git
+PKG_SOURCE_DATE:=2018-07-25
+PKG_SOURCE_VERSION:=c83a84afbef2b24f960ddeda0b5e2ab01fba6981
+PKG_MIRROR_HASH:=4a9594d2ae3706174d182a21fe815f1d18c20beca6593707cc757994975dc670
 CMAKE_INSTALL:=1
 
 PKG_LICENSE:=ISC
@@ -16,6 +16,8 @@ PKG_LICENSE_FILES:=
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 
 PKG_BUILD_DEPENDS:=lua
+HOST_BUILD_DEPENDS:=libjson-c/host
+HOST_BUILD_PREFIX:=$(STAGING_DIR_HOST)
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
@@ -58,7 +60,7 @@ define Package/libubox-lua
   SECTION:=libs
   CATEGORY:=Libraries
   DEPENDS:=+libubox +liblua
-  TITLE:=Lua binding for the OpenWrt Basic utility library
+  TITLE:=Lua binding for the libreCMC Basic utility library
 endef
 
 TARGET_CFLAGS += -I$(STAGING_DIR)/usr/include
@@ -95,6 +97,9 @@ endef
 CMAKE_HOST_OPTIONS += \
 	-DBUILD_LUA=OFF \
 	-DBUILD_EXAMPLES=OFF \
+	-DCMAKE_SKIP_RPATH=FALSE \
+	-DCMAKE_MACOSX_RPATH=1 \
+	-DCMAKE_INSTALL_RPATH="${STAGING_DIR_HOST}/lib" \
 
 $(eval $(call BuildPackage,libubox))
 $(eval $(call BuildPackage,libblobmsg-json))

@@ -1,0 +1,25 @@
+menuconfig CCS
+        bool "Build the libreCMC CCS (Complete Corresponding Source) Disk"
+        depends on !EXTERNAL_TOOLCHAIN
+        default BUILDBOT
+        help
+          This generates a CCS disk for distribution with devices that ship
+	  with libreCMC. Note that this may omit some components, ex. u-boot
+	  for a given target, which should be part of the CCS. Please see /docs/ccs.md
+
+	config CCS_GIT_UPSTREAM
+		string "Enter source repository to clone" if CCS
+		default "https://gogs.librecmc.org/librecmc" if !CCS_GIT_TOPDIR
+		help
+		  The git repository specified here is for the corresponding libreCMC
+		  Buildroot that was used to build and generate firmware images.
+
+	config CCS_GIT_TOPDIR
+		bool "Use local checkout for sources" if CCS
+		help
+		  This option will use the current checkout for the libreCMC Buildroot
+		  source. If using this option, make sure that all changes have been
+		  properly checked in.
+
+
+

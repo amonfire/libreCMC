@@ -40,6 +40,28 @@ function build_url(...)
 	return table.concat(url, "")
 end
 
+function _ordered_children(node)
+	local name, child, children = nil, nil, {}
+
+	for name, child in pairs(node.nodes) do
+		children[#children+1] = {
+			name  = name,
+			node  = child,
+			order = child.order or 100
+		}
+	end
+
+	table.sort(children, function(a, b)
+		if a.order == b.order then
+			return a.name < b.name
+		else
+			return a.order < b.order
+		end
+	end)
+
+	return children
+end
+
 function node_visible(node)
    if node then
 	  return not (
@@ -55,15 +77,10 @@ end
 function node_childs(node)
 	local rv = { }
 	if node then
-		local k, v
-		for k, v in util.spairs(node.nodes,
-			function(a, b)
-				return (node.nodes[a].order or 100)
-				     < (node.nodes[b].order or 100)
-			end)
-		do
-			if node_visible(v) then
-				rv[#rv+1] = k
+		local _, child
+		for _, child in ipairs(_ordered_children(node)) do
+			if node_visible(child.node) then
+				rv[#rv+1] = child.name
 			end
 		end
 	end
@@ -75,11 +92,16 @@ function error404(message)
 	http.status(404, "Not Found")
 	message = message or "Not Found"
 
-	require("luci.template")
-	if not util.copcall(luci.template.render, "error404") then
+	local function render()
+		local template = require "luci.template"
+		template.render("error404")
+	end
+
+	if not util.copcall(render) then
 		http.prepare_content("text/plain")
 		http.write(message)
 	end
+
 	return false
 end
 
@@ -113,7 +135,8 @@ function httpdispatch(request, prefix)
 		end
 	end
 
-	for node in pathinfo:gmatch("[^/]+") do
+	local node
+	for node in pathinfo:gmatch("[^/%z]+") do
 		r[#r+1] = node
 	end
 
@@ -136,8 +159,7 @@ local function require_post_security(target)
 
 				if (type(required_val) == "string" and
 				    request_val ~= required_val) or
-				   (required_val == true and
-				    (request_val == nil or request_val == ""))
+				   (required_val == true and request_val == nil)
 				then
 					return false
 				end
@@ -177,6 +199,7 @@ local function session_retrieve(sid, allowed_users)
 	   (not allowed_users or
 	    util.contains(allowed_users, sdat.values.username))
 	then
+		uci:set_session_id(sid)
 		return sid, sdat.values
 	end
 
@@ -191,6 +214,9 @@ local function session_setup(user, pass, allowed_users)
 			timeout  = tonumber(luci.config.sauth.sessiontime)
 		})
 
+		local rp = context.requestpath
+			and table.concat(context.requestpath, "/") or ""
+
 		if type(login) == "table" and
 		   type(login.ubus_rpc_session) == "string"
 		then
@@ -199,8 +225,14 @@ local function session_setup(user, pass, allowed_users)
 				values = { token = sys.uniqueid(16) }
 			})
 
+			io.stderr:write("luci: accepted login on /%s for %s from %s\n"
+				%{ rp, user, http.getenv("REMOTE_ADDR") or "?" })
+
 			return session_retrieve(login.ubus_rpc_session)
 		end
+
+		io.stderr:write("luci: failed login on /%s for %s from %s\n"
+			%{ rp, user, http.getenv("REMOTE_ADDR") or "?" })
 	end
 
 	return nil, nil
@@ -281,10 +313,6 @@ function dispatch(request)
 	ctx.requestpath = ctx.requestpath or freq
 	ctx.path = preq
 
-	if track.i18n then
-		i18n.loadc(track.i18n)
-	end
-
 	-- Init template engine
 	if (c and c.index) or not track.notemplate then
 		local tpl = require("luci.template")
@@ -337,15 +365,23 @@ function dispatch(request)
 		   ifattr      = function(...) return _ifattr(...) end;
 		   attr        = function(...) return _ifattr(true, ...) end;
 		   url         = build_url;
-		}, {__index=function(table, key)
+		}, {__index=function(tbl, key)
 			if key == "controller" then
 				return build_url()
 			elseif key == "REQUEST_URI" then
 				return build_url(unpack(ctx.requestpath))
+			elseif key == "FULL_REQUEST_URI" then
+				local url = { http.getenv("SCRIPT_NAME") or "", http.getenv("PATH_INFO") }
+				local query = http.getenv("QUERY_STRING")
+				if query and #query > 0 then
+					url[#url+1] = "?"
+					url[#url+1] = query
+				end
+				return table.concat(url, "")
 			elseif key == "token" then
 				return ctx.authtoken
 			else
-				return rawget(table, key) or _G[key]
+				return rawget(tbl, key) or _G[key]
 			end
 		end})
 	end
@@ -358,7 +394,7 @@ function dispatch(request)
 		"https://github.com/openwrt/luci/issues"
 	)
 
-	if track.sysauth then
+	if track.sysauth and not ctx.authsession then
 		local authen = track.sysauth_authenticator
 		local _, sid, sdat, default_user, allowed_users
 
@@ -398,6 +434,7 @@ function dispatch(request)
 				context.path = {}
 
 				http.status(403, "Forbidden")
+				http.header("X-LuCI-Login-Required", "yes")
 				tmpl.render(track.sysauth_template or "sysauth", {
 					duser = default_user,
 					fuser = user
@@ -406,18 +443,28 @@ function dispatch(request)
 				return
 			end
 
-			http.header("Set-Cookie", 'sysauth=%s; path=%s' %{ sid, build_url() })
+			http.header("Set-Cookie", 'sysauth=%s; path=%s; HttpOnly%s' %{
+				sid, build_url(), http.getenv("HTTPS") == "on" and "; secure" or ""
+			})
 			http.redirect(build_url(unpack(ctx.requestpath)))
 		end
 
 		if not sid or not sdat then
 			http.status(403, "Forbidden")
+			http.header("X-LuCI-Login-Required", "yes")
 			return
 		end
 
 		ctx.authsession = sid
 		ctx.authtoken = sdat.token
 		ctx.authuser = sdat.username
+	end
+
+	if track.cors and http.getenv("REQUEST_METHOD") == "OPTIONS" then
+		luci.http.status(200, "OK")
+		luci.http.header("Access-Control-Allow-Origin", http.getenv("HTTP_ORIGIN") or "*")
+		luci.http.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+		return
 	end
 
 	if c and require_post_security(c.target) then
@@ -475,10 +522,11 @@ function dispatch(request)
 		else
 			ok, err = util.copcall(target, unpack(args))
 		end
-		assert(ok,
-		       "Failed to execute " .. (type(c.target) == "function" and "function" or c.target.type or "unknown") ..
-		       " dispatcher target for entry '/" .. table.concat(request, "/") .. "'.\n" ..
-		       "The called action terminated with an exception:\n" .. tostring(err or "(unknown)"))
+		if not ok then
+			error500("Failed to execute " .. (type(c.target) == "function" and "function" or c.target.type or "unknown") ..
+			         " dispatcher target for entry '/" .. table.concat(request, "/") .. "'.\n" ..
+			         "The called action terminated with an exception:\n" .. tostring(err or "(unknown)"))
+		end
 	else
 		local root = node()
 		if not root or not root.target then
@@ -564,14 +612,9 @@ function createtree()
 
 	local ctx  = context
 	local tree = {nodes={}, inreq=true}
-	local modi = {}
 
 	ctx.treecache = setmetatable({}, {__mode="v"})
 	ctx.tree = tree
-	ctx.modifiers = modi
-
-	-- Load default translation
-	require "luci.i18n".loadc("base")
 
 	local scope = setmetatable({}, {__index = luci.dispatcher})
 
@@ -581,26 +624,7 @@ function createtree()
 		v()
 	end
 
-	local function modisort(a,b)
-		return modi[a].order < modi[b].order
-	end
-
-	for _, v in util.spairs(modi, modisort) do
-		scope._NAME = v.module
-		setfenv(v.func, scope)
-		v.func()
-	end
-
 	return tree
-end
-
-function modifier(func, order)
-	context.modifiers[#context.modifiers+1] = {
-		func = func,
-		order = order or 0,
-		module
-			= getfenv(2)._NAME
-	}
 end
 
 function assign(path, clone, title, order)
@@ -641,6 +665,23 @@ function node(...)
 	return c
 end
 
+function lookup(...)
+	local i, path = nil, {}
+	for i = 1, select('#', ...) do
+		local name, arg = nil, tostring(select(i, ...))
+		for name in arg:gmatch("[^/]+") do
+			path[#path+1] = name
+		end
+	end
+
+	for i = #path, 1, -1 do
+		local node = context.treecache[table.concat(path, ".", 1, i)]
+		if node and (i == #path or node.leaf) then
+			return node, build_url(unpack(path))
+		end
+	end
+end
+
 function _create_node(path)
 	if #path == 0 then
 		return context.tree
@@ -653,46 +694,87 @@ function _create_node(path)
 		local last = table.remove(path)
 		local parent = _create_node(path)
 
-		c = {nodes={}, auto=true}
-		-- the node is "in request" if the request path matches
-		-- at least up to the length of the node path
-		if parent.inreq and context.path[#path+1] == last then
-		  c.inreq = true
+		c = {nodes={}, auto=true, inreq=true}
+
+		local _, n
+		for _, n in ipairs(path) do
+			if context.path[_] ~= n then
+				c.inreq = false
+				break
+			end
 		end
+
+		c.inreq = c.inreq and (context.path[#path + 1] == last)
+
 		parent.nodes[last] = c
 		context.treecache[name] = c
 	end
+
 	return c
 end
 
 -- Subdispatchers --
 
+function _find_eligible_node(root, prefix, deep, types, descend)
+	local children = _ordered_children(root)
+
+	if not root.leaf and deep ~= nil then
+		local sub_path = { unpack(prefix) }
+
+		if deep == false then
+			deep = nil
+		end
+
+		local _, child
+		for _, child in ipairs(children) do
+			sub_path[#prefix+1] = child.name
+
+			local res_path = _find_eligible_node(child.node, sub_path,
+			                                     deep, types, true)
+
+			if res_path then
+				return res_path
+			end
+		end
+	end
+
+	if descend and
+	   (not types or
+	    (type(root.target) == "table" and
+	     util.contains(types, root.target.type)))
+	then
+		return prefix
+	end
+end
+
+function _find_node(recurse, types)
+	local path = { unpack(context.path) }
+	local name = table.concat(path, ".")
+	local node = context.treecache[name]
+
+	path = _find_eligible_node(node, path, recurse, types)
+
+	if path then
+		dispatch(path)
+	else
+		require "luci.template".render("empty_node_placeholder")
+	end
+end
+
 function _firstchild()
-   local path = { unpack(context.path) }
-   local name = table.concat(path, ".")
-   local node = context.treecache[name]
-
-   local lowest
-   if node and node.nodes and next(node.nodes) then
-	  local k, v
-	  for k, v in pairs(node.nodes) do
-		 if not lowest or
-			(v.order or 100) < (node.nodes[lowest].order or 100)
-		 then
-			lowest = k
-		 end
-	  end
-   end
-
-   assert(lowest ~= nil,
-		  "The requested node contains no childs, unable to redispatch")
-
-   path[#path+1] = lowest
-   dispatch(path)
+	return _find_node(false, nil)
 end
 
 function firstchild()
-   return { type = "firstchild", target = _firstchild }
+	return { type = "firstchild", target = _firstchild }
+end
+
+function _firstnode()
+	return _find_node(true, { "cbi", "form", "template", "arcombine" })
+end
+
+function firstnode()
+	return { type = "firstnode", target = _firstnode }
 end
 
 function alias(...)
@@ -782,7 +864,16 @@ local function _cbi(self, ...)
 
 	local state = nil
 
+	local i, res
 	for i, res in ipairs(maps) do
+		if util.instanceof(res, cbi.SimpleForm) then
+			io.stderr:write("Model %s returns SimpleForm but is dispatched via cbi(),\n"
+				% self.model)
+
+			io.stderr:write("please change %s to use the form() action instead.\n"
+				% table.concat(context.request, "/"))
+		end
+
 		res.flow = config
 		local cstate = res:parse()
 		if cstate and (not state or cstate < state) then
@@ -853,7 +944,6 @@ local function _cbi(self, ...)
 	for i, res in ipairs(maps) do
 		res:render({
 			firstmap   = (i == 1),
-			applymap   = applymap,
 			redirect   = redirect,
 			messages   = messages,
 			pageaction = pageaction,
@@ -863,11 +953,12 @@ local function _cbi(self, ...)
 
 	if not config.nofooter then
 		tpl.render("cbi/footer", {
-			flow       = config,
-			pageaction = pageaction,
-			redirect   = redirect,
-			state      = state,
-			autoapply  = config.autoapply
+			flow          = config,
+			pageaction    = pageaction,
+			redirect      = redirect,
+			state         = state,
+			autoapply     = config.autoapply,
+			trigger_apply = applymap
 		})
 	end
 end
@@ -875,7 +966,7 @@ end
 function cbi(model, config)
 	return {
 		type = "cbi",
-		post = { ["cbi.submit"] = "1" },
+		post = { ["cbi.submit"] = true },
 		config = config,
 		model = model,
 		target = _cbi
@@ -903,6 +994,7 @@ local function _form(self, ...)
 	local maps = luci.cbi.load(self.model, ...)
 	local state = nil
 
+	local i, res
 	for i, res in ipairs(maps) do
 		local cstate = res:parse()
 		if cstate and (not state or cstate < state) then
@@ -921,7 +1013,7 @@ end
 function form(model)
 	return {
 		type = "cbi",
-		post = { ["cbi.submit"] = "1" },
+		post = { ["cbi.submit"] = true },
 		model = model,
 		target = _form
 	}

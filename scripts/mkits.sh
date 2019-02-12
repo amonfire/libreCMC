@@ -19,6 +19,7 @@ usage() {
 		"-v version -k kernel [-D name -d dtb] -o its_file"
 	echo -e "\t-A ==> set architecture to 'arch'"
 	echo -e "\t-C ==> set compression type 'comp'"
+	echo -e "\t-c ==> set config name 'config'"
 	echo -e "\t-a ==> set load address to 'addr' (hex)"
 	echo -e "\t-e ==> set entry point to 'entry' (hex)"
 	echo -e "\t-v ==> set kernel version to 'version'"
@@ -29,11 +30,12 @@ usage() {
 	exit 1
 }
 
-while getopts ":A:a:C:D:d:e:k:o:v:" OPTION
+while getopts ":A:a:c:C:D:d:e:k:o:v:" OPTION
 do
 	case $OPTION in
 		A ) ARCH=$OPTARG;;
 		a ) LOAD_ADDR=$OPTARG;;
+		c ) CONFIG=$OPTARG;;
 		C ) COMPRESS=$OPTARG;;
 		D ) DEVICE=$OPTARG;;
 		d ) DTB=$OPTARG;;
@@ -49,7 +51,7 @@ done
 # Make sure user entered all required parameters
 if [ -z "${ARCH}" ] || [ -z "${COMPRESS}" ] || [ -z "${LOAD_ADDR}" ] || \
 	[ -z "${ENTRY_ADDR}" ] || [ -z "${VERSION}" ] || [ -z "${KERNEL}" ] || \
-	[ -z "${OUTPUT}" ]; then
+	[ -z "${OUTPUT}" ] || [ -z "${CONFIG}" ]; then
 	usage
 fi
 
@@ -59,7 +61,7 @@ ARCH_UPPER=`echo $ARCH | tr '[:lower:]' '[:upper:]'`
 if [ -n "${DTB}" ]; then
 	FDT="
 		fdt@1 {
-			description = \"${ARCH_UPPER} OpenWrt ${DEVICE} device tree blob\";
+			description = \"${ARCH_UPPER} libreCMC ${DEVICE} device tree blob\";
 			data = /incbin/(\"${DTB}\");
 			type = \"flat_dt\";
 			arch = \"${ARCH}\";
@@ -78,12 +80,12 @@ fi
 DATA="/dts-v1/;
 
 / {
-	description = \"${ARCH_UPPER} OpenWrt FIT (Flattened Image Tree)\";
+	description = \"${ARCH_UPPER} libreCMC FIT (Flattened Image Tree)\";
 	#address-cells = <1>;
 
 	images {
 		kernel@1 {
-			description = \"${ARCH_UPPER} OpenWrt Linux-${VERSION}\";
+			description = \"${ARCH_UPPER} libreCMC Linux-${VERSION}\";
 			data = /incbin/(\"${KERNEL}\");
 			type = \"kernel\";
 			arch = \"${ARCH}\";
@@ -104,9 +106,9 @@ ${FDT}
 	};
 
 	configurations {
-		default = \"config@1\";
-		config@1 {
-			description = \"OpenWrt\";
+		default = \"${CONFIG}\";
+		${CONFIG} {
+			description = \"libreCMC\";
 			kernel = \"kernel@1\";
 			fdt = \"fdt@1\";
 		};

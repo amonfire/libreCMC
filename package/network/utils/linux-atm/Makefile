@@ -10,7 +10,7 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=linux-atm
 PKG_VERSION:=2.5.2
-PKG_RELEASE:=5
+PKG_RELEASE:=6
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/$(PKG_NAME)
@@ -19,6 +19,7 @@ PKG_HASH:=9645481a2b16476b59220aa2d6bc5bc41043f291326c9b37581018fbd16dd53a
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
 PKG_LICENSE:=GPL-2.0+
+PKG_CPE_ID:=cpe:/a:linux-atm:linux-atm
 PKG_FIXUP:=autoreconf
 
 include $(INCLUDE_DIR)/package.mk
@@ -180,7 +181,7 @@ define Package/br2684ctl/install
 	$(INSTALL_DIR) $(1)/etc/init.d $(1)/etc/hotplug.d/atm $(1)/usr/sbin $(1)/lib/netifd
 	$(INSTALL_BIN) ./files/br2684-up $(1)/lib/netifd/br2684-up
 	$(INSTALL_BIN) ./files/br2684ctl $(1)/etc/init.d/
-	$(INSTALL_DATA) ./files/atm.hotplug $(1)/etc/hotplug.d/atm/00-trigger
+	$(INSTALL_CONF) ./files/atm.hotplug $(1)/etc/hotplug.d/atm/00-trigger
 	$(INSTALL_BIN) \
 		./files/br2684ctl_wrap \
 		$(PKG_INSTALL_DIR)/usr/sbin/br2684ctl \

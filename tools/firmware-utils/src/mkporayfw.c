@@ -605,9 +605,9 @@ static inline void inspect_fw_phexdef(char *label,
 	printf("%-23s: 0x%08x                  ", label, val);
 
 	if (val == defval) {
-		printf("(== OpenWrt default)\n");
+		printf("(== libreCMC default)\n");
 	} else {
-		printf("(OpenWrt default: 0x%08x)\n", defval);
+		printf("(libreCMC default: 0x%08x)\n", defval);
 	}
 }
 

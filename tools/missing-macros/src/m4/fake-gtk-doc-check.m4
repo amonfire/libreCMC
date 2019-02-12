@@ -1,4 +1,4 @@
-dnl fake-gtk-doc-check.m4 serial 1 (OpenWrt)
+dnl fake-gtk-doc-check.m4 serial 1 (libreCMC)
 dnl Provide a fake GTK_DOC_CHECK macros which
 dnl always defines false.
 

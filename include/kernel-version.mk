@@ -2,14 +2,29 @@
 
 LINUX_RELEASE?=1
 
-LINUX_VERSION-4.4 = .159
-LINUX_VERSION-4.19 =
+LINUX_VERSION-3.18 = .132
+LINUX_VERSION-4.9 = .150
+LINUX_VERSION-4.14 = .93
+LINUX_VERSION-4.19 = .16
 
-LINUX_KERNEL_HASH-4.4.159 = d464fea1f888ada3a55c3aea1c05ba9fd2d4edd7ffb152369faace18a285998b
-LINUX_KERNEL_HASH-4.19 = d06d7a0d59a96ab04e7af63244627d1d5aa2d99db84f81f559f0f8e7e58f94c8
+LINUX_KERNEL_HASH-3.18.132 =
+LINUX_KERNEL_HASH-4.9.150 =
+LINUX_KERNEL_HASH-4.14.93 = 5a61c1b681d74216c0547da1bc3d530152fae8c92af118feff94002c39943114
+LINUX_KERNEL_HASH-4.19.16 = d3bbf6b90e3e47cc2b37f855f6cbd6cceff90a4802ae0d713439ebf91da5eeb6
 
+remove_uri_prefix=$(subst git://,,$(subst http://,,$(subst https://,,$(1))))
+sanitize_uri=$(call qstrip,$(subst @,_,$(subst :,_,$(subst .,_,$(subst -,_,$(subst /,_,$(1)))))))
+
+ifneq ($(call qstrip,$(CONFIG_KERNEL_GIT_CLONE_URI)),)
+  LINUX_VERSION:=$(call sanitize_uri,$(call remove_uri_prefix,$(CONFIG_KERNEL_GIT_CLONE_URI)))
+  ifeq ($(call qstrip,$(CONFIG_KERNEL_GIT_REF)),)
+    CONFIG_KERNEL_GIT_REF:=HEAD
+  endif
+  LINUX_VERSION:=$(LINUX_VERSION)-$(call sanitize_uri,$(CONFIG_KERNEL_GIT_REF))
+else
 ifdef KERNEL_PATCHVER
   LINUX_VERSION:=$(KERNEL_PATCHVER)$(strip $(LINUX_VERSION-$(KERNEL_PATCHVER)))
+endif
 endif
 
 split_version=$(subst ., ,$(1))

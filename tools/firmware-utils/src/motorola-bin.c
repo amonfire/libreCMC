@@ -4,7 +4,7 @@
  * Copyright (C) 2005-2006 Mike Baker,
  *                         Imre Kaloz <kaloz@openwrt.org>
  *                         D. Hugh Redelmeier
- *                         OpenWrt.org
+ *                         libreCMC.org
  *
  *
  * This program is free software; you can redistribute it and/or

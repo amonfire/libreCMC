@@ -1,5 +1,5 @@
 /*
- * mkbrnimg.c - partially based on OpenWrt's wndr3700.c
+ * mkbrnimg.c - partially based on libreCMC's wndr3700.c
  *
  * Copyright (C) 2011 Tobias Diedrich <ranma+openwrt@tdiedrich.de>
  *

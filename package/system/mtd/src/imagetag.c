@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2005 Mike Baker
  * Copyright (C) 2008 Felix Fietkau <nbd@nbd.name>
- * Copyrigth (C) 2010 Daniel Dickinson <openwrt@cshore.neomailbox.net>
+ * Copyrigth (C) 2010 Daniel Dickinson <librecmc@cshore.neomailbox.net>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,7 +105,7 @@ struct bcm_tag {
 	char inactive_flag[INACTIVEFLAG_LEN];
 	/* 142-161: RSA Signature (not used; some vendors may use this) */
 	char rsa_signature[RSASIG_LEN];
-	/* 162-191: Compilation and related information (not used in OpenWrt) */
+	/* 162-191: Compilation and related information (not used in libreCMC) */
 	char information1[TAGINFO1_LEN];
 	/* 192-195: Version flash layout */
 	char flash_layout_ver[FLASHLAYOUTVER_LEN];

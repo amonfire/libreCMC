@@ -35,9 +35,11 @@ LIB_SPECS="
 	rt:       librt-* librt
 	pthread:  libpthread-* libpthread
 	stdcpp:   libstdc++
+	thread_db: libthread-db
 	gcc:      libgcc_s
 	ssp:      libssp
 	gfortran: libgfortran
+	gomp:	  libgomp
 "
 
 # Binary specs
@@ -307,7 +309,7 @@ print_config() {
 			echo "Available targets:"                               >&2
 			echo $mktargets                                         >&2
 		else
-			echo -e "Could not find a suitable OpenWrt target for " >&2
+			echo -e "Could not find a suitable libreCMC target for " >&2
 			echo -e "CPU architecture '$cpuarch' - you need to "    >&2
 			echo -e "define one first!"                             >&2
 		fi
@@ -361,7 +363,7 @@ print_config() {
 	fi
 
 	local lib
-	for lib in C RT PTHREAD GCC STDCPP SSP GFORTRAN; do
+	for lib in C RT PTHREAD GCC STDCPP SSP GFORTRAN GOMP; do
 		local file
 		local spec=""
 		local llib="$(echo "$lib" | sed -e 's#.*#\L&#')"
