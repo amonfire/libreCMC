@@ -104,11 +104,8 @@ $(Device/tplink)
 endef
 
 define Device/archer-cxx
+  $(Device/tplink-ldr)
   KERNEL := kernel-bin | patch-cmdline | lzma | uImageArcher lzma
-  IMAGES := sysupgrade.bin factory.bin
-  IMAGE/sysupgrade.bin := append-rootfs | tplink-safeloader sysupgrade | \
-	append-metadata | check-size $$$$(IMAGE_SIZE)
-  IMAGE/factory.bin := append-rootfs | tplink-safeloader factory
 endef
 
 define Device/cpe510-520
@@ -751,17 +748,6 @@ define Device/tl-wr1041n-v2
 endef
 TARGET_DEVICES += tl-wr1041n-v2
 
-define Device/tl-wr1043n-v5
-    $(Device/archer-cxx)
-    DEVICE_TITLE := TP-LINK TL-WR1043N v5
-    BOARDNAME := TL-WR1043N-v5
-    SUPPORTED_DEVICES := tl-wr1043n-v5
-    DEVICE_PROFILE := TLWR1043
-    MTDPARTS := spi0.0:128k(factory-uboot)ro,128k(u-boot)ro,15104k(firmware),128k(product-info)ro,640k(config)ro,64k(partition-table)ro,128k(logs)ro,64k(art)ro
-    IMAGE_SIZE := 15104k
-    TPLINK_BOARD_ID := TLWR1043NV5
-endef
-
 define Device/tl-wr1043nd-v1
     $(Device/tplink-8m)
     DEVICE_TITLE := TP-LINK TL-WR1043N/ND v1
@@ -805,6 +791,24 @@ define Device/tl-wr1043nd-v4
     IMAGE/sysupgrade.bin := append-rootfs | tplink-safeloader sysupgrade
     IMAGE/factory.bin := append-rootfs | tplink-safeloader factory
 endef
+
+define Device/tl-wr1043n-v5
+    $(Device/tplink)
+    DEVICE_TITLE := TP-LINK TL-WR1043N v5
+    DEVICE_PACKAGES :=
+    BOARDNAME := TL-WR1043N-v5
+    DEVICE_PROFILE := TLWR1043
+    TPLINK_HWID :=  0x10430005
+    TPLINK_FLASHLAYOUT := 16Msafeloader
+    MTDPARTS := spi0.0:128k(factory-uboot)ro,128k(u-boot)ro,15104k(firmware),128k(product-info)ro,640k(config)ro,64k(partition-table)ro,128k(logs)ro,64k(art)ro
+    IMAGE_SIZE := 15104k
+    TPLINK_BOARD_NAME := TLWR1043NV5
+    KERNEL := kernel-bin | patch-cmdline | lzma | uImageArcher lzma
+    IMAGE/sysupgrade.bin := append-rootfs | tplink-safeloader sysupgrade | \
+	append-metadata | check-size $$$$(IMAGE_SIZE)
+    IMAGE/factory.bin := append-rootfs | tplink-safeloader factory
+endef
+
 TARGET_DEVICES += tl-wr1043nd-v1 tl-wr1043nd-v2 tl-wr1043nd-v3 tl-wr1043nd-v4 tl-wr1043n-v5
 
 define Device/tl-wr2543-v1
