@@ -36,8 +36,10 @@ v5.x (TL-WR1043N v5)
 Similar to v4.x
 
 * No USB
-* libreCMC images available but have *Not* been tested!
-* Most likely needs to be TFTP flashed
+* libreCMC v1.4.7+
+* Must be TFTP flashed for first install.
+* tftp file name (factory image) : WR1043v5_tp_recovery.bin
+* tftp server IP : 192.168.0.66
 
 ## Supported Versions:
 
@@ -45,7 +47,7 @@ Similar to v4.x
 * v2.x
 * v3.x
 * v4.x
-* v5.x : images available, *Not Tested*
+* v5.x : v1.4.7+ / v1.5
 
 # Reset instructions
 
@@ -77,9 +79,9 @@ See our [flavors](https://librecmc.org/flavors.html) page for a description of e
 [TL-WR1043ND v4 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v4-squashfs-sysupgrade.bin)
 
 
-[TL-WR1043N v5 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-factory.bin) *NOT TESTED!!
+Beta images: [TL-WR1043N v5 Factory](https://librecmc.org/librecmc/downloads/snapshots/archive/v1.4.6-20190220/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-factory.bin)
 
-[TL-WR1043N v5 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-sysupgrade.bin) *NOT TESTED!!
+Beta images: [TL-WR1043N v5 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/archive/v1.4.6-20190220/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-sysupgrade.bin)
 
 ## Core Images
 
@@ -103,10 +105,6 @@ See our [flavors](https://librecmc.org/flavors.html) page for a description of e
 [TL-WR1043ND v4 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043nd-v4-squashfs-sysupgrade.bin)
 
 
-[TL-WR1043N v5 Factory](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-factory.bin) *NOT TESTED!!
-
-[TL-WR1043N v5 Sysupgrade](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/librecmc-ar71xx-generic-tl-wr1043n-v5-squashfs-sysupgrade.bin) *NOT TESTED!!
-
 ## Image File Signatures 
 
 [Main sha256sums](https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/sha256sums)
@@ -117,4 +115,3 @@ See our [flavors](https://librecmc.org/flavors.html) page for a description of e
 [Core sha256sums](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/sha256sums)
 
 [Core sha256sums.asc](https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/sha256sums.asc)
-
