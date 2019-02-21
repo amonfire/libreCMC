@@ -9,7 +9,7 @@ menuconfig CCS
 
 	config CCS_GIT_UPSTREAM
 		string "Enter source repository to clone" if CCS
-		default "https://gogs.librecmc.org/librecmc" if !CCS_GIT_TOPDIR
+		default "https://gogs.librecmc.org/librecmc/librecmc" if !CCS_GIT_TOPDIR
 		help
 		  The git repository specified here is for the corresponding libreCMC
 		  Buildroot that was used to build and generate firmware images.
