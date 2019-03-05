@@ -1,8 +1,10 @@
 # libreCMC supported Hardware
 
 ### Buffalo
+
 * [WZR-HP-G300NH](/WZR_HP_G300NH.md)
 * WHR-HP-G300NH
+* WZR-600DHP
 
 ### Netgear 
 
