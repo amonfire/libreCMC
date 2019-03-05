@@ -11,6 +11,7 @@
 | TP-Link TL-WR842ND v2.0  |  zeus |  No |
 | TP-Link TL-WR1043ND v1.8| orly_owl | ??? |
 | TP-Link TL-WR1043ND v2.1| RISCi_ATOM | ??? |
+| TP-Link TL-WR1043N v5  | RISCi_ATOM | ??? |
 | D-Link DGL-5500 vA1 rm' wifi card| RISCi_ATOM | ??? |
 | Western Digital MyNet N750 | orly_owl | ??? |
 

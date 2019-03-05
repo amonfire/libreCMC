@@ -1,10 +1,17 @@
 # libreCMC supported Hardware
 
+Officially supported devices generally fall into one of three categories : can
+easily be flashed from the stock firmware's web-ui, requires the usage of a tFTP
+server or the device must be opened. When choosing a router to use with libreCMC,
+please keep in mind the method which is required for the initial install of
+libreCMC. Unless otherwise noted, the listed devices fall into the first
+category [1].
+
 ### Buffalo
 
 * [WZR-HP-G300NH](/WZR_HP_G300NH.md)
 * WHR-HP-G300NH
-* WZR-600DHP
+* WZR-600DHP [2]
 
 ### Netgear 
 
@@ -37,3 +44,11 @@
 * DGL-5500 a1 : Ships with non-free wifi card, but can be replaced with a free one. Has a mini-pci-e card slot.
 
 #####Please note that other targets may work; we are **NOT** responsible for **ANY** _bricked_ devices.
+
+## Notes:
+
+[1] Firmware can be flashed from the stock firmware's web-ui.
+
+[2] Requires a tFTP server for initial flashing.
+
+[3] Requires opening up the hardware and the usage of a few tools (SPI Flasher, serial cable or both).
