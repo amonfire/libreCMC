@@ -237,6 +237,22 @@ endef
 
 $(eval $(call KernelPackage,usb-gadget-mass-storage))
 
+define KernelPackage/usb-gadget-cdc-composite
+  TITLE:= USB CDC Composite (Ethernet + ACM)
+  KCONFIG:=CONFIG_USB_CDC_COMPOSITE
+  DEPENDS:=+kmod-usb-gadget +kmod-usb-lib-composite \
+	+kmod-usb-gadget-eth +kmod-usb-gadget-serial
+  FILES:= $(LINUX_DIR)/drivers/usb/gadget/legacy/g_cdc.ko
+  $(call AddDepends/usb)
+endef
+
+define KernelPackage/usb-gadget-cdc-composite/description
+  Kernel support for the USB CDC Composite gadget.
+  This appears as an ethernet + ACM serial gadget.
+endef
+
+$(eval $(call KernelPackage,usb-gadget-cdc-composite))
+
 
 define KernelPackage/usb-uhci
   TITLE:=Support for UHCI controllers
@@ -359,7 +375,6 @@ define KernelPackage/usb2
 	+TARGET_brcm47xx:kmod-usb-bcma \
 	+TARGET_brcm47xx:kmod-usb-ssb \
 	+TARGET_bcm53xx:kmod-usb-bcma \
-	+TARGET_bcm53xx:kmod-phy-bcm-ns-usb2 \
 	+TARGET_ath79:kmod-phy-ath79-usb \
 	+kmod-usb-ehci
   KCONFIG:=\
@@ -610,38 +625,6 @@ define KernelPackage/usb-serial-ch341/description
 endef
 
 $(eval $(call KernelPackage,usb-serial-ch341))
-
-
-define KernelPackage/usb-serial-edgeport
-  TITLE:=Support for Digi Edgeport devices
-  KCONFIG:=CONFIG_USB_SERIAL_EDGEPORT
-  FILES:=$(LINUX_DIR)/drivers/usb/serial/io_edgeport.ko
-  AUTOLOAD:=$(call AutoProbe,io_edgeport)
-  $(call AddDepends/usb-serial)
-  DEPENDS+=+edgeport-firmware
-endef
-
-define KernelPackage/usb-serial-edgeport/description
- Kernel support for Inside Out Networks (Digi)
-	Edgeport/4
-	Rapidport/4
-	Edgeport/4t
-	Edgeport/2
-	Edgeport/4i
-	Edgeport/2i
-	Edgeport/421
-	Edgeport/21
-	Edgeport/8
-	Edgeport/8 Dual
-	Edgeport/2D8
-	Edgeport/4D8
-	Edgeport/8i
-	Edgeport/2 DIN
-	Edgeport/4 DIN
-	Edgeport/16 Dual
-endef
-
-$(eval $(call KernelPackage,usb-serial-edgeport))
 
 
 define KernelPackage/usb-serial-ftdi
@@ -1646,8 +1629,8 @@ XHCI_AUTOLOAD := $(patsubst $(LINUX_DIR)/drivers/usb/host/%.ko,%,$(XHCI_FILES))
 define KernelPackage/usb3
   TITLE:=Support for USB3 controllers
   DEPENDS:= \
-	+TARGET_bcm53xx:kmod-usb-bcma \
-	+TARGET_bcm53xx:kmod-phy-bcm-ns-usb3
+
+
   KCONFIG:= \
 	CONFIG_USB_PCI=y \
 	CONFIG_USB_XHCI_HCD \

@@ -4,7 +4,7 @@ PKG_NAME:=uclient
 PKG_RELEASE=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL=$(PROJECT_GIT)/project/uclient.git
+PKG_SOURCE_URL=$(PROJECT_GIT)/uclient.git
 PKG_SOURCE_DATE:=2018-11-24
 PKG_SOURCE_VERSION:=3ba74ebc9363993ea2a83fd73b4c1b1a96e73940
 PKG_MIRROR_HASH:=3c456a8ab965ed8db216ac1bfaf2b974e2f689137a7c35d0220e5b7d9c42a994
@@ -24,7 +24,7 @@ define Package/libuclient
   SECTION:=libs
   CATEGORY:=Libraries
   TITLE:=HTTP/1.1 client library
-  ABI_VERSION:=$(PKG_VERSION)
+  ABI_VERSION:=20160123
   DEPENDS:=+libubox
 endef
 

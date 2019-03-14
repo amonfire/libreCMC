@@ -37,7 +37,7 @@ USB_IDS_FILE:=usb.ids.$(USB_IDS_VER)
 define Download/usb_ids
   FILE:=$(USB_IDS_FILE)
   URL_FILE:=usb.ids
-  URL:=@GITHUB/vcrhonek/hwdata/v$(USB_IDS_VER)
+  URL:=$(PROJECT_GIT)/hwdata/raw/v$(USB_IDS_VER)
   HASH:=7454bd75fcfe5559bd1caa1bb132ecffe72a39269a2efaab9472de46be3bcf57
 endef
 $(eval $(call Download,usb_ids))

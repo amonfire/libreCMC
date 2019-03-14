@@ -7,7 +7,7 @@
 curdir:=target
 
 $(curdir)/subtargets:=install
-$(curdir)/builddirs:=linux sdk ccsdisk imagebuilder toolchain
+$(curdir)/builddirs:=linux sdk imagebuilder toolchain ccsdisk
 $(curdir)/builddirs-default:=linux
 $(curdir)/builddirs-install:=linux $(if $(CONFIG_SDK),sdk) $(if $(CONFIG_IB),imagebuilder) $(if $(CONFIG_MAKE_TOOLCHAIN),toolchain) $(if $(CONFIG_CCS),ccsdisk)
 

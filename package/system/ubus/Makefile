@@ -4,7 +4,7 @@ PKG_NAME:=ubus
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL=$(PROJECT_GIT)/project/ubus.git
+PKG_SOURCE_URL=$(PROJECT_GIT)/ubus.git
 PKG_SOURCE_DATE:=2018-10-06
 PKG_SOURCE_VERSION:=221ce7e7ff1bd1a0c9995fa9d32f58e865f7207f
 PKG_MIRROR_HASH:=e6ab3f009688740eb6d7a1857df59a6ba10ae8ae0fac78ae0fd6672f71c02dce
@@ -36,7 +36,7 @@ define Package/libubus
   SECTION:=libs
   CATEGORY:=Libraries
   DEPENDS:=+libubox
-  ABI_VERSION:=$(PKG_VERSION)
+  ABI_VERSION:=20170705
   TITLE:=libreCMC RPC client library
 endef
 

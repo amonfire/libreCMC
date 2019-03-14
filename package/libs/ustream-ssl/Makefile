@@ -4,7 +4,7 @@ PKG_NAME:=ustream-ssl
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL=$(PROJECT_GIT)/project/ustream-ssl.git
+PKG_SOURCE_URL=$(PROJECT_GIT)/ustream-ssl.git
 PKG_SOURCE_DATE:=2018-07-30
 PKG_SOURCE_VERSION:=23a3f2830341acd1db149175baf7315a33bd0edb
 PKG_MIRROR_HASH:=289bef5dac684015b6a40cfd72cf1c8c297bb77cf2efd54e562b628ba3afd83d
@@ -25,7 +25,7 @@ define Package/libustream/default
   CATEGORY:=Libraries
   TITLE:=ustream SSL Library
   DEPENDS:=+libubox
-  ABI_VERSION:=$(PKG_VERSION)
+  ABI_VERSION:=20150806
 endef
 
 define Package/libustream-openssl

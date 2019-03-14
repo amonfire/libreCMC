@@ -6,7 +6,7 @@
 # See /LICENSE for more information.
 #
 
-PROJECT_GIT = https://git.openwrt.org
+PROJECT_GIT = https://gogs.librecmc.org/OWEALs
 
 LIBRECMC_GIT = $(PROJECT_GIT)
 LEDE_GIT = $(PROJECT_GIT)
@@ -28,7 +28,7 @@ define dl_method
 $(strip \
   $(if $(filter git,$(2)),$(call dl_method_git,$(1),$(2)),
     $(if $(2),$(2), \
-      $(if $(filter @APACHE/% @GNOME/% @GNU/% @KERNEL_LIBRE/% @KERNEL/% @SAVANNAH/% ftp://% http://% https://% file://%,$(1)),default, \
+      $(if $(filter @APACHE/% @GNOME/% @GNU/% @KERNEL_LIBRE/% @KERNEL/% @SF/% @SAVANNAH/% ftp://% http://% https://% file://%,$(1)),default, \
         $(if $(filter git://%,$(1)),$(call dl_method_git,$(1),$(2)), \
           $(if $(filter svn://%,$(1)),svn, \
             $(if $(filter cvs://%,$(1)),cvs, \

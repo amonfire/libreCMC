@@ -10,10 +10,10 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=mac80211
 
-PKG_VERSION:=4.19.7-1
-PKG_RELEASE:=1
-PKG_SOURCE_URL:=@KERNEL/linux/kernel/projects/backports/stable/v4.19.7/
-PKG_HASH:=86650a02f36b0d39059be343d4bad3be14adece699723713a69c94cc64d456ef
+PKG_VERSION:=4.19.23-1
+PKG_RELEASE:=4
+PKG_SOURCE_URL:=@KERNEL/linux/kernel/projects/backports/stable/v4.19.23/
+PKG_HASH:=703e940b542eb56067fcd847a7c69398dcc9829f34472647eea4211cb2ab3b83
 
 PKG_SOURCE:=backports-$(PKG_VERSION).tar.xz
 PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/backports-$(PKG_VERSION)
@@ -23,16 +23,14 @@ PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 
 PKG_DRIVERS = \
 	lib80211 \
-	mac80211-hwsim \
+	mac80211-hwsim
+
 
 PKG_CONFIG_DEPENDS:= \
 	CONFIG_PACKAGE_kmod-mac80211 \
 	CONFIG_PACKAGE_MAC80211_DEBUGFS \
 	CONFIG_PACKAGE_MAC80211_MESH \
 	CONFIG_PACKAGE_MAC80211_TRACING \
-	CONFIG_PACKAGE_IWLWIFI_DEBUG \
-	CONFIG_PACKAGE_IWLWIFI_DEBUGFS \
-	CONFIG_PACKAGE_RTLWIFI_DEBUG \
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -57,19 +55,7 @@ config-y:= \
 	MAC80211_RC_DEFAULT_MINSTREL \
 	WLAN_VENDOR_ADMTEK \
 	WLAN_VENDOR_ATH \
-	WLAN_VENDOR_ATMEL \
-	WLAN_VENDOR_BROADCOM \
-	WLAN_VENDOR_CISCO \
-	WLAN_VENDOR_INTEL \
-	WLAN_VENDOR_INTERSIL \
-	WLAN_VENDOR_MARVELL \
-	WLAN_VENDOR_MEDIATEK \
-	WLAN_VENDOR_RALINK \
-	WLAN_VENDOR_REALTEK \
-	WLAN_VENDOR_RSI \
-	WLAN_VENDOR_ST \
-	WLAN_VENDOR_TI \
-	WLAN_VENDOR_ZYDAS \
+
 
 config-$(call config_package,cfg80211) += CFG80211
 
@@ -256,6 +242,7 @@ define Build/Patch
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/subsys,subsys/)
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/ath,ath/)
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/rt2x00,rt2x00/)
+	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/mwl,mwl/)
 	$(if $(QUILT),touch $(PKG_BUILD_DIR)/.quilt_used)
 endef
 
@@ -264,6 +251,7 @@ define Quilt/Refresh/Package
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/subsys,subsys/)
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/ath,ath/)
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/rt2x00,rt2x00/)
+	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/mwl,mwl/)
 endef
 
 define Build/Compile

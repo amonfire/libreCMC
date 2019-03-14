@@ -9,9 +9,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=uci
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
-PKG_SOURCE_URL=$(PROJECT_GIT)/project/uci.git
+PKG_SOURCE_URL=$(PROJECT_GIT)/uci.git
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_DATE=2018-08-11
 PKG_SOURCE_VERSION:=4c8b4d6efc8302b508d261573351fffb75bd98c2
@@ -35,6 +35,7 @@ define Package/libuci
   CATEGORY:=Libraries
   TITLE:=C library for the Unified Configuration Interface (UCI)
   DEPENDS:=+libubox
+  ABI_VERSION:=20130104
 endef
 
 define Package/uci
