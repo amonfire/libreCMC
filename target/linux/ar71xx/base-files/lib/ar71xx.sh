@@ -935,6 +935,9 @@ ar71xx_board_detect() {
 	*TEW-823DRU)
 		name="tew-823dru"
 		;;
+	*"TPE-R1200 Think Penguin Mini Router")
+                name="tpe-r1200"
+                ;;
 	*"TL-WR1041N v2")
 		name="tl-wr1041n-v2"
 		;;

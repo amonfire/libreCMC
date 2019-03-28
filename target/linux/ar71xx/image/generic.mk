@@ -169,7 +169,15 @@ define Device/gl-ar300m
   CONSOLE = ttyS0,115200
   MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env),16000k(firmware),64k(art)ro
 endef
-TARGET_DEVICES += gl-ar300m
+
+define Device/tpe-r1200
+  $(Device/gl-ar300m)
+  DEVICE_TITLE := TPE-R1200 Think Penguin Mini Router
+  BOARDNAME = TPE-R1200
+endef
+
+TARGET_DEVICES += gl-ar300m tpe-r1200
+
 
 define Device/gl-ar750
   DEVICE_TITLE := GL.iNet GL-AR750

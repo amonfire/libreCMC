@@ -274,6 +274,10 @@ platform_check_image() {
 		platform_check_image_gl_ar300m "$1" "$board" "$magic" && return 0
 		return 1
 	;;
+	tpe-r1200)
+		platform_check_image_gl_ar300m "$1" "$board" "$magic" && return 0
+		return 1
+	;;
 	gl-ar300|\
 	gl-ar750|\
 	gl-domino|\
@@ -653,6 +657,9 @@ platform_pre_upgrade() {
 
 	case "$board" in
 	gl-ar300m)
+		platform_pre_upgrade_gl_ar300m "$1"
+		;;
+	tpe-r1200)
 		platform_pre_upgrade_gl_ar300m "$1"
 		;;
 	rb-941-2nd)

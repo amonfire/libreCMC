@@ -164,3 +164,6 @@ static void __init gl_ar300m_setup(void)
 
 MIPS_MACHINE(ATH79_MACH_GL_AR300M, "GL-AR300M", "GL-AR300M",
          gl_ar300m_setup);
+
+MIPS_MACHINE(ATH79_MACH_TPE_R1200, "TPE-R1200", "TPE-R1200 Think Penguin Mini Router",
+         gl_ar300m_setup);

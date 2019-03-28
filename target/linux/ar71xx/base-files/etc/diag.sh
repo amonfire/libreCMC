@@ -481,6 +481,7 @@ set_state() {
 		status_led_on
 		case $(ar71xx_board_name) in
 		gl-ar300m|\
+		tpe-r1200|\
 		gl-ar750)
 			fw_printenv lc >/dev/null 2>&1 && fw_setenv "bootcount" 0
 			;;

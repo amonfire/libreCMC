@@ -25,7 +25,12 @@ define LegacyDevice/GL-AR300MD
 	DEVICE_TITLE := GL-AR300M with nand flash
 	DEVICE_PACKAGES := kmod-usb-core kmod-usb2 uboot-envtools
 endef
-LEGACY_DEVICES += GL-AR300MD
+
+define LegacyDevice/TPE-R1200D
+        DEVICE_TITLE := TPE-R1200 Think Penguin Mini Router
+        DEVICE_PACKAGES := kmod-usb-core kmod-usb2 uboot-envtools
+endef
+LEGACY_DEVICES += GL-AR300MD TPE-R1200D
 
 define Device/mr18
   DEVICE_TITLE := Meraki MR18

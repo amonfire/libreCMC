@@ -126,6 +126,7 @@ ar71xx_setup_interfaces()
 	dr344|\
 	gl-ar150|\
 	gl-ar300m|\
+	tpe-r1200|\
 	gl-domino|\
 	gl-inet|\
 	gl-mifi|\
