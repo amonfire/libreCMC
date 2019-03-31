@@ -1254,6 +1254,16 @@ config ATH79_MACH_BSB
 	select ATH79_DEV_USB
 	select ATH79_DEV_WMAC
 
+config ATH79_MACH_TPE_R1100
+        bool "TPE-R1100 support"
+        select SOC_AR933X
+        select ATH79_DEV_ETH
+        select ATH79_DEV_GPIO_BUTTONS
+        select ATH79_DEV_LEDS_GPIO
+        select ATH79_DEV_M25P80
+        select ATH79_DEV_USB
+        select ATH79_DEV_WMAC
+
 config ATH79_MACH_TPE_R1200
         bool "TPE-R1200 Support"
         select SOC_QCA953X

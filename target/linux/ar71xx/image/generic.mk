@@ -129,7 +129,16 @@ define Device/gl-ar150
   CONSOLE = ttyATH0,115200
   MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env)ro,16000k(firmware),64k(art)ro
 endef
-TARGET_DEVICES += gl-ar150
+
+define Device/tpe-r1100
+  $(Device/gl-ar150)
+  DEVICE_TITLE := TPE-R1100 Think Penguin Mini Router
+  BOARDNAME = TPE-R1100
+endef
+
+TARGET_DEVICES += gl-ar150 tpe-r1100
+
+
 
 define Device/gl-usb150
   DEVICE_TITLE := GL.iNet GL-USB150
@@ -143,13 +152,6 @@ define Device/gl-usb150
         append-rootfs | pad-rootfs | append-metadata | check-size $$$$(IMAGE_SIZE)
 endef
 TARGET_DEVICES += gl-usb150
-
-define Device/tpe-r1100
-  $(Device/gl-ar150)
-  DEVICE_TITLE := TPE-R1100 Think Penguin Mini Router
-endef
-
-TARGET_DEVICES += tpe-r1100
 
 define Device/gl-ar300
   DEVICE_TITLE := GL AR300
