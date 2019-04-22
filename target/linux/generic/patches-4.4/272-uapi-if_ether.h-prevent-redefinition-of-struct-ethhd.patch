@@ -1,7 +1,5 @@
-Index: linux-4.4.178/include/uapi/linux/if_ether.h
-===================================================================
---- linux-4.4.178.orig/include/uapi/linux/if_ether.h
-+++ linux-4.4.178/include/uapi/linux/if_ether.h
+--- a/include/uapi/linux/if_ether.h
++++ b/include/uapi/linux/if_ether.h
 @@ -22,6 +22,7 @@
  #define _UAPI_LINUX_IF_ETHER_H
  
@@ -22,10 +20,8 @@ Index: linux-4.4.178/include/uapi/linux/if_ether.h
  #define __UAPI_DEF_ETHHDR		1
  #endif
  
-Index: linux-4.4.178/include/uapi/linux/libc-compat.h
-===================================================================
---- linux-4.4.178.orig/include/uapi/linux/libc-compat.h
-+++ linux-4.4.178/include/uapi/linux/libc-compat.h
+--- a/include/uapi/linux/libc-compat.h
++++ b/include/uapi/linux/libc-compat.h
 @@ -160,6 +160,8 @@
  #define __UAPI_DEF_IF_NET_DEVICE_FLAGS 1
  /* For the future if glibc adds IFF_LOWER_UP, IFF_DORMANT and IFF_ECHO */

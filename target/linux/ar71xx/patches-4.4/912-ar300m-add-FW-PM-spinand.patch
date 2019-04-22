@@ -10,7 +10,7 @@
  	cmd.n_dummy = 0;
  	cmd.n_rx = len;
  	cmd.rx_buf = rbuf;
-@@ -776,9 +779,9 @@ static void ath79_spinand_cmdfunc(struct
+@@ -775,9 +778,9 @@ static void ath79_spinand_cmdfunc(struct
  					state->buf);
  		break;
  	case NAND_CMD_READOOB:
@@ -23,7 +23,7 @@
  		break;
  	case NAND_CMD_RNDOUT:
  		state->buf_ptr = column;
-@@ -1005,6 +1008,21 @@ static struct ath79_spinand_priv ath79_s
+@@ -1004,6 +1007,21 @@ static struct ath79_spinand_priv ath79_s
  		0x07,					/* ecc error code */
  		SZ_512,					/* ecc size */
  		16,					/* ecc bytes */
@@ -57,7 +57,7 @@
  	{"GD5F2GQ4U 2G 3.3V 8-bit",
  		{ .id = {0xc8, 0xb2} },
  		  SZ_2K, SZ_256, SZ_128K, 0, 2, 128, NAND_ECC_INFO(4, SZ_512) },
-@@ -128,6 +131,7 @@ struct nand_flash_dev nand_flash_ids[] =
+@@ -129,6 +132,7 @@ struct nand_flash_dev nand_flash_ids[] =
  	EXTENDED_ID_NAND("NAND 128MiB 3,3V 8-bit",  0xF1, 128, LP_OPTIONS),
  	EXTENDED_ID_NAND("NAND 128MiB 3,3V 8-bit",  0xD1, 128, LP_OPTIONS),
  	EXTENDED_ID_NAND("NAND 128MiB 1,8V 16-bit", 0xB1, 128, LP_OPTIONS16),
@@ -65,7 +65,7 @@
  	EXTENDED_ID_NAND("NAND 128MiB 3,3V 16-bit", 0xC1, 128, LP_OPTIONS16),
  	EXTENDED_ID_NAND("NAND 128MiB 1,8V 16-bit", 0xAD, 128, LP_OPTIONS16),
  
-@@ -207,6 +211,7 @@ struct nand_manufacturers nand_manuf_ids
+@@ -208,6 +212,7 @@ struct nand_manufacturers nand_manuf_ids
  	{NAND_MFR_GIGADEVICE, "Giga Device"},
  	{NAND_MFR_WINBOND, "Winbond"},
  	{NAND_MFR_HEYANGTEK, "HeYang Tek"},

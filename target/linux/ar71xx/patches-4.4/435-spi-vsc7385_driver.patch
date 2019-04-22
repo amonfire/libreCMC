@@ -1,8 +1,8 @@
 --- a/drivers/spi/Kconfig
 +++ b/drivers/spi/Kconfig
-@@ -720,6 +720,11 @@ config SPI_RB4XX_CPLD
- 	  SPI driver for the Xilinx CPLD chip present on the
- 	  MikroTik RB4xx boards.
+@@ -707,6 +707,11 @@ config SPI_TLE62X0
+ 	  sysfs interface, with each line presented as a kind of GPIO
+ 	  exposing both switch control and diagnostic feedback.
  
 +config SPI_VSC7385
 +	tristate "Vitesse VSC7385 ethernet switch driver"
@@ -14,7 +14,7 @@
  #
 --- a/drivers/spi/Makefile
 +++ b/drivers/spi/Makefile
-@@ -91,6 +91,7 @@ obj-$(CONFIG_SPI_TEGRA20_SLINK)		+= spi-
+@@ -89,6 +89,7 @@ obj-$(CONFIG_SPI_TEGRA20_SLINK)		+= spi-
  obj-$(CONFIG_SPI_TLE62X0)		+= spi-tle62x0.o
  obj-$(CONFIG_SPI_TOPCLIFF_PCH)		+= spi-topcliff-pch.o
  obj-$(CONFIG_SPI_TXX9)			+= spi-txx9.o
