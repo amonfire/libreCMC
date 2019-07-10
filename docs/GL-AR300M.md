@@ -33,8 +33,6 @@
 
 ## Notes:
 
-* This router is currently not officially supported by Librecmc
-
 * This router is dual flash and stock uboot attempts to boot nand flash first.
 
 * NOR flash uses .bin image and NAND flash uses .img image.
